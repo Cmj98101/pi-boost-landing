@@ -1,3 +1,5 @@
+import PaymentButton from "./PaymentButton";
+
 export default function CTA() {
   return (
     <section id="cta" className="py-20 bg-gradient-to-r from-primary to-secondary">
@@ -10,15 +12,17 @@ export default function CTA() {
             Join hundreds of private investigators who trust PI Boost for professional video documentation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a href="#pricing" className="btn btn-lg bg-white text-primary hover:bg-gray-100 border-0">
-              Start Your 7-Day Free Trial
-            </a>
+            <PaymentButton
+              text="Start Your 7-Day Free Trial"
+              size="lg"
+              className="bg-white text-primary hover:bg-gray-100 border-0"
+            />
             <a href="#features" className="btn btn-lg btn-outline text-white border-white hover:bg-white hover:text-primary">
               View Features
             </a>
           </div>
           <p className="text-sm opacity-75">
-            No credit card required • Cancel anytime • Full access during trial
+            Credit card required • Cancel anytime • Full access during trial
           </p>
         </div>
       </div>

@@ -1,7 +1,10 @@
+import PaymentButton from "./PaymentButton";
+
 export default function Pricing() {
   const plans = [
     {
       name: "Monthly",
+      planType: "monthly" as const,
       price: "$49",
       period: "per month",
       description: "Perfect for flexible usage",
@@ -18,6 +21,7 @@ export default function Pricing() {
     },
     {
       name: "Yearly",
+      planType: "yearly" as const,
       price: "$490",
       period: "per year",
       savings: "Save $98 per year",
@@ -43,7 +47,7 @@ export default function Pricing() {
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Start with a 7-day free trial. No credit card required.
+            Start with a 7-day free trial. Credit card required.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -65,9 +69,13 @@ export default function Pricing() {
                   <div className="badge badge-success badge-lg mb-4">{plan.savings}</div>
                 )}
                 <p className="text-gray-600 mb-6">{plan.description}</p>
-                <button className={`btn ${plan.highlighted ? 'btn-primary' : 'btn-outline'} btn-lg w-full mb-6`}>
-                  Start Free Trial
-                </button>
+                <PaymentButton
+                  text="Start Free Trial"
+                  variant={plan.highlighted ? "primary" : "outline"}
+                  size="lg"
+                  planType={plan.planType}
+                  className={`w-full mb-6 ${plan.highlighted ? 'text-white' : ''}`}
+                />
                 <div className="divider">Features</div>
                 <ul className="space-y-3">
                   {plan.features.map((feature, fIndex) => (
