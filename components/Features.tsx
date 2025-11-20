@@ -1,4 +1,36 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+
 export default function Features() {
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger the card animations
+            features.forEach((_, index) => {
+              setTimeout(() => {
+                setVisibleCards((prev) => [...prev, index]);
+              }, index * 100);
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const features = [
     {
       icon: (
@@ -6,8 +38,9 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      title: "Precise Timestamping",
-      description: "Add accurate timestamps to individual videos or process entire batches with ease. Perfect for surveillance footage documentation."
+      title: "Court-Ready Evidence in Minutes",
+      description: "Transform raw surveillance footage into professionally timestamped evidence that holds up in court. Process one video or entire case folders with accurate, verifiable timestamps.",
+      gradient: "from-purple-500 to-blue-500"
     },
     {
       icon: (
@@ -15,8 +48,9 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
         </svg>
       ),
-      title: "Easy Customization",
-      description: "Customize timestamp formats, positions, and styles to meet your exact requirements. Edit timestamps anytime with our intuitive interface."
+      title: "Match Your Agency's Standards Exactly",
+      description: "Customize every detail—format, position, style, and color—to meet your agency's requirements or court specifications. Make adjustments anytime without re-processing.",
+      gradient: "from-blue-500 to-cyan-500"
     },
     {
       icon: (
@@ -24,8 +58,9 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
-      title: "Batch Processing",
-      description: "Process multiple videos simultaneously to save time. Handle entire case folders with just a few clicks."
+      title: "Process Entire Cases in One Click",
+      description: "Stop wasting hours on manual processing. Batch process entire folders of surveillance videos simultaneously and reclaim your time for actual investigation work.",
+      gradient: "from-cyan-500 to-teal-500"
     },
     {
       icon: (
@@ -33,8 +68,9 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
         </svg>
       ),
-      title: "MP4 & MOV Export",
-      description: "Export your timestamped videos in industry-standard MP4 and MOV formats. Compatible with all court systems and clients."
+      title: "Universal Compatibility Guaranteed",
+      description: "Export in MP4 or MOV format—accepted by every court system, legal team, and client. No more rejected evidence due to format issues.",
+      gradient: "from-teal-500 to-green-500"
     },
     {
       icon: (
@@ -42,8 +78,9 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       ),
-      title: "Project Management",
-      description: "Organize your cases with built-in project management. Keep all case-related videos organized and easily accessible."
+      title: "Never Lose Track of a Case",
+      description: "Keep every investigation organized with built-in project management. Find any video instantly, track processing status, and maintain a clear chain of custody.",
+      gradient: "from-green-500 to-emerald-500"
     },
     {
       icon: (
@@ -51,32 +88,124 @@ export default function Features() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
-      title: "Simple & Fast",
-      description: "Designed specifically for private investigators. No learning curve - start timestamping videos within minutes of installation."
+      title: "Start Working Immediately",
+      description: "Built specifically for investigators who need results now. No training required, no complicated setup—just install and start processing videos in under 5 minutes.",
+      gradient: "from-emerald-500 to-purple-500"
     }
   ];
 
   return (
-    <section id="features" className="py-20 bg-base-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Everything You Need for Video Timestamping
+    <section
+      id="features"
+      ref={sectionRef}
+      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50"
+    >
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-6">
+            <span className="text-sm font-semibold text-purple-700">
+              POWERFUL FEATURES
+            </span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
+            Everything You Need to{" "}
+            <span className="gradient-text">Win More Cases</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Built specifically for private investigators who need reliable, professional video documentation.
+
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+            Save hours per case, eliminate evidence rejection, and deliver court-ready documentation that strengthens your credibility.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="card bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="card-body">
-                <div className="text-primary mb-4">{feature.icon}</div>
-                <h3 className="card-title text-2xl mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+            <div
+              key={index}
+              className={`group relative transition-all duration-700 ${
+                visibleCards.includes(index)
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-10'
+              }`}
+            >
+              {/* Feature Card */}
+              <div className="card-luxury-border h-full group-hover:scale-105 transition-all duration-300">
+                {/* Icon with gradient background */}
+                <div className="relative mb-6">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
+                    <div className="text-white">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  {/* Glow effect on hover */}
+                  <div className={`absolute inset-0 w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity`}></div>
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-700 transition-colors">
+                  {feature.title}
+                </h3>
+
+                <p className="text-slate-600 leading-relaxed">
+                  {feature.description}
+                </p>
+
+                {/* Hover indicator */}
+                <div className="mt-4 flex items-center text-purple-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-sm">Learn more</span>
+                  <svg
+                    className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16 md:mt-20">
+          <p className="text-slate-600 mb-6 text-lg">
+            Ready to transform your video workflow?
+          </p>
+          <a
+            href="#pricing"
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="btn-primary-luxury inline-flex items-center gap-2 text-lg group"
+          >
+            Start Your Free Trial
+            <svg
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

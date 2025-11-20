@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import PaymentButton from "./PaymentButton";
+import { useState, useEffect } from "react";
 import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
@@ -11,13 +10,17 @@ export default function Hero() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage("");
 
-    // Track email capture attempt
     analytics.emailCaptureStart();
 
     try {
@@ -28,7 +31,8 @@ export default function Hero() {
         },
         body: JSON.stringify({
           email,
-          name: `${firstName} ${lastName}`.trim()
+          firstName,
+          lastName,
         }),
       });
 
@@ -41,20 +45,18 @@ export default function Hero() {
         setFirstName("");
         setLastName("");
 
-        // Track successful email capture
         analytics.emailCaptureSuccess(email);
       } else {
-        const errorMsg = data.error || "Something went wrong. Please try again.";
+        const errorMsg =
+          data.error || "Something went wrong. Please try again.";
         setMessage(errorMsg);
 
-        // Track failed email capture
         analytics.emailCaptureFailed(errorMsg);
       }
     } catch (error) {
       const errorMsg = "Something went wrong. Please try again.";
       setMessage(errorMsg);
 
-      // Track failed email capture
       analytics.emailCaptureFailed(errorMsg);
     } finally {
       setIsLoading(false);
@@ -62,106 +64,78 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center bg-white py-12 md:py-20">
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 xl:px-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start max-w-7xl mx-auto">
-          {/* Left side - Hero content */}
-          <div className="space-y-8">
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Convert Investigation Videos in Minutes
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-                Transform your surveillance footage into court-ready evidence with just a few
-                clicks. Add timestamps, remove audio, and convert to standard MP4 format.
-              </p>
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Luxury Gradient Mesh Background */}
+      <div className="absolute inset-0 gradient-mesh opacity-60"></div>
+
+      {/* Animated gradient orbs */}
+      <div className="absolute top-20 -left-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float delay-1000"></div>
+
+      {/* Content Container */}
+      <div className="relative w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-24 lg:py-32">
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          {/* Left Column - Headline & CTA */}
+          <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-purple-100 animate-fade-in">
+              <span className="flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-purple-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              </span>
+              <span className="text-sm font-semibold text-slate-700">
+                Trusted by 500+ Private Investigators
+              </span>
             </div>
 
-            {/* Feature checkmarks */}
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
-                  <svg
-                    className="w-4 h-4 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2.5}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-gray-700 text-base md:text-lg">
-                  Convert any video format to standard MP4
-                </p>
-              </div>
+            {/* Main Headline */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in-up delay-200">
+              <span className="text-slate-900">Video Time-Stamping </span>
+              <span className="gradient-text">Simplified</span>
+              <br />
+              <span className="text-slate-900">for </span>
+              <span className="gradient-text">Private Investigators</span>
+            </h1>
 
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
-                  <svg
-                    className="w-4 h-4 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2.5}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-gray-700 text-base md:text-lg">
-                  Add accurate timestamps to surveillance footage
-                </p>
-              </div>
+            {/* Subheadline */}
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up delay-300">
+              Correct timestamp errors, perfect video conversion, customize timestamp appearance and location - Simplified.
+            </p>
 
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
-                  <svg
-                    className="w-4 h-4 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2.5}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+            {/* Key Benefits - Quick Scan */}
+            <div className="flex flex-wrap gap-4 animate-fade-in-up delay-400">
+              {[
+                "✓ Court-Ready Evidence",
+                "✓ Universal Compatibility",
+                "✓ Batch Processing"
+              ].map((benefit, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200"
+                >
+                  <span className="text-sm font-medium text-slate-700">
+                    {benefit}
+                  </span>
                 </div>
-                <p className="text-gray-700 text-base md:text-lg">
-                  Remove audio for privacy and legal compliance
-                </p>
-              </div>
+              ))}
             </div>
 
-            {/* CTA Button */}
-            <div>
-              <PaymentButton
-                text="Start 7-Day Free Trial"
-                variant="primary"
-                size="lg"
-                className="text-white"
-              />
-            </div>
-
-            {/* Sign in link */}
-            <div>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-500">
               <a
-                href="#"
-                className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1 transition-colors"
+                href="#pricing"
+                className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
               >
-                Already have an account? Sign in
+                Start Free Trial
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -170,27 +144,126 @@ export default function Hero() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M9 5l7 7-7 7"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
                   />
                 </svg>
               </a>
+
+              <a
+                href="#features"
+                className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              >
+                See How It Works
+              </a>
+            </div>
+
+            {/* Social Proof Stats */}
+            <div className="flex items-center gap-8 pt-4 animate-fade-in-up delay-600">
+              <div className="flex -space-x-3">
+                {[72, 50, 32, 25, 18].map((id) => (
+                  <img
+                    key={id}
+                    src={`https://avatar.iran.liara.run/public/${id}`}
+                    alt={`User ${id}`}
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full border-3 border-white shadow-md"
+                  />
+                ))}
+              </div>
+
+              <div className="flex flex-col">
+                <div className="flex gap-1 mb-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className="w-5 h-5 text-yellow-400 fill-current"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-sm text-slate-600">
+                  <span className="font-bold text-slate-900">4.9/5</span> from 500+ investigators
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Right side - Email capture card */}
-          <div className="lg:pt-8">
-            <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-8 max-w-md mx-auto lg:mx-0">
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Get Early Access
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Join our waiting list to be notified when our software launches.
-              </p>
+          {/* Right Column - Product Demo / Email Capture */}
+          <div className={`space-y-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+
+            {/* Product Demo Card */}
+            <div className="card-luxury-border animate-scale-in delay-700">
+              {/* Video Placeholder */}
+              <div className="video-container mb-6 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl shadow-inner">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="w-20 h-20 mx-auto bg-white rounded-full shadow-lg flex items-center justify-center">
+                      <svg
+                        className="w-10 h-10 text-purple-600"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                    <p className="text-slate-600 font-medium">
+                      Watch 60-Second Demo
+                    </p>
+                    <p className="text-sm text-slate-500">
+                      See how easy it is to timestamp videos
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature Highlights */}
+              <div className="space-y-3">
+                {[
+                  { icon: "🎬", text: "Convert any video format to MP4" },
+                  { icon: "⏱️", text: "Add professional timestamps" },
+                  { icon: "🔇", text: "Remove audio for privacy" }
+                ].map((feature, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+                  >
+                    <span className="text-2xl">{feature.icon}</span>
+                    <span className="text-slate-700 font-medium">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Email Capture Card */}
+            <div className="card-luxury glass animate-scale-in delay-800">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Get Early Access
+                </h3>
+                <p className="text-slate-600">
+                  Join the waitlist for exclusive beta access
+                </p>
+              </div>
 
               {isSuccess ? (
-                <div className="text-center p-6 bg-green-50 rounded-lg">
-                  <div className="text-green-600 text-4xl mb-2">✓</div>
-                  <p className="text-green-600 font-semibold">{message}</p>
+                <div className="text-center p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-green-700 font-semibold text-lg">{message}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -198,96 +271,85 @@ export default function Hero() {
                     <input
                       type="text"
                       name="firstName"
-                      placeholder="First Name"
+                      placeholder="First name"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       required
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
                     />
                     <input
                       type="text"
                       name="lastName"
-                      placeholder="Last Name"
+                      placeholder="Last name"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       required
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>
                   <input
                     type="email"
                     name="email"
-                    placeholder="Enter your email address..."
+                    placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
                   />
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-primary-luxury w-full text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? "Joining..." : "Notify Me"}
+                    {isLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            fill="none"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        Joining...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        Join Waitlist
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
+                      </span>
+                    )}
                   </button>
                   {message && !isSuccess && (
-                    <p className="text-center text-sm text-red-600">{message}</p>
+                    <p className="text-center text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg">
+                      {message}
+                    </p>
                   )}
+                  <p className="text-center text-xs text-slate-500">
+                    🔒 No spam. Unsubscribe anytime. 7-day free trial included.
+                  </p>
                 </form>
               )}
-
-              {/* App mockup image */}
-              <div className="mt-8 bg-gray-900 rounded-lg p-4">
-                <div className="bg-gray-800 rounded-t-lg px-3 py-2 flex items-center gap-2 mb-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="text-gray-400 text-sm font-medium ml-2">
-                    PI Video Converter
-                  </div>
-                </div>
-
-                <div className="space-y-3 bg-gray-50 rounded-lg p-4">
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-gray-900 text-sm">Convert Video</div>
-                      <div className="text-xs text-gray-500">MOV, AVI to MP4</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-gray-900 text-sm">Add Timestamp</div>
-                      <div className="text-xs text-gray-500">Date & Time overlay</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-gray-900 text-sm">Remove Audio</div>
-                      <div className="text-xs text-gray-500">Ensure privacy compliance</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
