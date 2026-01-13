@@ -1,27 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-09-30.clover",
-});
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { planType = "default" } = body;
+    const { planType = "monthly" } = body;
 
-    // Get the appropriate payment link based on plan type
+    // Get the appropriate payment link based on billing option
     let paymentLinkUrl;
 
-    if (planType === "monthly") {
-      paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
-    } else if (planType === "yearly") {
-      paymentLinkUrl = process.env.STRIPE_YEARLY_PAYMENT_LINK_URL;
-    } else {
-      // Default to monthly for general CTAs
-      paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
+    switch (planType) {
+      case "monthly":
+        paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
+        break;
+      case "yearly":
+        paymentLinkUrl = process.env.STRIPE_YEARLY_PAYMENT_LINK_URL;
+        break;
+      case "single-use":
+        paymentLinkUrl = process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL;
+        break;
+      default:
+        paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
     }
 
     if (!paymentLinkUrl) {
+      console.error(`Payment link not configured for: ${planType}`);
       return NextResponse.json(
         { error: "Payment link not configured" },
         { status: 500 }

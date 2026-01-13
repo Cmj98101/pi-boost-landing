@@ -12,6 +12,11 @@ export default function GoogleAnalytics() {
   return (
     <>
       <Script
+        src="https://analytics.ahrefs.com/analytics.js"
+        data-key="8RGaHpym6HopAd3PLKhSqw"
+        async
+      ></Script>
+      <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="afterInteractive"
       />
@@ -22,6 +27,7 @@ export default function GoogleAnalytics() {
           gtag('js', new Date());
           gtag('config', '${measurementId}', {
             page_path: window.location.pathname,
+            debug_mode: ${process.env.NODE_ENV === "development"}
           });
         `}
       </Script>
