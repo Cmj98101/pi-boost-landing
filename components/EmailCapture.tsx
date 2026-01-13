@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getModeContent } from "@/lib/config";
 
 interface EmailCaptureProps {
   variant?: "hero" | "footer" | "inline";
@@ -13,8 +14,11 @@ export default function EmailCapture({
   onSuccess,
   className = "",
 }: EmailCaptureProps) {
+  const emailContent = getModeContent('emailCapture');
+
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -39,8 +43,8 @@ export default function EmailCapture({
 
       if (response.ok) {
         setIsSuccess(true);
-        setMessage("Thank you! We'll notify you when we launch.");
-        setFormData({ name: "", email: "" });
+        setMessage(emailContent.successMessage);
+        setFormData({ firstName: "", lastName: "", email: "" });
         onSuccess?.();
       } else {
         setMessage(data.error || "Something went wrong. Please try again.");
@@ -66,7 +70,7 @@ export default function EmailCapture({
         className={`bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-md mx-auto ${className}`}
       >
         <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          Get Early Access
+          {emailContent.title}
         </h3>
         {isSuccess ? (
           <div className="text-center">
@@ -75,15 +79,24 @@ export default function EmailCapture({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            <div className="grid grid-cols-2 gap-3">
               <input
                 type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
             <div>
@@ -102,7 +115,7 @@ export default function EmailCapture({
               disabled={isLoading}
               className="w-full btn btn-primary btn-lg text-white disabled:opacity-50"
             >
-              {isLoading ? "Joining..." : "Join Waitlist"}
+              {isLoading ? "Joining..." : emailContent.buttonText}
             </button>
             {message && (
               <p
@@ -130,15 +143,26 @@ export default function EmailCapture({
           <div className="text-green-400 text-sm">{message}</div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
-            />
+            <div className="grid grid-cols-2 gap-2">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className="px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="px-3 py-2 bg-gray-800 border border-gray-700 rounded text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+              />
+            </div>
             <input
               type="email"
               name="email"
@@ -153,7 +177,7 @@ export default function EmailCapture({
               disabled={isLoading}
               className="w-full btn btn-primary btn-sm text-white disabled:opacity-50"
             >
-              {isLoading ? "Joining..." : "Join Waitlist"}
+              {isLoading ? "Joining..." : emailContent.buttonText}
             </button>
             {message && (
               <p
@@ -180,16 +204,27 @@ export default function EmailCapture({
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <input
               type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
               onChange={handleChange}
               required
               className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
             />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
             <input
               type="email"
               name="email"
@@ -197,7 +232,7 @@ export default function EmailCapture({
               value={formData.email}
               onChange={handleChange}
               required
-              className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
           <button
@@ -205,7 +240,7 @@ export default function EmailCapture({
             disabled={isLoading}
             className="w-full btn btn-primary btn-lg text-white disabled:opacity-50"
           >
-            {isLoading ? "Joining..." : "Join Waitlist"}
+            {isLoading ? "Joining..." : emailContent.buttonText}
           </button>
           {message && (
             <p

@@ -1,7 +1,8 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
@@ -12,21 +13,22 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     // Check if there's an access_token in the URL hash (from Supabase magic link)
-    if (typeof window !== 'undefined' && window.location.hash) {
-      const hash = window.location.hash
-      if (hash.includes('access_token=')) {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash;
+      if (hash.includes("access_token=")) {
         // Redirect to the auth callback page with the hash
-        router.push(`/auth/callback${hash}`)
+        router.push(`/auth/callback${hash}`);
       }
     }
-  }, [router])
+  }, [router]);
 
   return (
     <main className="min-h-screen">
+      <Navigation />
       <Hero />
       <Features />
       <HowItWorks />

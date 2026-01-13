@@ -2,8 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { analytics } from "@/lib/analytics";
+import { getModeContent } from "@/lib/config";
 
 export default function Hero() {
+  const heroContent = getModeContent('hero');
+  const emailContent = getModeContent('emailCapture');
+
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -40,7 +44,7 @@ export default function Hero() {
 
       if (response.ok) {
         setIsSuccess(true);
-        setMessage("Thank you! We'll notify you when we launch.");
+        setMessage(emailContent.successMessage);
         setEmail("");
         setFirstName("");
         setLastName("");
@@ -91,22 +95,18 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
               </span>
               <span className="text-sm font-semibold text-slate-700">
-                Trusted by 500+ Private Investigators
+                {heroContent.badge}
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in-up delay-200">
-              <span className="text-slate-900">Video Time-Stamping </span>
-              <span className="gradient-text">Simplified</span>
-              <br />
-              <span className="text-slate-900">for </span>
-              <span className="gradient-text">Private Investigators</span>
+              <span className="gradient-text">{heroContent.headline}</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up delay-300">
-              Correct timestamp errors, perfect video conversion, customize timestamp appearance and location - Simplified.
+              {heroContent.subheadline}
             </p>
 
             {/* Key Benefits - Quick Scan */}
@@ -130,10 +130,14 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-500">
               <a
-                href="#pricing"
+                href="#waitlist"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
               >
-                Start Free Trial
+                {heroContent.cta.primary}
                 <svg
                   className="w-5 h-5 group-hover:translate-x-1 transition-transform"
                   fill="none"
@@ -153,7 +157,7 @@ export default function Hero() {
                 href="#features"
                 className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
               >
-                See How It Works
+                {heroContent.cta.secondary}
               </a>
             </div>
 
@@ -236,13 +240,13 @@ export default function Hero() {
             </div>
 
             {/* Email Capture Card */}
-            <div className="card-luxury glass animate-scale-in delay-800">
+            <div id="waitlist" className="card-luxury glass animate-scale-in delay-800 scroll-mt-24">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                  Get Early Access
+                  {emailContent.title}
                 </h3>
                 <p className="text-slate-600">
-                  Join the waitlist for exclusive beta access
+                  {emailContent.subtitle}
                 </p>
               </div>
 
@@ -323,7 +327,7 @@ export default function Hero() {
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        Join Waitlist
+                        {emailContent.buttonText}
                         <svg
                           className="w-5 h-5"
                           fill="none"
@@ -346,7 +350,7 @@ export default function Hero() {
                     </p>
                   )}
                   <p className="text-center text-xs text-slate-500">
-                    🔒 No spam. Unsubscribe anytime. 7-day free trial included.
+                    {emailContent.footerText}
                   </p>
                 </form>
               )}

@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email } = await request.json();
+    const { firstName, lastName, email } = await request.json();
 
     // Validate input
     if (!email) {
@@ -27,9 +27,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if email already exists in waitlist
-    const { data: existingEmail, error: checkError } = await supabase
-      .from("email_waitlist")
+    // Check if email already exists
+    const { data: existingUser, error: checkError } = await supabase
+      .from("users")
       .select("id, email")
       .eq("email", email.toLowerCase())
       .single();
@@ -40,19 +40,21 @@ export async function POST(request: NextRequest) {
     }
 
     // If email already exists, return success (don't tell user it's duplicate for privacy)
-    if (existingEmail) {
+    if (existingUser) {
       console.log("Email already exists in waitlist:", email);
       return NextResponse.json({ success: true });
     }
 
-    // Insert new email into waitlist
+    // Insert new user into waitlist
     const { error: insertError } = await supabase
-      .from("email_waitlist")
+      .from("users")
       .insert({
-        name: name || null,
+        first_name: firstName || "",
+        last_name: lastName || "",
         email: email.toLowerCase(),
-        source: "landing_page",
+        subscription_status: "waitlist",
         created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       });
 
     if (insertError) {

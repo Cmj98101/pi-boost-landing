@@ -7,11 +7,32 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PI Boost - Professional Video Timestamping for Private Investigators",
+  title:
+    "Investigation Flow | Video Time-Stamping Simplified for Private Investigators",
   description:
-    "Add precise timestamps to your surveillance footage with ease. Individual or batch processing - simple, fast, and reliable timestamping software for private investigators.",
-  keywords:
-    "private investigator, video timestamping, surveillance footage, batch processing, MP4, MOV, timestamp software",
+    "Professional video timestamping software for private investigators. Correct timestamp errors, perfect video conversion, customize timestamp appearance and location.",
+  icons: {
+    icon: "/favicon.svg",
+  },
+  openGraph: {
+    title:
+      "Investigation Flow | Video Time-Stamping Simplified for Private Investigators",
+    description:
+      "Professional video timestamping software for private investigators. Correct timestamp errors, perfect video conversion, customize timestamp appearance and location.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Investigation Flow",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Investigation Flow | Video Time-Stamping Simplified for Private Investigators",
+    description:
+      "Professional video timestamping software for private investigators. Correct timestamp errors, perfect video conversion, customize timestamp appearance and location.",
+  },
+  alternates: {
+    canonical: "https://investigationflow.com",
+  },
 };
 
 export default function RootLayout({
@@ -19,11 +40,70 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        name: "PIVideoTools",
+        applicationCategory: "MultimediaApplication",
+        offers: {
+          "@type": "Offer",
+          price: "49.00",
+          priceCurrency: "USD",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "49.00",
+            priceCurrency: "USD",
+            billingIncrement: "P1M",
+          },
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.8",
+          ratingCount: "127",
+        },
+        operatingSystem: "Windows, macOS",
+        description:
+          "Professional video timestamping software for private investigators. Add timestamps, remove audio, convert formats, and batch process surveillance footage.",
+        featureList: [
+          "Video timestamping",
+          "Batch processing",
+          "Audio removal",
+          "Format conversion",
+          "Project management",
+        ],
+      },
+      {
+        "@type": "Organization",
+        name: "PIVideoTools",
+        url: "https://pivideotools.com",
+        logo: "https://pivideotools.com/logo.png",
+        description:
+          "Professional video editing software for private investigators and surveillance professionals.",
+      },
+    ],
+  };
+
   return (
     <html lang="en" data-theme="piboost">
-      <GoogleAnalytics />
-      <body className={inter.className}>{children}</body>
-      <Analytics />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="8RGaHpym6HopAd3PLKhSqw"
+          async
+        ></script>
+      </head>
+      <body className={inter.className}>
+        <GoogleAnalytics />
+
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

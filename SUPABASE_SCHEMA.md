@@ -7,7 +7,8 @@ Create a `users` table with the following structure:
 ```sql
 CREATE TABLE users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
+  first_name TEXT NOT NULL DEFAULT '',
+  last_name TEXT NOT NULL DEFAULT '',
   email TEXT UNIQUE NOT NULL,
   subscription_status TEXT NOT NULL DEFAULT 'waitlist' CHECK (subscription_status IN ('waitlist', 'trial', 'active', 'expired')),
   stripe_customer_id TEXT,
@@ -173,4 +174,3 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 3. Install dependencies: `npm install`
 4. Set up Stripe webhook endpoint in your Stripe dashboard
 5. Test the email capture and payment flow
-
