@@ -126,7 +126,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   console.log("Using Stripe customer ID:", stripeCustomerId);
 
   // Determine subscription status based on payment mode
-  const isSubscription = mode === "subscription" && subscription;
+  const isSubscription = mode === "subscription" && !!subscription;
   const isOneTime = mode === "payment";
 
   let userId: string;
