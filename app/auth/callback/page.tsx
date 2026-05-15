@@ -18,7 +18,7 @@ export default function AuthCallback() {
         setHasToken(true);
         setAccessToken(token);
         setStatus(
-          "Authentication successful! Click the button below to open Pi Boost."
+          "Authentication successful! Click the button below to open Investigation Flow."
         );
       } else {
         setStatus("No access token found in URL");
@@ -38,11 +38,11 @@ export default function AuthCallback() {
 
       if (accessToken) {
         // Trigger deep link to open desktop app
-        const deepLink = `piboost://auth?access_token=${encodeURIComponent(
+        const deepLink = `investigationflow://auth?access_token=${encodeURIComponent(
           accessToken
         )}`;
 
-        setStatus("Opening Pi Boost app...");
+        setStatus("Opening Investigation Flow...");
 
         // Use hidden iframe to trigger deep link without navigation
         const iframe = document.createElement("iframe");
@@ -102,7 +102,7 @@ export default function AuthCallback() {
               onClick={openDesktopApp}
               className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
             >
-              Open Pi Boost App
+              Open Investigation Flow
             </button>
 
             {/* <p className="text-sm text-gray-500">
@@ -110,7 +110,7 @@ export default function AuthCallback() {
               <a href="/app" className="text-blue-600 hover:underline">
                 Continue in browser
               </a>{" "}
-              or make sure Pi Boost is installed.
+              or make sure Investigation Flow is installed.
             </p> */}
           </div>
         )}

@@ -1,6 +1,6 @@
 /**
  * Site-wide configuration for launch vs early access modes
- * Toggle between beta testing and full launch by changing the mode
+ * Toggle between waitlist and full launch by changing the mode
  */
 
 export type SiteMode = "early-access" | "launch";
@@ -15,12 +15,12 @@ export const SITE_CONFIG = {
   // Hero section content
   hero: {
     "early-access": {
-      badge: "Limited Beta Access - Join Our Founding Users",
+      badge: "Limited Early Access - Join Our Founding Users",
       headline: "Video Time-Stamping Simplified for Private Investigators",
       subheadline:
-        "Join our exclusive beta program and help us build the perfect tool for investigators while getting your videos court-ready.",
+        "Join our exclusive waitlist and help us build the perfect tool for investigators while getting your videos court-ready.",
       cta: {
-        primary: "Join Beta Program",
+        primary: "Join Waitlist",
         secondary: "See How It Works",
       },
     },
@@ -41,18 +41,18 @@ export const SITE_CONFIG = {
     "early-access": {
       headline: "Ready to Become a Founding User?",
       subheadline:
-        "Join our exclusive beta program. Your feedback shapes the product.",
+        "Join our exclusive waitlist. Your feedback shapes the product.",
       benefits: [
         "Direct line to our founding team",
         "Shape the product roadmap",
         "First access to new features",
         "Priority support",
       ],
-      buttonText: "Claim Your Beta Spot",
+      buttonText: "Join Waitlist",
       badge: "Limited to First 50 Investigators",
       stats: [
-        { value: "Beta", label: "Exclusive Early Access" },
-        { value: "50", label: "Limited Beta Spots Available" },
+        { value: "Early", label: "Exclusive Early Access" },
+        { value: "50", label: "Limited Spots Available" },
         { value: "24/7", label: "Direct Access to Founders" },
       ],
     },
@@ -79,15 +79,15 @@ export const SITE_CONFIG = {
   // Email capture modal content
   emailCapture: {
     "early-access": {
-      title: "Join Our Exclusive Beta",
+      title: "Join the Waitlist",
       subtitle: "Become a founding user and shape the product",
       features: [
-        "Exclusive beta access (limited to 50 investigators)",
+        "Exclusive early access (limited to 50 investigators)",
         "Priority email support from our founding team",
         "Exclusive founding user community",
         "Your feedback directly shapes our roadmap",
       ],
-      buttonText: "Claim My Beta Access",
+      buttonText: "Join Waitlist",
       successMessage:
         "Welcome to the founding user community! Check your email for next steps.",
       footerText: "🔒 No spam. Unsubscribe anytime. Limited to first 50 users.",

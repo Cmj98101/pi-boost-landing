@@ -1,6 +1,6 @@
 # Landing Page Configuration Guide
 
-This landing page has been configured with a modular system that allows you to easily switch between **early access/beta mode** and **launch mode**.
+This landing page has been configured with a modular system that allows you to easily switch between **early access/waitlist mode** and **launch mode**.
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ export const SITE_CONFIG = {
 ## Configuration Options
 
 ### Site Mode
-- `'early-access'` - Beta/founding user messaging focused on getting early testers
+- `'early-access'` - Waitlist/founding user messaging focused on getting early testers
 - `'launch'` - Full launch messaging focused on conversions and sales
 
 ### Feature Flags
@@ -27,21 +27,21 @@ export const SITE_CONFIG = {
 
 ### Early Access Mode (`mode: 'early-access'`)
 **Hero Section:**
-- Badge: "Limited Beta Access - Join Our Founding Users"
-- Headline: Emphasizes exclusive beta program
-- CTA: "Join Beta Program"
+- Badge: "Limited Early Access - Join Our Founding Users"
+- Headline: Emphasizes exclusive early access
+- CTA: "Join Waitlist"
 - Email form success message highlights founding user community
 
 **CTA Section:**
 - Headline: "Ready to Become a Founding User?"
-- Benefits focus on lifetime free access and shaping the product
+- Benefits focus on shaping the product and priority access
 - Badge: "Limited to First 50 Investigators"
-- Stats show: Free access, 50 spots available, 24/7 founder access
+- Stats show: Early access, 50 spots available, 24/7 founder access
 
 **Email Capture:**
-- Title: "Join Our Exclusive Beta"
-- Features: Free lifetime access, priority support, founding user community
-- Button: "Claim My Beta Access"
+- Title: "Join the Waitlist"
+- Features: Exclusive early access, priority support, founding user community
+- Button: "Join Waitlist"
 - Footer: Limited to first 50 users
 
 **Pricing:**
@@ -105,7 +105,7 @@ Save the file and the entire site will update automatically!
 
 ✅ **No code changes needed** - Just update the config file
 ✅ **Preview both modes** - Easy to A/B test or compare
-✅ **Keep all content safe** - Launch copy is preserved when in beta mode
+✅ **Keep all content safe** - Launch copy is preserved when in early access mode
 ✅ **Type-safe** - TypeScript ensures you don't have typos
 ✅ **Single source of truth** - All messaging in one place
 
