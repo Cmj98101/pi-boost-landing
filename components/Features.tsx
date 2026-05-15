@@ -184,14 +184,14 @@ export default function Features() {
             Ready to transform your video workflow?
           </p>
           <a
-            href="#pricing"
+            href="#waitlist"
             onClick={(e) => {
               e.preventDefault();
-              document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" });
+              document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" });
             }}
             className="btn-primary-luxury inline-flex items-center gap-2 text-lg group"
           >
-            Start Your Free Trial
+            Join the Waitlist
             <svg
               className="w-5 h-5 group-hover:translate-x-1 transition-transform"
               fill="none"

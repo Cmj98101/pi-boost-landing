@@ -45,19 +45,8 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "SoftwareApplication",
-        name: "PIVideoTools",
+        name: "Investigation Flow",
         applicationCategory: "MultimediaApplication",
-        offers: {
-          "@type": "Offer",
-          price: "49.00",
-          priceCurrency: "USD",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: "49.00",
-            priceCurrency: "USD",
-            billingIncrement: "P1M",
-          },
-        },
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "4.8",
@@ -76,9 +65,9 @@ export default function RootLayout({
       },
       {
         "@type": "Organization",
-        name: "PIVideoTools",
-        url: "https://pivideotools.com",
-        logo: "https://pivideotools.com/logo.png",
+        name: "Investigation Flow",
+        url: "https://investigationflow.com",
+        logo: "https://investigationflow.com/logo.svg",
         description:
           "Professional video editing software for private investigators and surveillance professionals.",
       },
@@ -86,7 +75,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" data-theme="piboost">
+    <html lang="en" data-theme="investigationflow">
       <head>
         <script
           type="application/ld+json"

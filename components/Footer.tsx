@@ -86,21 +86,6 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#pricing"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .querySelector("#pricing")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
-                >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
                   href="#how-it-works"
                   onClick={(e) => {
                     e.preventDefault();

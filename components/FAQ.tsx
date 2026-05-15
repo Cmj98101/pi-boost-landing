@@ -7,15 +7,6 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "How does the 7-day free trial work?",
-      answer: "Simply download Investigation Flow and start using all features immediately. No credit card required. After 7 days, choose a plan to continue using the software.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-    {
       question: "Can I timestamp videos in batch?",
       answer: "Yes! Investigation Flow supports both individual video timestamping and batch processing. You can process entire folders of surveillance footage with just a few clicks, saving you hours of work.",
       icon: (

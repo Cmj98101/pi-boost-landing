@@ -21,7 +21,6 @@ export default function Navigation() {
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
-    { name: "Pricing", href: "/pricing" },
     { name: "Testimonials", href: "#testimonials" },
     { name: "FAQ", href: "#faq" },
   ];
@@ -43,7 +42,9 @@ export default function Navigation() {
             onClick={(e) => {
               if (isHomePage) {
                 e.preventDefault();
-                document.querySelector("#hero")?.scrollIntoView({ behavior: "smooth" });
+                document
+                  .querySelector("#hero")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }
             }}
           >
@@ -52,7 +53,11 @@ export default function Navigation() {
               alt="Investigation Flow Logo"
               className="w-8 h-8 group-hover:scale-110 transition-transform"
             />
-            <span className={`text-lg font-bold transition-colors ${isScrolled ? "text-slate-900" : "text-slate-900"}`}>
+            <span
+              className={`text-lg font-bold transition-colors ${
+                isScrolled ? "text-slate-900" : "text-slate-900"
+              }`}
+            >
               Investigation Flow
             </span>
           </a>
@@ -62,11 +67,19 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href.startsWith("#") ? (isHomePage ? link.href : `/${link.href}`) : link.href}
+                href={
+                  link.href.startsWith("#")
+                    ? isHomePage
+                      ? link.href
+                      : `/${link.href}`
+                    : link.href
+                }
                 onClick={(e) => {
                   if (link.href.startsWith("#") && isHomePage) {
                     e.preventDefault();
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .querySelector(link.href)
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
                 className={`font-medium transition-colors hover:text-purple-600 ${
@@ -81,7 +94,15 @@ export default function Navigation() {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="/pricing"
+              href={isHomePage ? "#waitlist" : "/#waitlist"}
+              onClick={(e) => {
+                if (isHomePage) {
+                  e.preventDefault();
+                  document
+                    .querySelector("#waitlist")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className="btn-primary-luxury"
             >
               Get Started
@@ -95,7 +116,9 @@ export default function Navigation() {
             aria-label="Toggle menu"
           >
             <svg
-              className={`w-6 h-6 ${isScrolled ? "text-slate-900" : "text-slate-900"}`}
+              className={`w-6 h-6 ${
+                isScrolled ? "text-slate-900" : "text-slate-900"
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -127,11 +150,19 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href.startsWith("#") ? (isHomePage ? link.href : `/${link.href}`) : link.href}
+                href={
+                  link.href.startsWith("#")
+                    ? isHomePage
+                      ? link.href
+                      : `/${link.href}`
+                    : link.href
+                }
                 onClick={(e) => {
                   if (link.href.startsWith("#") && isHomePage) {
                     e.preventDefault();
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                    document
+                      .querySelector(link.href)
+                      ?.scrollIntoView({ behavior: "smooth" });
                   }
                   setIsMobileMenuOpen(false);
                 }}
@@ -141,8 +172,16 @@ export default function Navigation() {
               </a>
             ))}
             <a
-              href="/pricing"
-              onClick={() => setIsMobileMenuOpen(false)}
+              href={isHomePage ? "#waitlist" : "/#waitlist"}
+              onClick={(e) => {
+                if (isHomePage) {
+                  e.preventDefault();
+                  document
+                    .querySelector("#waitlist")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }
+                setIsMobileMenuOpen(false);
+              }}
               className="btn-primary-luxury w-full text-center block"
             >
               Get Started
