@@ -6,9 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/auth/callback'],
+        disallow: ['/api/', '/auth/callback', '/pricing', '/buy'],
       },
     ],
-    sitemap: 'https://investigatorvideoediting.com/sitemap.xml',
+    sitemap: 'https://investigationflow.com/sitemap.xml',
   }
 }
