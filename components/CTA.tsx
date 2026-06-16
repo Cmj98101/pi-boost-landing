@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import PaymentButton from "./PaymentButton";
-import { getModeContent } from "@/lib/config";
+import { getConfig, getModeContent } from "@/lib/config";
 
 export default function CTA() {
   const ctaContent = getModeContent('cta');
+  const demoUrl = getConfig('demoUrl');
 
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,11 +77,9 @@ export default function CTA() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <a
-                href="#waitlist"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector("#waitlist")?.scrollIntoView({ behavior: "smooth" });
-                }}
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white text-purple-600 hover:bg-slate-50 hover:shadow-2xl transition-all duration-300 font-bold px-8 py-4 rounded-xl shadow-xl text-lg"
               >
                 {ctaContent.buttonText}

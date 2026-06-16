@@ -15,7 +15,8 @@ export async function POST(request: NextRequest) {
       case "yearly":
         paymentLinkUrl = process.env.STRIPE_YEARLY_PAYMENT_LINK_URL;
         break;
-      case "single-use":
+      case "lifetime":
+      case "single-use": // legacy alias
         paymentLinkUrl = process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL;
         break;
       default:

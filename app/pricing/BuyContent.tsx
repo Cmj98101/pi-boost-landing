@@ -210,13 +210,13 @@ export default function BuyContent() {
               <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              About Single Use Licenses
+              About the Lifetime License
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
-              A Single Use license key activates the software on <strong>one computer, one time</strong>.
-              If you reinstall the software or switch to a new computer, you'll need to purchase a new key.
-              Unused keys never expire—you can save them for later. If you need flexibility to move between
-              computers, we recommend a Monthly or Yearly subscription instead.
+              A Lifetime License is a one-time purchase that activates the software on <strong>one computer</strong>,
+              with all future updates included—no recurring fees. The license stays with that machine, so if you
+              need to run Investigation Flow across multiple computers or move it between devices, we recommend a
+              Monthly or Yearly subscription instead.
             </p>
           </div>
 

@@ -43,8 +43,8 @@ export default function FAQ() {
       )
     },
     {
-      question: "How does project management work?",
-      answer: "Investigation Flow includes built-in project management to help you organize videos by case. Create projects for each investigation, add videos, and keep everything organized in one place.",
+      question: "Can I stitch clips together and pull still shots?",
+      answer: "Yes. You can stitch multiple surveillance clips into one logical, chronological sequence, keep or remove the audio on each clip, and grab court-ready still shots straight from the footage you're editing—all without a separate editor.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -52,8 +52,8 @@ export default function FAQ() {
       )
     },
     {
-      question: "What kind of support do you offer?",
-      answer: "All plans include priority email support. Business subscribers also get priority phone support and a dedicated account manager. We're here to help you succeed with Investigation Flow.",
+      question: "Do you offer a subscription or a one-time purchase?",
+      answer: "Both. You can subscribe monthly or yearly (the yearly plan saves about 34%), or buy a one-time lifetime license for a single device that includes a year of updates. Subscriptions include priority email support; all plans include email support.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />

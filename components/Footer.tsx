@@ -11,13 +11,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="mb-4">
               <img
-                src="/logo.svg"
-                alt="Investigation Flow Logo"
-                className="w-8 h-8"
+                src="/logo-full-white.png"
+                alt="Investigation Flow"
+                className="h-10 w-auto"
               />
-              <span className="text-lg font-bold">Investigation Flow</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Professional video timestamping software for private

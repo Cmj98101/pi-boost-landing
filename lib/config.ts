@@ -8,6 +8,9 @@ export type SiteMode = "early-access" | "launch";
 export const SITE_CONFIG = {
   mode: "early-access" as SiteMode,
 
+  // Live, in-browser demo of the timestamping tool
+  demoUrl: "https://timestamp.investigationflow.com",
+
   // Feature flags
   showPricing: false, // Set to true for launch
   showFullTestimonials: false, // Can add more testimonials for launch
@@ -15,22 +18,24 @@ export const SITE_CONFIG = {
   // Hero section content
   hero: {
     "early-access": {
-      badge: "Limited Early Access - Join Our Founding Users",
-      headline: "Video Time-Stamping Simplified for Private Investigators",
+      badge: "Now in Early Access — Join the Founding Users",
+      headline:
+        "Timestamp, Stitch & Deliver Court-Ready Surveillance Video in Minutes — Not Hours",
       subheadline:
-        "Join our exclusive waitlist and help us build the perfect tool for investigators while getting your videos court-ready.",
+        "Investigation Flow does the four jobs surveillance video actually needs — timestamp, stitch clips in order, toggle audio, and grab stills — without fighting a general video editor. Try it free in your browser, no download required.",
       cta: {
-        primary: "Join Waitlist",
+        primary: "Try the Live Demo",
         secondary: "See How It Works",
       },
     },
     launch: {
-      badge: "Launching Soon - Join the Waitlist",
-      headline: "Video Time-Stamping Simplified for Private Investigators",
+      badge: "Built for Private Investigators — Windows & Mac",
+      headline:
+        "Timestamp, Stitch & Deliver Court-Ready Surveillance Video in Minutes — Not Hours",
       subheadline:
-        "Correct timestamp errors, perfect video conversion, customize timestamp appearance and location - Simplified.",
+        "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills — all in one tool built for surveillance work, not Hollywood.",
       cta: {
-        primary: "Get Early Access",
+        primary: "Try the Live Demo",
         secondary: "See How It Works",
       },
     },
@@ -39,39 +44,39 @@ export const SITE_CONFIG = {
   // CTA section content
   cta: {
     "early-access": {
-      headline: "Ready to Become a Founding User?",
+      headline: "See It For Yourself",
       subheadline:
-        "Join our exclusive waitlist. Your feedback shapes the product.",
+        "Try the live demo right in your browser—upload a clip and watch it become court-ready in seconds. No download, no signup.",
       benefits: [
-        "Direct line to our founding team",
-        "Shape the product roadmap",
-        "First access to new features",
-        "Priority support",
+        "Runs in your browser—nothing to install",
+        "Timestamp · Stitch · Audio · Stills",
+        "Founding-user pricing at launch",
+        "Built with working investigators",
       ],
-      buttonText: "Join Waitlist",
-      badge: "Limited to First 50 Investigators",
+      buttonText: "Try the Live Demo",
+      badge: "Live Demo — Try It Free",
       stats: [
-        { value: "Early", label: "Exclusive Early Access" },
-        { value: "50", label: "Limited Spots Available" },
-        { value: "24/7", label: "Direct Access to Founders" },
+        { value: "Win/Mac", label: "Native Windows & Mac App" },
+        { value: "4 Tools", label: "Timestamp · Stitch · Audio · Stills" },
+        { value: "Minutes", label: "From Footage to Court-Ready" },
       ],
     },
     launch: {
-      headline: "Ready to Transform Your Video Workflow?",
+      headline: "Ready to Turn Footage Into Evidence?",
       subheadline:
-        "Join hundreds of investigators already saving hours per case.",
+        "Stop fighting general video editors. Do timestamping, stitching, audio, and stills in one tool built for investigators.",
       benefits: [
-        "Set up in 60 seconds",
-        "Process your first video today",
+        "Install on Windows or Mac in minutes",
+        "Process your first case today",
         "Cancel anytime, no questions asked",
-        "7-day free trial included",
+        "Free trial included",
       ],
-      buttonText: "Start Free Trial",
+      buttonText: "Try the Live Demo",
       badge: null,
       stats: [
-        { value: "$9.99", label: "Starting at Per Month" },
-        { value: "7 Days", label: "Free Trial Included" },
-        { value: "First 100", label: "Get 50% Off First Month" },
+        { value: "$14.99", label: "Starting Per Month" },
+        { value: "$149", label: "One-Time License Option" },
+        { value: "Win/Mac", label: "Native Desktop App" },
       ],
     },
   },
@@ -110,41 +115,42 @@ export const SITE_CONFIG = {
   // Pricing options (single product, multiple billing options)
   pricing: {
     productName: "Investigation Flow",
-    productTagline: "Video Timestamping for Investigators",
+    productTagline: "Surveillance video, court-ready in minutes.",
     features: [
-      "Convert videos to MP4",
-      "Add or correct timestamps",
-      "Remove audio track",
-      "Recover original recording time",
-      "Court-ready video output",
+      "Court-ready timestamps",
+      "Stitch clips in order",
+      "Keep or remove audio",
+      "One-click still shots",
+      "Batch process folders",
+      "Windows & Mac",
     ],
     options: [
       {
         id: "monthly",
         name: "Monthly",
-        price: 9.99,
+        price: 14.99,
         period: "/month",
-        description: "Flexible monthly billing",
-        support: "Priority support + all updates",
+        description: "Flexible month-to-month billing",
+        support: "Priority email support + all updates",
         highlighted: false,
       },
       {
         id: "yearly",
         name: "Yearly",
-        price: 79.99,
+        price: 119,
         period: "/year",
-        description: "Save 33% with annual billing",
-        support: "Priority support + all updates",
+        description: "Save 34% vs. monthly (~$9.92/mo)",
+        support: "Priority email support + all updates",
         highlighted: true,
         badge: "BEST VALUE",
       },
       {
-        id: "single-use",
-        name: "Single Use",
-        price: 59.99,
+        id: "lifetime",
+        name: "Lifetime License",
+        price: 149,
         period: "one-time",
-        description: "One license key, one installation",
-        support: "Community support",
+        description: "One device · lifetime updates included",
+        support: "Email support",
         highlighted: false,
       },
     ],
@@ -160,7 +166,7 @@ export function getConfig<T extends keyof typeof SITE_CONFIG>(key: T) {
 export function getModeContent<
   T extends keyof Omit<
     typeof SITE_CONFIG,
-    "mode" | "showPricing" | "showFullTestimonials" | "pricing"
+    "mode" | "demoUrl" | "showPricing" | "showFullTestimonials" | "pricing"
   >
 >(section: T): (typeof SITE_CONFIG)[T][SiteMode] {
   const mode = SITE_CONFIG.mode;

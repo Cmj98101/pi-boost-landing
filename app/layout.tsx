@@ -47,27 +47,22 @@ export default function RootLayout({
         "@type": "SoftwareApplication",
         name: "Investigation Flow",
         applicationCategory: "MultimediaApplication",
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          ratingCount: "127",
-        },
         operatingSystem: "Windows, macOS",
         description:
-          "Professional video timestamping software for private investigators. Add timestamps, remove audio, convert formats, and batch process surveillance footage.",
+          "Court-ready video timestamping software for private investigators. Add timestamps, stitch clips in order, keep or remove audio, grab still shots, and batch process surveillance footage.",
         featureList: [
-          "Video timestamping",
+          "Court-ready video timestamping",
+          "Clip stitching",
+          "Audio keep or remove",
+          "Still-shot capture",
           "Batch processing",
-          "Audio removal",
-          "Format conversion",
-          "Project management",
         ],
       },
       {
         "@type": "Organization",
         name: "Investigation Flow",
         url: "https://investigationflow.com",
-        logo: "https://investigationflow.com/logo.svg",
+        logo: "https://investigationflow.com/logo-full.png",
         description:
           "Professional video editing software for private investigators and surveillance professionals.",
       },

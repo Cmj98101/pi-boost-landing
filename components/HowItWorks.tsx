@@ -32,8 +32,8 @@ export default function HowItWorks() {
 
   const steps = [
     {
-      title: "Upload Your Videos",
-      description: "Drag and drop your surveillance footage from any device or camera. Supports all major video formats.",
+      title: "Add Your Footage",
+      description: "Drag and drop a day's worth of surveillance clips from any camera or device. Supports all major video formats.",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -43,8 +43,8 @@ export default function HowItWorks() {
       number: "01"
     },
     {
-      title: "Process & Edit",
-      description: "Add timestamps, remove audio, customize appearance. Make any necessary adjustments with precision.",
+      title: "Timestamp, Stitch & Edit",
+      description: "Add accurate timestamps, stitch clips into order, toggle audio on or off, and grab still shots—all in one place.",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -54,8 +54,8 @@ export default function HowItWorks() {
       number: "02"
     },
     {
-      title: "Export & Share",
-      description: "Download your court-ready MP4 files in minutes. Professional quality guaranteed every time.",
+      title: "Export Court-Ready",
+      description: "Render universally-accepted MP4 or MOV files in minutes, ready for court, clients, and case files.",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

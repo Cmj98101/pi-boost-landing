@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { getConfig } from "@/lib/config";
 
 export default function Navigation() {
+  const demoUrl = getConfig("demoUrl");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -21,7 +23,7 @@ export default function Navigation() {
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
-    { name: "Testimonials", href: "#testimonials" },
+    { name: "Why It Works", href: "#why" },
     { name: "FAQ", href: "#faq" },
   ];
 
@@ -49,17 +51,10 @@ export default function Navigation() {
             }}
           >
             <img
-              src="/logo.svg"
-              alt="Investigation Flow Logo"
-              className="w-8 h-8 group-hover:scale-110 transition-transform"
+              src="/logo-full.png"
+              alt="Investigation Flow"
+              className="h-9 md:h-10 w-auto group-hover:scale-105 transition-transform"
             />
-            <span
-              className={`text-lg font-bold transition-colors ${
-                isScrolled ? "text-slate-900" : "text-slate-900"
-              }`}
-            >
-              Investigation Flow
-            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -94,18 +89,12 @@ export default function Navigation() {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href={isHomePage ? "#waitlist" : "/#waitlist"}
-              onClick={(e) => {
-                if (isHomePage) {
-                  e.preventDefault();
-                  document
-                    .querySelector("#waitlist")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary-luxury"
             >
-              Get Started
+              Try the Demo
             </a>
           </div>
 
@@ -172,19 +161,13 @@ export default function Navigation() {
               </a>
             ))}
             <a
-              href={isHomePage ? "#waitlist" : "/#waitlist"}
-              onClick={(e) => {
-                if (isHomePage) {
-                  e.preventDefault();
-                  document
-                    .querySelector("#waitlist")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }
-                setIsMobileMenuOpen(false);
-              }}
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="btn-primary-luxury w-full text-center block"
             >
-              Get Started
+              Try the Demo
             </a>
           </div>
         </div>

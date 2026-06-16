@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import LiveDemo from "@/components/LiveDemo";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Pricing from "@/components/Pricing";
@@ -30,6 +31,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navigation />
       <Hero />
+      <LiveDemo />
       <Features />
       <HowItWorks />
       <Pricing />
