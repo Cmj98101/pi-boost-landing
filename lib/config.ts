@@ -18,7 +18,7 @@ export const SITE_CONFIG = {
   hero: {
     "early-access": {
       badge: "Now in Early Access — Join the Founding Users",
-      headline: "Timestamp your surveillance video in 5 minutes",
+      headline: "Timestamp your surveillance videos in 5 minutes.",
       subheadline:
         "Timestamp, stitch clips in order, toggle audio, and grab stills — without fighting a general video editor. Try it free in your browser, no download required.",
       cta: {
@@ -29,7 +29,7 @@ export const SITE_CONFIG = {
     launch: {
       badge: "Built for Private Investigators — Windows & Mac",
       headline:
-        "Timestamp, Stitch & Deliver Court-Ready Surveillance Video in Minutes — Not Hours",
+        "Timestamp, Stitch & Deliver Court-Ready Surveillance Videos in Minutes — Not Hours",
       subheadline:
         "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills — all in one tool built for surveillance work, not Hollywood.",
       cta: {
