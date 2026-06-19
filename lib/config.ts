@@ -12,17 +12,15 @@ export const SITE_CONFIG = {
   demoUrl: "https://timestamp.investigationflow.com",
 
   // Feature flags
-  showPricing: false, // Set to true for launch
   showFullTestimonials: false, // Can add more testimonials for launch
 
   // Hero section content
   hero: {
     "early-access": {
       badge: "Now in Early Access — Join the Founding Users",
-      headline:
-        "Timestamp, Stitch & Deliver Court-Ready Surveillance Video in Minutes — Not Hours",
+      headline: "Timestamp your surveillance video in 5 minutes",
       subheadline:
-        "Investigation Flow does the four jobs surveillance video actually needs — timestamp, stitch clips in order, toggle audio, and grab stills — without fighting a general video editor. Try it free in your browser, no download required.",
+        "Timestamp, stitch clips in order, toggle audio, and grab stills — without fighting a general video editor. Try it free in your browser, no download required.",
       cta: {
         primary: "Try the Live Demo",
         secondary: "See How It Works",
@@ -166,8 +164,8 @@ export function getConfig<T extends keyof typeof SITE_CONFIG>(key: T) {
 export function getModeContent<
   T extends keyof Omit<
     typeof SITE_CONFIG,
-    "mode" | "demoUrl" | "showPricing" | "showFullTestimonials" | "pricing"
-  >
+    "mode" | "demoUrl" | "showFullTestimonials" | "pricing"
+  >,
 >(section: T): (typeof SITE_CONFIG)[T][SiteMode] {
   const mode = SITE_CONFIG.mode;
   const content = SITE_CONFIG[section];

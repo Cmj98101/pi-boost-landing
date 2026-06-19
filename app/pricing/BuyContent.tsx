@@ -111,8 +111,10 @@ export default function BuyContent() {
           </div>
 
           {/* Pricing Options */}
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            {pricingConfig.options.map((option, index) => (
+          <div className="grid gap-8 md:grid-cols-3 mb-12">
+            {pricingConfig.options.map((option, index) => {
+              const [whole, cents] = String(option.price).split(".");
+              return (
               <div
                 key={option.id}
                 className={`relative transition-all duration-700 ${
@@ -144,17 +146,25 @@ export default function BuyContent() {
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl -z-10"></div>
                   )}
 
-                  <div className="p-6 md:p-8">
+                  <div className="p-8 md:p-10 h-full flex flex-col">
                     {/* Option Name */}
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 min-h-[3.5rem] flex items-center justify-center text-center">
                       {option.name}
                     </h3>
 
                     {/* Price */}
-                    <div className="mb-1">
-                      <span className="text-4xl md:text-5xl font-bold text-slate-900">
-                        ${option.price}
+                    <div className="mb-1 flex items-start justify-center leading-none">
+                      <span className="text-2xl md:text-3xl font-bold text-slate-900 mt-1.5">
+                        $
                       </span>
+                      <span className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+                        {whole}
+                      </span>
+                      {cents && (
+                        <span className="text-xl md:text-2xl font-bold text-slate-900 mt-1.5">
+                          .{cents}
+                        </span>
+                      )}
                     </div>
                     <p className="text-slate-500 text-sm mb-4">{option.period}</p>
 
@@ -168,7 +178,7 @@ export default function BuyContent() {
                     <button
                       onClick={() => handleSelectOption(option.id)}
                       disabled={loadingOption !== null}
-                      className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
                         option.highlighted
                           ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105"
                           : "bg-slate-900 text-white hover:bg-slate-800"
@@ -201,7 +211,8 @@ export default function BuyContent() {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Single Use Disclaimer */}

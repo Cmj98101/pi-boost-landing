@@ -5,34 +5,35 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { planType = "monthly" } = body;
 
-    // Get the appropriate payment link based on billing option
-    let paymentLinkUrl;
+    // Resolve the hosted checkout URL for the chosen plan.
+    // Prefer Lemon Squeezy "Buy" links; fall back to the legacy Stripe vars
+    // so the site keeps working during the migration.
+    const checkoutUrls: Record<string, string | undefined> = {
+      monthly:
+        process.env.LEMONSQUEEZY_MONTHLY_CHECKOUT_URL ||
+        process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL,
+      yearly:
+        process.env.LEMONSQUEEZY_YEARLY_CHECKOUT_URL ||
+        process.env.STRIPE_YEARLY_PAYMENT_LINK_URL,
+      lifetime:
+        process.env.LEMONSQUEEZY_LIFETIME_CHECKOUT_URL ||
+        process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL,
+    };
+    // Legacy alias for the one-time plan
+    checkoutUrls["single-use"] = checkoutUrls.lifetime;
 
-    switch (planType) {
-      case "monthly":
-        paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
-        break;
-      case "yearly":
-        paymentLinkUrl = process.env.STRIPE_YEARLY_PAYMENT_LINK_URL;
-        break;
-      case "lifetime":
-      case "single-use": // legacy alias
-        paymentLinkUrl = process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL;
-        break;
-      default:
-        paymentLinkUrl = process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL;
-    }
+    const checkoutUrl = checkoutUrls[planType] || checkoutUrls.monthly;
 
-    if (!paymentLinkUrl) {
-      console.error(`Payment link not configured for: ${planType}`);
+    if (!checkoutUrl) {
+      console.error(`Checkout URL not configured for: ${planType}`);
       return NextResponse.json(
-        { error: "Payment link not configured" },
+        { error: "Checkout URL not configured" },
         { status: 500 }
       );
     }
 
-    console.log(`Redirecting to Stripe Payment Link (${planType}):`, paymentLinkUrl);
-    return NextResponse.json({ url: paymentLinkUrl });
+    console.log(`Redirecting to checkout (${planType}):`, checkoutUrl);
+    return NextResponse.json({ url: checkoutUrl });
   } catch (error) {
     console.error("Payment link error:", error);
     return NextResponse.json(

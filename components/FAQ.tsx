@@ -168,7 +168,7 @@ export default function FAQ() {
               Can't find the answer you're looking for? Our support team is here to help.
             </p>
             <a
-              href="mailto:support@investigationflow.com"
+              href="mailto:chris@systumboost.com"
               className="btn-primary-luxury inline-flex items-center gap-2"
             >
               Contact Support

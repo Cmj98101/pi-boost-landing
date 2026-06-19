@@ -7,7 +7,6 @@ import Hero from "@/components/Hero";
 import LiveDemo from "@/components/LiveDemo";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
-import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
@@ -34,7 +33,6 @@ export default function Home() {
       <LiveDemo />
       <Features />
       <HowItWorks />
-      <Pricing />
       <Testimonials />
       <FAQ />
       <CTA />

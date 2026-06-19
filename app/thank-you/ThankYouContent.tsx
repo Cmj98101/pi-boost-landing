@@ -143,8 +143,8 @@ export default function ThankYouContent() {
 
               <p className="text-sm text-slate-500">
                 Questions? Email{" "}
-                <a href="mailto:support@investigationflow.com" className="text-purple-600 hover:underline font-medium">
-                  support@investigationflow.com
+                <a href="mailto:chris@systumboost.com" className="text-purple-600 hover:underline font-medium">
+                  chris@systumboost.com
                 </a>
               </p>
             </div>
@@ -260,8 +260,8 @@ export default function ThankYouContent() {
 
             <p className="text-sm text-slate-500">
               Need help? Email{" "}
-              <a href="mailto:support@investigationflow.com" className="text-purple-600 hover:underline font-medium">
-                support@investigationflow.com
+              <a href="mailto:chris@systumboost.com" className="text-purple-600 hover:underline font-medium">
+                chris@systumboost.com
               </a>
             </p>
           </div>

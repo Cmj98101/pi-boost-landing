@@ -251,7 +251,7 @@ async function sendWelcomeEmail(email: string, isSubscription: boolean, magicLin
 
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_FROM || "Investigation Flow <noreply@investigationflow.com>",
+      from: process.env.EMAIL_FROM || "Investigation Flow <chris@systumboost.com>",
       to: email,
       subject: "Welcome to Investigation Flow - Download Your App",
       html: `
@@ -310,13 +310,13 @@ async function sendWelcomeEmail(email: string, isSubscription: boolean, magicLin
             <h3 style="margin-top: 0; color: #92400e;">Trial Information</h3>
             <p style="color: #92400e; margin-bottom: 0;">
               Your 7-day free trial has started. You won't be charged until the trial ends.
-              Cancel anytime by emailing support@investigationflow.com.
+              Cancel anytime by emailing chris@systumboost.com.
             </p>
           </div>
           ` : ""}
 
           <div style="text-align: center; color: #64748b; font-size: 14px;">
-            <p>Need help? Reply to this email or contact <a href="mailto:support@investigationflow.com" style="color: #7c3aed;">support@investigationflow.com</a></p>
+            <p>Need help? Reply to this email or contact <a href="mailto:chris@systumboost.com" style="color: #7c3aed;">chris@systumboost.com</a></p>
             <p style="margin-top: 24px;">
               <a href="${appUrl}" style="color: #7c3aed;">Investigation Flow</a>
             </p>

@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/auth/callback', '/pricing', '/buy'],
+        disallow: ['/api/', '/auth/callback', '/buy'],
       },
     ],
     sitemap: 'https://investigationflow.com/sitemap.xml',
