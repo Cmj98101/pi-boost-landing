@@ -144,10 +144,10 @@ export const SITE_CONFIG = {
       },
       {
         id: "lifetime",
-        name: "Lifetime License",
+        name: "Lifetime (V1)",
         price: 149,
         period: "one-time",
-        description: "One device · lifetime updates included",
+        description: "One device · all Version 1 updates included",
         support: "Email support",
         highlighted: false,
       },

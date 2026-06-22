@@ -221,13 +221,14 @@ export default function BuyContent() {
               <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              About the Lifetime License
+              About the Lifetime (V1) License
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
-              A Lifetime License is a one-time purchase that activates the software on <strong>one computer</strong>,
-              with all future updates included—no recurring fees. The license stays with that machine, so if you
-              need to run Investigation Flow across multiple computers or move it between devices, we recommend a
-              Monthly or Yearly subscription instead.
+              The Lifetime (V1) License is a one-time purchase that activates Investigation Flow <strong>Version 1</strong> on
+              {" "}<strong>one computer</strong>, with all Version 1 updates included—no recurring fees. Future major versions
+              (such as Version 2) are sold separately. The license stays with that machine, so if you need to run
+              Investigation Flow across multiple computers or move it between devices, we recommend a Monthly or Yearly
+              subscription instead.
             </p>
           </div>
 

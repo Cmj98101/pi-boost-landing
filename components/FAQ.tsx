@@ -53,7 +53,7 @@ export default function FAQ() {
     },
     {
       question: "Do you offer a subscription or a one-time purchase?",
-      answer: "Both. You can subscribe monthly or yearly (the yearly plan saves about 34%), or buy a one-time lifetime license for a single device that includes a year of updates. Subscriptions include priority email support; all plans include email support.",
+      answer: "Both. You can subscribe monthly or yearly (the yearly plan saves about 34%), or buy a one-time Version 1 lifetime license for a single device that includes all Version 1 updates. Future major versions are sold separately. Subscriptions include priority email support; all plans include email support.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
