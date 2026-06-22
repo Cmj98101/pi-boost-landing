@@ -11,19 +11,20 @@ export default function BuyContent() {
   const teamConfig = pricingConfig.team;
   const [isVisible, setIsVisible] = useState(false);
   const [loadingOption, setLoadingOption] = useState<string | null>(null);
-  const [teamBilling, setTeamBilling] = useState<"yearly" | "monthly">("yearly");
+  const [teamBilling, setTeamBilling] = useState<"yearly" | "monthly" | "contact">("yearly");
   const [teamSeats, setTeamSeats] = useState<number>(teamConfig.defaultSeats);
   const sectionRef = useRef<HTMLElement>(null);
 
   // Volume pricing: find the first tier whose `upTo` covers the seat count.
-  const teamPlan = teamConfig.plans[teamBilling];
+  // The "contact" tab has no plan/price (custom quote for 50+ seats).
+  const teamPlan = teamBilling === "contact" ? null : teamConfig.plans[teamBilling];
   const resolveRate = (
     tiers: readonly { readonly upTo: number | null; readonly price: number }[],
     seats: number
   ) => (tiers.find((t) => t.upTo === null || seats <= t.upTo) ?? tiers[tiers.length - 1]).price;
 
-  const perSeat = resolveRate(teamPlan.tiers, teamSeats);
-  const baseRate = teamPlan.tiers[0].price;
+  const perSeat = teamPlan ? resolveRate(teamPlan.tiers, teamSeats) : 0;
+  const baseRate = teamPlan ? teamPlan.tiers[0].price : 0;
   const teamTotal = perSeat * teamSeats;
   const savingsTotal = (baseRate - perSeat) * teamSeats;
   const savingsPct = baseRate > 0 ? Math.round(((baseRate - perSeat) / baseRate) * 100) : 0;
@@ -82,6 +83,7 @@ export default function BuyContent() {
   };
 
   const handleTeamCheckout = async () => {
+    if (!teamPlan) return;
     setLoadingOption(teamPlan.id);
 
     analytics.paymentButtonClicked(teamPlan.id);
@@ -292,7 +294,7 @@ export default function BuyContent() {
                   <div className="flex flex-col">
                     {/* Billing tabs */}
                     <div className="inline-flex p-1 bg-slate-100 rounded-xl mb-8 self-start">
-                      {(["yearly", "monthly"] as const).map((key) => (
+                      {(["yearly", "monthly", "contact"] as const).map((key) => (
                         <button
                           key={key}
                           onClick={() => setTeamBilling(key)}
@@ -302,7 +304,9 @@ export default function BuyContent() {
                               : "text-slate-500 hover:text-slate-700"
                           }`}
                         >
-                          {teamConfig.plans[key].label}
+                          {key === "contact"
+                            ? teamConfig.contact.label
+                            : teamConfig.plans[key].label}
                           {key === "yearly" && (
                             <span className="ml-2 text-xs font-bold text-purple-600">
                               Best value
@@ -312,6 +316,16 @@ export default function BuyContent() {
                       ))}
                     </div>
 
+                    {teamBilling === "contact" ? (
+                      <div className="flex-1 flex items-center">
+                        <p className="text-slate-600 leading-relaxed">
+                          Running Investigation Flow on more than {teamConfig.maxSeats}{" "}
+                          computers? We&apos;ll set you up with custom volume pricing and
+                          licensing for your agency or department—just reach out.
+                        </p>
+                      </div>
+                    ) : (
+                      <>
                     {/* Seat selector */}
                     <div className="mb-3 flex items-end justify-between">
                       <label className="text-sm font-semibold text-slate-700">
@@ -382,22 +396,56 @@ export default function BuyContent() {
                         {teamConfig.keyExplanation}
                       </p>
                     </div>
+                      </>
+                    )}
                   </div>
 
-                  {/* Right: live price summary + checkout */}
+                  {/* Right: live price summary + checkout (or contact CTA) */}
                   <div className="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50 p-6 md:p-8 flex flex-col">
+                    {teamBilling === "contact" ? (
+                      <>
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-900">
+                          {teamConfig.contact.headline}
+                        </h4>
+                        <p className="text-slate-600 mt-2">
+                          {teamConfig.contact.body}
+                        </p>
+                        <a
+                          href={`mailto:${teamConfig.contact.email}?subject=${encodeURIComponent(
+                            "Team pricing for 50+ computers"
+                          )}`}
+                          className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                        >
+                          {teamConfig.contact.buttonText}
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                        </a>
+                      </>
+                    ) : (
+                      <>
                     <div className="flex items-baseline gap-2">
                       <span className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
                         {money(teamTotal)}
                       </span>
                       <span className="text-slate-500 font-medium">
-                        {teamPlan.totalSuffix}
+                        {teamPlan?.totalSuffix}
                       </span>
                     </div>
                     <p className="text-slate-600 mt-1">
                       {teamSeats} {teamSeats === 1 ? "computer" : "computers"} ×{" "}
                       {money(perSeat)}
-                      {teamPlan.unitSuffix}
+                      {teamPlan?.unitSuffix}
                     </p>
 
                     {savingsPct > 0 ? (
@@ -417,7 +465,7 @@ export default function BuyContent() {
                         </svg>
                         <span className="text-sm font-semibold text-green-700">
                           Save {money(savingsTotal)}
-                          {teamPlan.totalSuffix} ({savingsPct}% off)
+                          {teamPlan?.totalSuffix} ({savingsPct}% off)
                         </span>
                       </div>
                     ) : (
@@ -431,7 +479,7 @@ export default function BuyContent() {
                       disabled={loadingOption !== null}
                       className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
-                      {loadingOption === teamPlan.id ? (
+                      {loadingOption === teamPlan?.id ? (
                         <>
                           <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                           Processing...
@@ -458,6 +506,8 @@ export default function BuyContent() {
                     <p className="text-center text-xs text-slate-400 mt-3">
                       Secure checkout · one key, activate on every computer
                     </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

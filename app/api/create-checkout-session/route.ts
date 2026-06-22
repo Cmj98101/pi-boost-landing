@@ -19,9 +19,15 @@ export async function POST(request: NextRequest) {
         process.env.LEMONSQUEEZY_LIFETIME_CHECKOUT_URL ||
         process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL,
       // Team plans use native Lemon Squeezy volume pricing; the buyer's seat
-      // count is passed through as the checkout quantity (Lemon Squeezy only).
-      "team-monthly": process.env.LEMONSQUEEZY_TEAM_MONTHLY_CHECKOUT_URL,
-      "team-yearly": process.env.LEMONSQUEEZY_TEAM_YEARLY_CHECKOUT_URL,
+      // count is passed through as the checkout quantity. If a dedicated team
+      // variant isn't configured, fall back to the MATCHING individual link
+      // (yearly→yearly, monthly→monthly) so the billing choice is respected.
+      "team-monthly":
+        process.env.LEMONSQUEEZY_TEAM_MONTHLY_CHECKOUT_URL ||
+        process.env.LEMONSQUEEZY_MONTHLY_CHECKOUT_URL,
+      "team-yearly":
+        process.env.LEMONSQUEEZY_TEAM_YEARLY_CHECKOUT_URL ||
+        process.env.LEMONSQUEEZY_YEARLY_CHECKOUT_URL,
     };
     // Legacy alias for the one-time plan
     checkoutUrls["single-use"] = checkoutUrls.lifetime;

@@ -166,6 +166,14 @@ export const SITE_CONFIG = {
       minSeats: 1,
       maxSeats: 50,
       defaultSeats: 5,
+      // Shown as a third tab for buyers who need more than maxSeats.
+      contact: {
+        label: "50+ seats",
+        headline: "Need more than 50 computers?",
+        body: "Tell us how many seats you need and we'll set you up with custom volume pricing for your agency or department.",
+        buttonText: "Contact us",
+        email: "chris@systumboost.com",
+      },
       plans: {
         yearly: {
           id: "team-yearly",
