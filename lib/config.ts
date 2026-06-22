@@ -152,39 +152,43 @@ export const SITE_CONFIG = {
         highlighted: false,
       },
     ],
-    // Volume pricing for agencies. Each seat is its own license key (one
-    // active computer at a time), and the per-seat price drops as the team
-    // grows. Each band maps to a Lemon Squeezy variant via the checkout route.
+    // Volume pricing for agencies. The buyer picks how many computers they
+    // need; the per-seat price drops at the tier thresholds (matching the
+    // native Lemon Squeezy volume pricing on each variant). One license key
+    // covers all the computers they buy. `upTo` is the inclusive max seat
+    // count for a tier; `null` means "and up". Tiers must be in ascending order.
     team: {
       headline: "Outfit your whole team",
       subheadline:
-        "Volume pricing for agencies. Each seat is its own license key—one active computer at a time, transferable between machines.",
-      bands: [
-        {
-          id: "team-3",
-          seats: "3–4 seats",
-          pricePerSeat: 99,
-          period: "/seat/yr",
-          note: "Save ~17%",
-          highlighted: false,
+        "Pick how many computers you need—the more seats, the lower the price per seat.",
+      keyExplanation:
+        "You get one license key that activates on every computer you buy. Move it between machines anytime by deactivating a computer first.",
+      minSeats: 1,
+      maxSeats: 50,
+      defaultSeats: 5,
+      plans: {
+        yearly: {
+          id: "team-yearly",
+          label: "Yearly",
+          unitSuffix: "/seat/yr",
+          totalSuffix: "/yr",
+          tiers: [
+            { upTo: 3, price: 119 },
+            { upTo: 6, price: 99 },
+            { upTo: null, price: 89 },
+          ],
         },
-        {
-          id: "team-5",
-          seats: "5–9 seats",
-          pricePerSeat: 89,
-          period: "/seat/yr",
-          note: "Save ~25%",
-          highlighted: true,
+        monthly: {
+          id: "team-monthly",
+          label: "Monthly",
+          unitSuffix: "/seat/mo",
+          totalSuffix: "/mo",
+          tiers: [
+            { upTo: 3, price: 14.99 },
+            { upTo: null, price: 11.99 },
+          ],
         },
-        {
-          id: "team-10",
-          seats: "10+ seats",
-          pricePerSeat: 79,
-          period: "/seat/yr",
-          note: "Save ~34%",
-          highlighted: false,
-        },
-      ],
+      },
     },
   },
 } as const;

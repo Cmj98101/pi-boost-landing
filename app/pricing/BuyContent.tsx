@@ -8,9 +8,26 @@ import Footer from "@/components/Footer";
 
 export default function BuyContent() {
   const pricingConfig = getConfig("pricing");
+  const teamConfig = pricingConfig.team;
   const [isVisible, setIsVisible] = useState(false);
   const [loadingOption, setLoadingOption] = useState<string | null>(null);
+  const [teamBilling, setTeamBilling] = useState<"yearly" | "monthly">("yearly");
+  const [teamSeats, setTeamSeats] = useState<number>(teamConfig.defaultSeats);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Volume pricing: find the first tier whose `upTo` covers the seat count.
+  const teamPlan = teamConfig.plans[teamBilling];
+  const resolveRate = (
+    tiers: readonly { readonly upTo: number | null; readonly price: number }[],
+    seats: number
+  ) => (tiers.find((t) => t.upTo === null || seats <= t.upTo) ?? tiers[tiers.length - 1]).price;
+
+  const perSeat = resolveRate(teamPlan.tiers, teamSeats);
+  const baseRate = teamPlan.tiers[0].price;
+  const teamTotal = perSeat * teamSeats;
+  const savingsTotal = (baseRate - perSeat) * teamSeats;
+  const savingsPct = baseRate > 0 ? Math.round(((baseRate - perSeat) / baseRate) * 100) : 0;
+  const money = (n: number) => (Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,6 +70,39 @@ export default function BuyContent() {
 
       if (response.ok && data.url) {
         window.open(data.url, '_blank');
+        setLoadingOption(null);
+      } else {
+        throw new Error(data.error || "Failed to start checkout");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("Something went wrong. Please try again.");
+      setLoadingOption(null);
+    }
+  };
+
+  const handleTeamCheckout = async () => {
+    setLoadingOption(teamPlan.id);
+
+    analytics.paymentButtonClicked(teamPlan.id);
+    analytics.trialSignupStarted(teamPlan.id);
+
+    try {
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          planType: teamPlan.id,
+          quantity: teamSeats,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        window.open(data.url, "_blank");
         setLoadingOption(null);
       } else {
         throw new Error(data.error || "Failed to start checkout");
@@ -230,69 +280,185 @@ export default function BuyContent() {
                     </span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-                    {pricingConfig.team.headline}
+                    {teamConfig.headline}
                   </h3>
                   <p className="text-slate-600 mt-2 max-w-2xl">
-                    {pricingConfig.team.subheadline}
+                    {teamConfig.subheadline}
                   </p>
                 </div>
 
-                {/* Seat bands */}
-                <div className="grid gap-6 md:grid-cols-3">
-                  {pricingConfig.team.bands.map((band) => (
-                    <div
-                      key={band.id}
-                      className={`relative rounded-xl border p-6 text-center flex flex-col ${
-                        band.highlighted
-                          ? "border-purple-300 ring-2 ring-purple-200 bg-gradient-to-br from-purple-50 to-blue-50"
-                          : "border-slate-200 bg-slate-50"
-                      }`}
-                    >
-                      {band.highlighted && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                          <div className="px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold rounded-full shadow">
-                            MOST POPULAR
-                          </div>
-                        </div>
-                      )}
+                <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+                  {/* Left: billing toggle + seat selector */}
+                  <div className="flex flex-col">
+                    {/* Billing tabs */}
+                    <div className="inline-flex p-1 bg-slate-100 rounded-xl mb-8 self-start">
+                      {(["yearly", "monthly"] as const).map((key) => (
+                        <button
+                          key={key}
+                          onClick={() => setTeamBilling(key)}
+                          className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${
+                            teamBilling === key
+                              ? "bg-white text-slate-900 shadow-sm"
+                              : "text-slate-500 hover:text-slate-700"
+                          }`}
+                        >
+                          {teamConfig.plans[key].label}
+                          {key === "yearly" && (
+                            <span className="ml-2 text-xs font-bold text-purple-600">
+                              Best value
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
 
-                      <p className="text-sm font-semibold text-slate-700 mb-2">
-                        {band.seats}
-                      </p>
-
-                      <div className="flex items-start justify-center leading-none mb-1">
-                        <span className="text-xl font-bold text-slate-900 mt-1">
-                          $
+                    {/* Seat selector */}
+                    <div className="mb-3 flex items-end justify-between">
+                      <label className="text-sm font-semibold text-slate-700">
+                        How many computers?
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setTeamSeats((n) => Math.max(teamConfig.minSeats, n - 1))
+                          }
+                          disabled={teamSeats <= teamConfig.minSeats}
+                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-bold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
+                          aria-label="Remove a computer"
+                        >
+                          –
+                        </button>
+                        <span className="w-12 text-center text-xl font-bold text-slate-900 tabular-nums">
+                          {teamSeats}
                         </span>
-                        <span className="text-4xl font-bold text-slate-900 tracking-tight">
-                          {band.pricePerSeat}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setTeamSeats((n) => Math.min(teamConfig.maxSeats, n + 1))
+                          }
+                          disabled={teamSeats >= teamConfig.maxSeats}
+                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-bold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
+                          aria-label="Add a computer"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <input
+                      type="range"
+                      min={teamConfig.minSeats}
+                      max={teamConfig.maxSeats}
+                      value={teamSeats}
+                      onChange={(e) => setTeamSeats(Number(e.target.value))}
+                      className="w-full accent-purple-600 cursor-pointer"
+                      aria-label="Number of computers"
+                    />
+                    <div className="flex justify-between text-xs text-slate-400 mt-1">
+                      <span>{teamConfig.minSeats}</span>
+                      <span>{teamConfig.maxSeats}+</span>
+                    </div>
+
+                    {/* One-key explanation */}
+                    <div className="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-200 flex gap-3">
+                      <svg
+                        className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                        />
+                      </svg>
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        <strong className="text-slate-900">
+                          One license key for {teamSeats} computer
+                          {teamSeats === 1 ? "" : "s"}.
+                        </strong>{" "}
+                        {teamConfig.keyExplanation}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right: live price summary + checkout */}
+                  <div className="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50 p-6 md:p-8 flex flex-col">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+                        {money(teamTotal)}
+                      </span>
+                      <span className="text-slate-500 font-medium">
+                        {teamPlan.totalSuffix}
+                      </span>
+                    </div>
+                    <p className="text-slate-600 mt-1">
+                      {teamSeats} {teamSeats === 1 ? "computer" : "computers"} ×{" "}
+                      {money(perSeat)}
+                      {teamPlan.unitSuffix}
+                    </p>
+
+                    {savingsPct > 0 ? (
+                      <div className="mt-4 inline-flex items-center gap-2 self-start px-3 py-1.5 bg-green-100 rounded-full">
+                        <svg
+                          className="w-4 h-4 text-green-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span className="text-sm font-semibold text-green-700">
+                          Save {money(savingsTotal)}
+                          {teamPlan.totalSuffix} ({savingsPct}% off)
                         </span>
                       </div>
-                      <p className="text-slate-500 text-sm mb-1">{band.period}</p>
-                      <p className="text-sm font-medium text-purple-700 mb-5">
-                        {band.note}
+                    ) : (
+                      <p className="mt-4 text-sm text-slate-500">
+                        Add a 4th computer to unlock volume pricing.
                       </p>
+                    )}
 
-                      <button
-                        onClick={() => handleSelectOption(band.id)}
-                        disabled={loadingOption !== null}
-                        className={`mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-5 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
-                          band.highlighted
-                            ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105"
-                            : "bg-slate-900 text-white hover:bg-slate-800"
-                        }`}
-                      >
-                        {loadingOption === band.id ? (
-                          <>
-                            <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                            Processing...
-                          </>
-                        ) : (
-                          <>Get {band.seats}</>
-                        )}
-                      </button>
-                    </div>
-                  ))}
+                    <button
+                      onClick={handleTeamCheckout}
+                      disabled={loadingOption !== null}
+                      className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      {loadingOption === teamPlan.id ? (
+                        <>
+                          <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Continue to checkout
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M13 7l5 5m0 0l-5 5m5-5H6"
+                            />
+                          </svg>
+                        </>
+                      )}
+                    </button>
+                    <p className="text-center text-xs text-slate-400 mt-3">
+                      Secure checkout · one key, activate on every computer
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ interface PaymentButtonProps {
   size?: "sm" | "md" | "lg";
   text?: string;
   className?: string;
-  planType?: "monthly" | "yearly" | "lifetime" | "team-3" | "team-5" | "team-10" | "default";
+  planType?: "monthly" | "yearly" | "lifetime" | "team-monthly" | "team-yearly" | "default";
   onSuccess?: () => void;
   onError?: (error: string) => void;
 }
