@@ -63,6 +63,15 @@ export const analytics = {
     });
   },
 
+  // Desktop app download clicks
+  downloadStarted: (platform: string) => {
+    trackEvent("download_started", {
+      event_category: "engagement",
+      event_label: `${platform}_app`,
+      platform,
+    });
+  },
+
   // Page view tracking (automatically handled by GA, but you can customize)
   pageView: (url: string) => {
     trackEvent("page_view", {

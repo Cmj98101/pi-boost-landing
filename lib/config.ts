@@ -11,6 +11,14 @@ export const SITE_CONFIG = {
   // Live, in-browser demo of the timestamping tool
   demoUrl: "https://timestamp.investigationflow.com",
 
+  // Desktop app downloads. Mac is live; Windows is coming soon. The actual
+  // file URLs come from NEXT_PUBLIC_MACOS_DOWNLOAD_URL / NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL.
+  download: {
+    macAvailable: true,
+    windowsAvailable: false,
+    macLabel: "Download for Mac",
+  },
+
   // Feature flags
   showFullTestimonials: false, // Can add more testimonials for launch
 
@@ -210,7 +218,7 @@ export function getConfig<T extends keyof typeof SITE_CONFIG>(key: T) {
 export function getModeContent<
   T extends keyof Omit<
     typeof SITE_CONFIG,
-    "mode" | "demoUrl" | "showFullTestimonials" | "pricing"
+    "mode" | "demoUrl" | "showFullTestimonials" | "pricing" | "download"
   >,
 >(section: T): (typeof SITE_CONFIG)[T][SiteMode] {
   const mode = SITE_CONFIG.mode;

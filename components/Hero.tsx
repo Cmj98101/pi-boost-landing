@@ -2,10 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { getConfig, getModeContent } from "@/lib/config";
+import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
   const heroContent = getModeContent("hero");
   const demoUrl = getConfig("demoUrl");
+  const download = getConfig("download");
+  const macUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL;
+  const showMacDownload = download.macAvailable && !!macUrl;
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -70,11 +74,37 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-500">
+            {showMacDownload && (
+              <a
+                href={macUrl}
+                download
+                onClick={() => analytics.downloadStarted("mac")}
+                className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
+              >
+                <svg
+                  className="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+                {download.macLabel}
+              </a>
+            )}
+
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
+              className={`${
+                showMacDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
+              } inline-flex items-center justify-center gap-2 text-lg group`}
             >
               {heroContent.cta.primary}
               <svg
@@ -103,6 +133,12 @@ export default function Hero() {
               {heroContent.cta.secondary}
             </a>
           </div>
+
+          {!download.windowsAvailable && (
+            <p className="text-sm text-slate-500 animate-fade-in-up delay-500">
+              Mac app available now. Windows version coming soon.
+            </p>
+          )}
 
           {/* Honest pre-launch trust line */}
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 pt-4 text-sm text-slate-600 animate-fade-in-up delay-600">

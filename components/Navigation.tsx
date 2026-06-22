@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { getConfig } from "@/lib/config";
+import { analytics } from "@/lib/analytics";
 
 export default function Navigation() {
   const demoUrl = getConfig("demoUrl");
+  const download = getConfig("download");
+  const macUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL;
+  const showMacDownload = download.macAvailable && !!macUrl;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -89,11 +93,21 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
+            {showMacDownload && (
+              <a
+                href={macUrl}
+                download
+                onClick={() => analytics.downloadStarted("mac")}
+                className="btn-primary-luxury"
+              >
+                {download.macLabel}
+              </a>
+            )}
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary-luxury"
+              className={showMacDownload ? "btn-secondary-luxury" : "btn-primary-luxury"}
             >
               Try the Demo
             </a>
@@ -161,12 +175,27 @@ export default function Navigation() {
                 {link.name}
               </a>
             ))}
+            {showMacDownload && (
+              <a
+                href={macUrl}
+                download
+                onClick={() => {
+                  analytics.downloadStarted("mac");
+                  setIsMobileMenuOpen(false);
+                }}
+                className="btn-primary-luxury w-full text-center block"
+              >
+                {download.macLabel}
+              </a>
+            )}
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="btn-primary-luxury w-full text-center block"
+              className={`${
+                showMacDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
+              } w-full text-center block`}
             >
               Try the Demo
             </a>
