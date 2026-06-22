@@ -215,6 +215,89 @@ export default function BuyContent() {
             })}
           </div>
 
+          {/* Team / Volume Pricing */}
+          <div className="mb-12">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+              {/* Accent bar */}
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-600 to-blue-600"></div>
+
+              <div className="p-8 md:p-10">
+                {/* Heading */}
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full mb-3">
+                    <span className="text-xs font-bold text-purple-700 uppercase tracking-wide">
+                      Team
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+                    {pricingConfig.team.headline}
+                  </h3>
+                  <p className="text-slate-600 mt-2 max-w-2xl">
+                    {pricingConfig.team.subheadline}
+                  </p>
+                </div>
+
+                {/* Seat bands */}
+                <div className="grid gap-6 md:grid-cols-3">
+                  {pricingConfig.team.bands.map((band) => (
+                    <div
+                      key={band.id}
+                      className={`relative rounded-xl border p-6 text-center flex flex-col ${
+                        band.highlighted
+                          ? "border-purple-300 ring-2 ring-purple-200 bg-gradient-to-br from-purple-50 to-blue-50"
+                          : "border-slate-200 bg-slate-50"
+                      }`}
+                    >
+                      {band.highlighted && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                          <div className="px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold rounded-full shadow">
+                            MOST POPULAR
+                          </div>
+                        </div>
+                      )}
+
+                      <p className="text-sm font-semibold text-slate-700 mb-2">
+                        {band.seats}
+                      </p>
+
+                      <div className="flex items-start justify-center leading-none mb-1">
+                        <span className="text-xl font-bold text-slate-900 mt-1">
+                          $
+                        </span>
+                        <span className="text-4xl font-bold text-slate-900 tracking-tight">
+                          {band.pricePerSeat}
+                        </span>
+                      </div>
+                      <p className="text-slate-500 text-sm mb-1">{band.period}</p>
+                      <p className="text-sm font-medium text-purple-700 mb-5">
+                        {band.note}
+                      </p>
+
+                      <button
+                        onClick={() => handleSelectOption(band.id)}
+                        disabled={loadingOption !== null}
+                        className={`mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-5 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                          band.highlighted
+                            ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105"
+                            : "bg-slate-900 text-white hover:bg-slate-800"
+                        }`}
+                      >
+                        {loadingOption === band.id ? (
+                          <>
+                            <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                            Processing...
+                          </>
+                        ) : (
+                          <>Get {band.seats}</>
+                        )}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Single Use Disclaimer */}
           <div className="mb-12 p-6 bg-slate-50 rounded-xl border border-slate-200">
             <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
@@ -224,11 +307,15 @@ export default function BuyContent() {
               About the Lifetime (V1) License
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
-              The Lifetime (V1) License is a one-time purchase that activates Investigation Flow <strong>Version 1</strong> on
-              {" "}<strong>one computer</strong>, with all Version 1 updates included—no recurring fees. Future major versions
-              (such as Version 2) are sold separately. The license stays with that machine, so if you need to run
-              Investigation Flow across multiple computers or move it between devices, we recommend a Monthly or Yearly
-              subscription instead.
+              The Lifetime (V1) License is a one-time purchase that runs Investigation Flow <strong>Version 1</strong> on
+              {" "}<strong>one computer at a time</strong>, with all Version 1 updates included—no recurring fees. Future
+              major versions (such as Version 2) are sold separately.
+            </p>
+            <p className="text-slate-600 text-sm leading-relaxed mt-3">
+              Need to switch machines? You can move the license to a different computer anytime—just deactivate the
+              license key on the old computer first, then activate it on the new one. Every plan (Monthly, Yearly, and
+              Lifetime) is licensed for <strong>one active computer at a time</strong>; to run Investigation Flow on
+              multiple computers at once, you'll need a license for each.
             </p>
           </div>
 

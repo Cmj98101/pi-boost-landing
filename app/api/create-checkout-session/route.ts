@@ -18,6 +18,10 @@ export async function POST(request: NextRequest) {
       lifetime:
         process.env.LEMONSQUEEZY_LIFETIME_CHECKOUT_URL ||
         process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL,
+      // Team seat-band bundles (Lemon Squeezy only — no Stripe fallback).
+      "team-3": process.env.LEMONSQUEEZY_TEAM_3_CHECKOUT_URL,
+      "team-5": process.env.LEMONSQUEEZY_TEAM_5_CHECKOUT_URL,
+      "team-10": process.env.LEMONSQUEEZY_TEAM_10_CHECKOUT_URL,
     };
     // Legacy alias for the one-time plan
     checkoutUrls["single-use"] = checkoutUrls.lifetime;

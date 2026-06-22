@@ -152,6 +152,40 @@ export const SITE_CONFIG = {
         highlighted: false,
       },
     ],
+    // Volume pricing for agencies. Each seat is its own license key (one
+    // active computer at a time), and the per-seat price drops as the team
+    // grows. Each band maps to a Lemon Squeezy variant via the checkout route.
+    team: {
+      headline: "Outfit your whole team",
+      subheadline:
+        "Volume pricing for agencies. Each seat is its own license key—one active computer at a time, transferable between machines.",
+      bands: [
+        {
+          id: "team-3",
+          seats: "3–4 seats",
+          pricePerSeat: 99,
+          period: "/seat/yr",
+          note: "Save ~17%",
+          highlighted: false,
+        },
+        {
+          id: "team-5",
+          seats: "5–9 seats",
+          pricePerSeat: 89,
+          period: "/seat/yr",
+          note: "Save ~25%",
+          highlighted: true,
+        },
+        {
+          id: "team-10",
+          seats: "10+ seats",
+          pricePerSeat: 79,
+          period: "/seat/yr",
+          note: "Save ~34%",
+          highlighted: false,
+        },
+      ],
+    },
   },
 } as const;
 
