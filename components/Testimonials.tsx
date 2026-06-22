@@ -41,7 +41,7 @@ export default function Testimonials() {
     {
       title: "Holds up in court",
       description:
-        "Accurate, verifiable timestamps and clean MP4/MOV exports built to meet court and agency standards—not Hollywood effects.",
+        "Accurate, verifiable timestamps and clean MP4/MOV exports built to meet court and agency standards, not Hollywood effects.",
       gradient: "from-blue-500 to-cyan-500",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,7 +88,7 @@ export default function Testimonials() {
 
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
             Adding a date and time stamp to modern surveillance footage is a
-            known headache—general editors like Premiere have no easy way to do
+            known headache. General editors like Premiere have no easy way to do
             it. Investigation Flow was built specifically to fix that.
           </p>
         </div>
@@ -124,7 +124,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Honest trust badges (pre-launch — no fabricated reviews) */}
+        {/* Honest trust badges (pre-launch, no fabricated reviews) */}
         <div className="mt-16 md:mt-20 text-center">
           <div className="inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-8 py-6 bg-white rounded-2xl shadow-lg border border-slate-200">
             {[

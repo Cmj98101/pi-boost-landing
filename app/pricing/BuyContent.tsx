@@ -321,7 +321,7 @@ export default function BuyContent() {
                         <p className="text-slate-600 leading-relaxed">
                           Running Investigation Flow on more than {teamConfig.maxSeats}{" "}
                           computers? We&apos;ll set you up with custom volume pricing and
-                          licensing for your agency or department—just reach out.
+                          licensing for your agency or department. Just reach out.
                         </p>
                       </div>
                     ) : (
@@ -341,7 +341,7 @@ export default function BuyContent() {
                           className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-bold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
                           aria-label="Remove a computer"
                         >
-                          –
+                          −
                         </button>
                         <span className="w-12 text-center text-xl font-bold text-slate-900 tabular-nums">
                           {teamSeats}
@@ -524,11 +524,11 @@ export default function BuyContent() {
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
               The Lifetime (V1) License is a one-time purchase that runs Investigation Flow <strong>Version 1</strong> on
-              {" "}<strong>one computer at a time</strong>, with all Version 1 updates included—no recurring fees. Future
+              {" "}<strong>one computer at a time</strong>, with all Version 1 updates included. No recurring fees. Future
               major versions (such as Version 2) are sold separately.
             </p>
             <p className="text-slate-600 text-sm leading-relaxed mt-3">
-              Need to switch machines? You can move the license to a different computer anytime—just deactivate the
+              Need to switch machines? You can move the license to a different computer anytime. Just deactivate the
               license key on the old computer first, then activate it on the new one. Every plan (Monthly, Yearly, and
               Lifetime) is licensed for <strong>one active computer at a time</strong>; to run Investigation Flow on
               multiple computers at once, you'll need a license for each.

@@ -73,7 +73,7 @@ export default function Features() {
       ),
       title: "Stitch a Whole Case Into One Sequence",
       description:
-        "Drop in clips from a day of surveillance and stitch them into a single, logical, chronological video—no timeline wrestling, no general-purpose editor required.",
+        "Drop in clips from a day of surveillance and stitch them into a single, logical, chronological video. No timeline wrestling, no general-purpose editor required.",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
@@ -92,9 +92,9 @@ export default function Features() {
           />
         </svg>
       ),
-      title: "Audio On or Off—Your Call",
+      title: "Audio On or Off, Your Call",
       description:
-        "Keep the audio when it matters, strip it when it doesn't—for privacy or admissibility. One toggle per clip, no re-encoding headaches.",
+        "Keep the audio when it matters, strip it when it doesn't, for privacy or admissibility. One toggle per clip, no re-encoding headaches.",
       gradient: "from-cyan-500 to-teal-500",
     },
     {
@@ -115,7 +115,7 @@ export default function Features() {
       ),
       title: "Grab Court-Ready Stills in One Click",
       description:
-        "Pull clean still shots straight from the footage you're editing—perfect for reports, exhibits, and client updates—without switching tools.",
+        "Pull clean still shots straight from the footage you're editing, perfect for reports, exhibits, and client updates, without switching tools.",
       gradient: "from-teal-500 to-green-500",
     },
     {
@@ -157,7 +157,7 @@ export default function Features() {
       ),
       title: "Built for Investigators, Not Filmmakers",
       description:
-        "Export universally-accepted MP4 or MOV, install on Windows or Mac in minutes, and start working immediately—no editing degree, no learning curve.",
+        "Export universally-accepted MP4 or MOV, install on Windows or Mac in minutes, and start working immediately. No editing degree, no learning curve.",
       gradient: "from-emerald-500 to-purple-500",
     },
   ];
@@ -188,8 +188,8 @@ export default function Features() {
 
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
             Stop fighting Premiere. Investigation Flow does the four jobs
-            surveillance video actually needs—timestamp, stitch, audio, and
-            stills—and nothing you don't.
+            surveillance video actually needs: timestamp, stitch, audio, and
+            stills, and nothing you don't.
           </p>
         </div>
 

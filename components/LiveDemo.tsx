@@ -46,7 +46,7 @@ export default function LiveDemo() {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-6">
             <span className="flex h-2 w-2 rounded-full bg-purple-500"></span>
             <span className="text-sm font-semibold text-purple-700">
-              LIVE DEMO — NO DOWNLOAD, NO SIGNUP
+              LIVE DEMO: NO DOWNLOAD, NO SIGNUP
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
@@ -54,7 +54,7 @@ export default function LiveDemo() {
             <span className="gradient-text">Right in Your Browser</span>
           </h2>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-            Drop in a clip, add a court-ready timestamp, and download the MP4—see
+            Drop in a clip, add a court-ready timestamp, and download the MP4. See
             exactly how it works before you install a thing.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function LiveDemo() {
           <div className="relative">
             <img
               src="/demo-preview.png"
-              alt="Investigation Flow live demo — add a court-ready timestamp to any clip"
+              alt="Investigation Flow live demo: add a court-ready timestamp to any clip"
               className="w-full h-auto"
             />
             {/* Hover overlay */}

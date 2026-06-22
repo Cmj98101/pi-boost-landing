@@ -17,21 +17,21 @@ export const SITE_CONFIG = {
   // Hero section content
   hero: {
     "early-access": {
-      badge: "Now in Early Access — Join the Founding Users",
+      badge: "Now in Early Access: Join the Founding Users",
       headline: "Timestamp your surveillance videos in 5 minutes.",
       subheadline:
-        "Timestamp, stitch clips in order, toggle audio, and grab stills — without fighting a general video editor. Try it free in your browser, no download required.",
+        "Timestamp, stitch clips in order, toggle audio, and grab stills, without fighting a general video editor. Try it free in your browser, no download required.",
       cta: {
         primary: "Try the Live Demo",
         secondary: "See How It Works",
       },
     },
     launch: {
-      badge: "Built for Private Investigators — Windows & Mac",
+      badge: "Built for Private Investigators: Windows & Mac",
       headline:
-        "Timestamp, Stitch & Deliver Court-Ready Surveillance Videos in Minutes — Not Hours",
+        "Timestamp, Stitch & Deliver Court-Ready Surveillance Videos in Minutes, Not Hours",
       subheadline:
-        "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills — all in one tool built for surveillance work, not Hollywood.",
+        "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills, all in one tool built for surveillance work, not Hollywood.",
       cta: {
         primary: "Try the Live Demo",
         secondary: "See How It Works",
@@ -44,15 +44,15 @@ export const SITE_CONFIG = {
     "early-access": {
       headline: "See It For Yourself",
       subheadline:
-        "Try the live demo right in your browser—upload a clip and watch it become court-ready in seconds. No download, no signup.",
+        "Try the live demo right in your browser. Upload a clip and watch it become court-ready in seconds. No download, no signup.",
       benefits: [
-        "Runs in your browser—nothing to install",
+        "Runs in your browser, nothing to install",
         "Timestamp · Stitch · Audio · Stills",
         "Founding-user pricing at launch",
         "Built with working investigators",
       ],
       buttonText: "Try the Live Demo",
-      badge: "Live Demo — Try It Free",
+      badge: "Live Demo: Try It Free",
       stats: [
         { value: "Win/Mac", label: "Native Windows & Mac App" },
         { value: "4 Tools", label: "Timestamp · Stitch · Audio · Stills" },
@@ -160,7 +160,7 @@ export const SITE_CONFIG = {
     team: {
       headline: "Outfit your whole team",
       subheadline:
-        "Pick how many computers you need—the more seats, the lower the price per seat.",
+        "Pick how many computers you need. The more seats, the lower the price per seat.",
       keyExplanation:
         "You get one license key that activates on every computer you buy. Move it between machines anytime by deactivating a computer first.",
       minSeats: 1,
