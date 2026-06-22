@@ -5,19 +5,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { planType = "monthly", quantity } = body;
 
-    // Resolve the hosted checkout URL for the chosen plan.
-    // Prefer Lemon Squeezy "Buy" links; fall back to the legacy Stripe vars
-    // so the site keeps working during the migration.
+    // Resolve the hosted Lemon Squeezy checkout URL for the chosen plan.
     const checkoutUrls: Record<string, string | undefined> = {
-      monthly:
-        process.env.LEMONSQUEEZY_MONTHLY_CHECKOUT_URL ||
-        process.env.STRIPE_MONTHLY_PAYMENT_LINK_URL,
-      yearly:
-        process.env.LEMONSQUEEZY_YEARLY_CHECKOUT_URL ||
-        process.env.STRIPE_YEARLY_PAYMENT_LINK_URL,
-      lifetime:
-        process.env.LEMONSQUEEZY_LIFETIME_CHECKOUT_URL ||
-        process.env.STRIPE_SINGLE_USE_PAYMENT_LINK_URL,
+      monthly: process.env.LEMONSQUEEZY_MONTHLY_CHECKOUT_URL,
+      yearly: process.env.LEMONSQUEEZY_YEARLY_CHECKOUT_URL,
+      lifetime: process.env.LEMONSQUEEZY_LIFETIME_CHECKOUT_URL,
       // Team plans use native Lemon Squeezy volume pricing; the buyer's seat
       // count is passed through as the checkout quantity. If a dedicated team
       // variant isn't configured, fall back to the MATCHING individual link

@@ -11,7 +11,7 @@ export default function ThankYouContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   const isLive = process.env.NEXT_PUBLIC_LAUNCH_MODE === "live";
-  const foundersLink = process.env.STRIPE_FOUNDERS_PAYMENT_LINK_URL || "#";
+  const foundersLink = process.env.LEMONSQUEEZY_FOUNDERS_CHECKOUT_URL || "#";
   const macosDownloadUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL || "#";
   const windowsDownloadUrl = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "#";
 
