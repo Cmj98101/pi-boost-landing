@@ -80,8 +80,8 @@ export const SITE_CONFIG = {
       buttonText: "Try the Live Demo",
       badge: null,
       stats: [
-        { value: "$14.99", label: "Starting Per Month" },
-        { value: "$149", label: "One-Time License Option" },
+        { value: "$19.99", label: "Starting Per Month" },
+        { value: "$299", label: "One-Time License Option" },
         { value: "Win/Mac", label: "Native Desktop App" },
       ],
     },
@@ -134,7 +134,7 @@ export const SITE_CONFIG = {
       {
         id: "monthly",
         name: "Monthly",
-        price: 14.99,
+        price: 19.99,
         period: "/month",
         description: "Flexible month-to-month billing",
         support: "Priority email support + all updates",
@@ -143,9 +143,9 @@ export const SITE_CONFIG = {
       {
         id: "yearly",
         name: "Yearly",
-        price: 119,
+        price: 199,
         period: "/year",
-        description: "Save 34% vs. monthly (~$9.92/mo)",
+        description: "Save ~17% vs. monthly (~$16.58/mo)",
         support: "Priority email support + all updates",
         highlighted: true,
         badge: "BEST VALUE",
@@ -153,7 +153,7 @@ export const SITE_CONFIG = {
       {
         id: "lifetime",
         name: "Lifetime (V1)",
-        price: 149,
+        price: 299,
         period: "one-time",
         description: "One device · all Version 1 updates included",
         support: "Email support",
@@ -189,9 +189,9 @@ export const SITE_CONFIG = {
           unitSuffix: "/seat/yr",
           totalSuffix: "/yr",
           tiers: [
-            { upTo: 3, price: 119 },
-            { upTo: 6, price: 99 },
-            { upTo: null, price: 89 },
+            { upTo: 3, price: 199 },
+            { upTo: 6, price: 169 },
+            { upTo: null, price: 149 },
           ],
         },
         monthly: {
@@ -200,8 +200,9 @@ export const SITE_CONFIG = {
           unitSuffix: "/seat/mo",
           totalSuffix: "/mo",
           tiers: [
-            { upTo: 3, price: 14.99 },
-            { upTo: null, price: 11.99 },
+            { upTo: 3, price: 19.99 },
+            { upTo: 6, price: 16.99 },
+            { upTo: null, price: 14.99 },
           ],
         },
       },

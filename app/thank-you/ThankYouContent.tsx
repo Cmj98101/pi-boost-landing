@@ -97,7 +97,7 @@ export default function ThankYouContent() {
               </h3>
 
               <div className="flex items-center justify-center gap-4 mb-4">
-                <span className="text-3xl md:text-4xl font-bold line-through opacity-60">$14.99</span>
+                <span className="text-3xl md:text-4xl font-bold line-through opacity-60">$19.99</span>
                 <span className="text-5xl md:text-6xl font-bold">$9.99</span>
                 <span className="text-xl">/month</span>
               </div>
