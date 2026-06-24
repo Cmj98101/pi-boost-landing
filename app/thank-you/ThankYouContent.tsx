@@ -11,7 +11,6 @@ export default function ThankYouContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   const isLive = process.env.NEXT_PUBLIC_LAUNCH_MODE === "live";
-  const foundersLink = process.env.LEMONSQUEEZY_FOUNDERS_CHECKOUT_URL || "#";
   const macosDownloadUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL || "#";
   const windowsDownloadUrl = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "#";
 
@@ -84,56 +83,6 @@ export default function ThankYouContent() {
                   <p className="text-slate-700">Start your 7-day free trial immediately</p>
                 </div>
               </div>
-            </div>
-
-            {/* Founder's Pricing Offer */}
-            <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8 text-white mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full mb-4">
-                <span className="text-sm font-semibold">LIMITED TIME OFFER</span>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">
-                Lock in Founder's Pricing
-              </h3>
-
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <span className="text-3xl md:text-4xl font-bold line-through opacity-60">$19.99</span>
-                <span className="text-5xl md:text-6xl font-bold">$9.99</span>
-                <span className="text-xl">/month</span>
-              </div>
-
-              <p className="text-lg mb-6 text-white/90">
-                Pay now and lock in founding-user pricing <strong>forever</strong>. First 100 only.
-              </p>
-
-              <div className="space-y-3 mb-6 text-left">
-                {[
-                  "Locked-in founding-user discount, forever",
-                  "Access the moment we launch",
-                  "All future features included",
-                  "Priority support",
-                  "Cancel anytime"
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <svg className="w-5 h-5 text-green-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="text-white/90">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <a
-                href={foundersLink}
-                className="inline-flex items-center justify-center gap-2 bg-white text-purple-600 font-bold px-8 py-4 rounded-xl hover:bg-slate-50 transition-all shadow-xl hover:shadow-2xl text-lg w-full"
-              >
-                Claim Founder's Pricing
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-
-              <p className="text-sm text-white/70 mt-4">67 of 100 spots claimed</p>
             </div>
 
             <div className="space-y-4">
