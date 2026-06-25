@@ -8,8 +8,13 @@ export default function Hero() {
   const heroContent = getModeContent("hero");
   const demoUrl = getConfig("demoUrl");
   const download = getConfig("download");
-  const macUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL;
-  const showMacDownload = download.macAvailable && !!macUrl;
+  const downloads = [
+    { key: "mac", available: download.macAvailable, label: download.macLabel, href: "/download/mac" },
+    { key: "windows", available: download.windowsAvailable, label: download.windowsLabel, href: "/download/windows" },
+  ];
+  const availableDownloads = downloads.filter((d) => d.available);
+  const comingSoon = downloads.filter((d) => !d.available);
+  const hasDownload = availableDownloads.length > 0;
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -74,11 +79,11 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-500">
-            {showMacDownload && (
+            {availableDownloads.map((d) => (
               <a
-                href={macUrl}
-                download
-                onClick={() => analytics.downloadStarted("mac")}
+                key={d.key}
+                href={d.href}
+                onClick={() => analytics.downloadStarted(d.key)}
                 className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
               >
                 <svg
@@ -94,16 +99,16 @@ export default function Hero() {
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                   />
                 </svg>
-                {download.macLabel}
+                {d.label}
               </a>
-            )}
+            ))}
 
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={`${
-                showMacDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
+                hasDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
               } inline-flex items-center justify-center gap-2 text-lg group`}
             >
               {heroContent.cta.primary}
@@ -134,9 +139,10 @@ export default function Hero() {
             </a>
           </div>
 
-          {!download.windowsAvailable && (
+          {hasDownload && comingSoon.length > 0 && (
             <p className="text-sm text-slate-500 animate-fade-in-up delay-500">
-              Mac app available now. Windows version coming soon.
+              {comingSoon.map((d) => (d.key === "mac" ? "Mac" : "Windows")).join(" & ")}{" "}
+              version coming soon.
             </p>
           )}
 

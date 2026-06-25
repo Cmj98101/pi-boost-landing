@@ -11,12 +11,14 @@ export const SITE_CONFIG = {
   // Live, in-browser demo of the timestamping tool
   demoUrl: "https://timestamp.investigationflow.com",
 
-  // Desktop app downloads. Mac is live; Windows is coming soon. The actual
-  // file URLs come from NEXT_PUBLIC_MACOS_DOWNLOAD_URL / NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL.
+  // Desktop app downloads. Flip a platform to `true` once its PUBLIC download
+  // URL is set (NEXT_PUBLIC_MACOS_DOWNLOAD_URL / NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL).
+  // Buttons link to /download/mac and /download/windows, which redirect to those URLs.
   download: {
-    macAvailable: true,
+    macAvailable: false,
     windowsAvailable: false,
     macLabel: "Download for Mac",
+    windowsLabel: "Download for Windows",
   },
 
   // Feature flags
