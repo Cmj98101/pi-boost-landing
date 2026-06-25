@@ -2,18 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { getConfig } from "@/lib/config";
-import { analytics } from "@/lib/analytics";
+import DownloadButton from "./DownloadButton";
 
 export default function Navigation() {
-  const demoUrl = getConfig("demoUrl");
-  const download = getConfig("download");
-  const downloads = [
-    { key: "mac", available: download.macAvailable, label: download.macLabel, href: "/download/mac" },
-    { key: "windows", available: download.windowsAvailable, label: download.windowsLabel, href: "/download/windows" },
-  ];
-  const availableDownloads = downloads.filter((d) => d.available);
-  const hasDownload = availableDownloads.length > 0;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -96,25 +87,8 @@ export default function Navigation() {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            {availableDownloads.map((d) => (
-              <a
-                key={d.key}
-                href={d.href}
-                onClick={() => analytics.downloadStarted(d.key)}
-                className="btn-primary-luxury"
-              >
-                {d.label}
-              </a>
-            ))}
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={hasDownload ? "btn-secondary-luxury" : "btn-primary-luxury"}
-            >
-              Try the Demo
-            </a>
+          <div className="hidden lg:flex items-center gap-3">
+            <DownloadButton className="btn-primary-luxury inline-flex items-center gap-2" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -179,30 +153,7 @@ export default function Navigation() {
                 {link.name}
               </a>
             ))}
-            {availableDownloads.map((d) => (
-              <a
-                key={d.key}
-                href={d.href}
-                onClick={() => {
-                  analytics.downloadStarted(d.key);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="btn-primary-luxury w-full text-center block"
-              >
-                {d.label}
-              </a>
-            ))}
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`${
-                hasDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
-              } w-full text-center block`}
-            >
-              Try the Demo
-            </a>
+            <DownloadButton className="btn-primary-luxury inline-flex items-center justify-center gap-2 w-full" />
           </div>
         </div>
       )}

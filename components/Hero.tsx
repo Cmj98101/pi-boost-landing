@@ -7,14 +7,6 @@ import { analytics } from "@/lib/analytics";
 export default function Hero() {
   const heroContent = getModeContent("hero");
   const demoUrl = getConfig("demoUrl");
-  const download = getConfig("download");
-  const downloads = [
-    { key: "mac", available: download.macAvailable, label: download.macLabel, href: "/download/mac" },
-    { key: "windows", available: download.windowsAvailable, label: download.windowsLabel, href: "/download/windows" },
-  ];
-  const availableDownloads = downloads.filter((d) => d.available);
-  const comingSoon = downloads.filter((d) => !d.available);
-  const hasDownload = availableDownloads.length > 0;
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -79,37 +71,12 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-500">
-            {availableDownloads.map((d) => (
-              <a
-                key={d.key}
-                href={d.href}
-                onClick={() => analytics.downloadStarted(d.key)}
-                className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
-              >
-                <svg
-                  className="w-5 h-5 group-hover:translate-y-0.5 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                {d.label}
-              </a>
-            ))}
-
             <a
               href={demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${
-                hasDownload ? "btn-secondary-luxury" : "btn-primary-luxury"
-              } inline-flex items-center justify-center gap-2 text-lg group`}
+              onClick={() => analytics.demoClicked("hero")}
+              className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
             >
               {heroContent.cta.primary}
               <svg
@@ -138,13 +105,6 @@ export default function Hero() {
               {heroContent.cta.secondary}
             </a>
           </div>
-
-          {hasDownload && comingSoon.length > 0 && (
-            <p className="text-sm text-slate-500 animate-fade-in-up delay-500">
-              {comingSoon.map((d) => (d.key === "mac" ? "Mac" : "Windows")).join(" & ")}{" "}
-              version coming soon.
-            </p>
-          )}
 
           {/* Honest pre-launch trust line */}
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 pt-4 text-sm text-slate-600 animate-fade-in-up delay-600">

@@ -63,6 +63,31 @@ export const analytics = {
     });
   },
 
+  // Redirected to the Lemon Squeezy hosted checkout (the buyer is about to pay)
+  proceedToCheckout: (planType: string) => {
+    trackEvent("proceed_to_checkout", {
+      event_category: "ecommerce",
+      event_label: `${planType}_checkout`,
+      plan_type: planType,
+    });
+  },
+
+  // "Download Now" button clicks (the nav CTA that opens the /download page)
+  downloadNowClicked: (location: string) => {
+    trackEvent("download_now_clicked", {
+      event_category: "engagement",
+      event_label: location,
+    });
+  },
+
+  // "Try the Live Demo" button clicks (the browser demo)
+  demoClicked: (location: string) => {
+    trackEvent("demo_clicked", {
+      event_category: "engagement",
+      event_label: location,
+    });
+  },
+
   // Desktop app download clicks
   downloadStarted: (platform: string) => {
     trackEvent("download_started", {
