@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import PaymentButton from "./PaymentButton";
 import { getConfig, getModeContent } from "@/lib/config";
+import { analytics } from "@/lib/analytics";
 
 export default function CTA() {
   const ctaContent = getModeContent('cta');
@@ -80,6 +81,7 @@ export default function CTA() {
                 href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => analytics.demoClicked("cta-section")}
                 className="inline-flex items-center justify-center gap-2 bg-white text-purple-600 hover:bg-slate-50 hover:shadow-2xl transition-all duration-300 font-bold px-8 py-4 rounded-xl shadow-xl text-lg"
               >
                 {ctaContent.buttonText}

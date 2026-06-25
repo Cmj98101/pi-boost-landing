@@ -70,6 +70,7 @@ export default function BuyContent() {
       const data = await response.json();
 
       if (response.ok && data.url) {
+        analytics.proceedToCheckout(optionId);
         window.open(data.url, '_blank');
         setLoadingOption(null);
       } else {
@@ -104,6 +105,7 @@ export default function BuyContent() {
       const data = await response.json();
 
       if (response.ok && data.url) {
+        analytics.proceedToCheckout(teamPlan.id);
         window.open(data.url, "_blank");
         setLoadingOption(null);
       } else {

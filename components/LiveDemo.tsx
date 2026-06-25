@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { getConfig } from "@/lib/config";
+import { analytics } from "@/lib/analytics";
 
 export default function LiveDemo() {
   const demoUrl = getConfig("demoUrl");
@@ -64,6 +65,7 @@ export default function LiveDemo() {
           href={demoUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => analytics.demoClicked("livedemo-preview")}
           className={`group block max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl ring-1 ring-slate-200 bg-white transition-all duration-700 hover:shadow-purple-200/50 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
@@ -114,6 +116,7 @@ export default function LiveDemo() {
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => analytics.demoClicked("livedemo-button")}
             className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
           >
             Open the Live Demo

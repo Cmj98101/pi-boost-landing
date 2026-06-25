@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { getConfig } from "@/lib/config";
+import { analytics } from "@/lib/analytics";
 
 export default function Features() {
   const demoUrl = getConfig("demoUrl");
@@ -259,6 +260,7 @@ export default function Features() {
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => analytics.demoClicked("features")}
             className="btn-primary-luxury inline-flex items-center gap-2 text-lg group"
           >
             Try the Live Demo
