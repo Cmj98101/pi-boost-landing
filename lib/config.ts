@@ -15,8 +15,8 @@ export const SITE_CONFIG = {
   // URL is set (NEXT_PUBLIC_MACOS_DOWNLOAD_URL / NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL).
   // Buttons link to /download/mac and /download/windows, which redirect to those URLs.
   download: {
-    macAvailable: false,
-    windowsAvailable: false,
+    macAvailable: true,
+    windowsAvailable: true,
     macLabel: "Download for Mac",
     windowsLabel: "Download for Windows",
   },
