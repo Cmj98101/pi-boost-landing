@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function POST(request: NextRequest) {
   try {
+    // Created per-request so the module loads even if env vars are absent at build.
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
     const { firstName, lastName, email } = await request.json();
 
     // Validate input
@@ -64,8 +65,7 @@ export async function POST(request: NextRequest) {
 
     console.log("Successfully added email to waitlist:", email);
 
-    // TODO: Send welcome email via SendGrid/Resend
-    // This would be implemented based on your email service choice
+    // TODO: Send welcome email (email service TBD).
 
     return NextResponse.json({ success: true });
   } catch (error) {
