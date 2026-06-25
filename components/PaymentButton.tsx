@@ -32,7 +32,7 @@ export default function PaymentButton({
     analytics.trialSignupStarted(planType);
 
     try {
-      // Create Stripe checkout session
+      // Resolve the Lemon Squeezy checkout URL
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
@@ -47,7 +47,7 @@ export default function PaymentButton({
       const data = await response.json();
 
       if (response.ok && data.url) {
-        // Redirect to Stripe Checkout
+        // Redirect to Lemon Squeezy checkout
         window.location.href = data.url;
       } else {
         throw new Error(data.error || "Failed to create checkout session");

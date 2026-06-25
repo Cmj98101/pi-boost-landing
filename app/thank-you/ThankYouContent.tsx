@@ -1,43 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function ThankYouContent() {
-  const searchParams = useSearchParams();
-  const sessionId = searchParams.get("session_id");
-  const [sessionData, setSessionData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const isLive = process.env.NEXT_PUBLIC_LAUNCH_MODE === "live";
   const macosDownloadUrl = process.env.NEXT_PUBLIC_MACOS_DOWNLOAD_URL || "#";
   const windowsDownloadUrl = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL || "#";
-
-  useEffect(() => {
-    if (sessionId) {
-      // Fetch session data to show user details
-      fetch(`/api/checkout-session?session_id=${sessionId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSessionData(data);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false);
-    }
-  }, [sessionId]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-purple-600"></div>
-      </div>
-    );
-  }
 
   // Waitlist Mode - Pre-Launch
   if (!isLive) {
@@ -152,30 +120,6 @@ export default function ThankYouContent() {
             </a>
           </div>
 
-          {/* Trial Details */}
-          {sessionData && (
-            <div className="bg-slate-50 rounded-2xl p-6 mb-8">
-              <h3 className="font-bold text-lg text-slate-900 mb-4">Your Trial Details</h3>
-              <div className="grid md:grid-cols-3 gap-4 text-center">
-                <div>
-                  <p className="text-sm text-slate-600 mb-1">Trial Period</p>
-                  <p className="font-bold text-2xl text-slate-900">7 Days</p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-600 mb-1">Trial Ends</p>
-                  <p className="font-bold text-2xl text-slate-900">
-                    {sessionData.trial_end
-                      ? new Date(sessionData.trial_end * 1000).toLocaleDateString()
-                      : "N/A"}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-600 mb-1">Status</p>
-                  <p className="font-bold text-2xl text-green-600">Active</p>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Getting Started Steps */}
           <div className="bg-slate-50 rounded-2xl p-6 mb-8 text-left">
