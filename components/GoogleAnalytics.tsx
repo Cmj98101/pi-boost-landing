@@ -12,11 +12,6 @@ export default function GoogleAnalytics() {
   return (
     <>
       <Script
-        src="https://analytics.ahrefs.com/analytics.js"
-        data-key="8RGaHpym6HopAd3PLKhSqw"
-        async
-      ></Script>
-      <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="afterInteractive"
       />

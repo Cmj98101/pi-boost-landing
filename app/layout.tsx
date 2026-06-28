@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       "Professional video timestamping software for private investigators. Correct timestamp errors, perfect video conversion, customize timestamp appearance and location.",
   },
   alternates: {
-    canonical: "https://investigationflow.com",
+    canonical: "https://www.investigationflow.com",
   },
 };
 
@@ -61,8 +61,8 @@ export default function RootLayout({
       {
         "@type": "Organization",
         name: "Investigation Flow",
-        url: "https://investigationflow.com",
-        logo: "https://investigationflow.com/logo-full.png",
+        url: "https://www.investigationflow.com",
+        logo: "https://www.investigationflow.com/logo-full.png",
         description:
           "Professional video editing software for private investigators and surveillance professionals.",
       },
@@ -72,6 +72,8 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="investigationflow">
       <head>
+        <link rel="preconnect" href="https://analytics.ahrefs.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

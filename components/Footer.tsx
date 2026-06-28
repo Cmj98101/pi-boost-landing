@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -14,9 +16,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="mb-4">
-              <img
+              <Image
                 src="/logo-full-white.png"
                 alt="Investigation Flow"
+                width={1682}
+                height={357}
                 className="h-10 w-auto"
               />
             </div>
@@ -125,7 +129,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:chris@systumboost.com"
+                  href="mailto:support@systumboost.com"
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -134,7 +138,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:chris@systumboost.com?subject=Cancel%20Subscription"
+                  href="mailto:support@systumboost.com?subject=Cancel%20Subscription"
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -143,7 +147,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:chris@systumboost.com?subject=Billing%20Question"
+                  href="mailto:support@systumboost.com?subject=Billing%20Question"
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -177,7 +181,7 @@ export default function Footer() {
                 Terms of Service
               </a>
               <a
-                href="mailto:chris@systumboost.com"
+                href="mailto:support@systumboost.com"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 Contact

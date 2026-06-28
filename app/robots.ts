@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/auth/callback', '/buy'],
       },
     ],
-    sitemap: 'https://investigationflow.com/sitemap.xml',
+    sitemap: 'https://www.investigationflow.com/sitemap.xml',
   }
 }

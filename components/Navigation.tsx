@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import DownloadButton from "./DownloadButton";
 
 export default function Navigation() {
@@ -50,9 +51,12 @@ export default function Navigation() {
               }
             }}
           >
-            <img
+            <Image
               src="/logo-full.png"
               alt="Investigation Flow"
+              width={1682}
+              height={357}
+              priority
               className="h-9 md:h-10 w-auto group-hover:scale-105 transition-transform"
             />
           </a>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { getConfig } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
@@ -88,9 +89,12 @@ export default function LiveDemo() {
 
           {/* Screenshot */}
           <div className="relative">
-            <img
+            <Image
               src="/demo-preview.png"
               alt="Investigation Flow live demo: add a court-ready timestamp to any clip"
+              width={1440}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-auto"
             />
             {/* Hover overlay */}
