@@ -1,6 +1,4 @@
-/* Premium Typography - Must be first */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
+/* Premium Typography - Inter is self-hosted via next/font in app/layout.tsx */
 @import "tailwindcss";
 
 /* ============================================
@@ -64,7 +62,7 @@
 
   /* ========== PREMIUM TYPOGRAPHY ========== */
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
 
   /* Font Sizes - Generous scale for luxury */
   --font-size-xs: 0.75rem;

@@ -4,7 +4,11 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title:
@@ -70,7 +74,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" data-theme="investigationflow">
+    <html lang="en" data-theme="investigationflow" className={inter.variable}>
       <head>
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
