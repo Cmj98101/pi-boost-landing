@@ -1,35 +1,4 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
-
 export default function HowItWorks() {
-  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            steps.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleSteps((prev) => [...prev, index]);
-              }, index * 200);
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const steps = [
     {
       title: "Add Your Footage",
@@ -69,7 +38,6 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50"
     >
       {/* Decorative background */}
@@ -103,11 +71,7 @@ export default function HowItWorks() {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className={`relative transition-all duration-700 ${
-                  visibleSteps.includes(index)
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-10'
-                }`}
+                className={`relative animate-fade-in-up delay-${index * 200}`}
               >
                 {/* Step Card */}
                 <div className="relative card-luxury h-full group hover:scale-105 transition-all duration-300">

@@ -289,6 +289,22 @@ body {
   animation: gradientShift 6s ease infinite;
 }
 
+/*
+  Reduced-motion safety net: these entrance classes start at opacity:0 and rely
+  on the keyframe animation to reveal content. If a user disables motion, skip
+  the animation and show the content immediately so nothing stays invisible.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 /* Stagger delays for sequential animations */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }

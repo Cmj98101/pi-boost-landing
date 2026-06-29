@@ -1,31 +1,4 @@
-"use client";
-
-import { useState, useEffect, useRef } from "react";
-
 export default function Testimonials() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const pillars = [
     {
       title: "Minutes, not hours",
@@ -65,7 +38,6 @@ export default function Testimonials() {
   return (
     <section
       id="why"
-      ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50"
     >
       {/* Decorative background */}
@@ -98,10 +70,7 @@ export default function Testimonials() {
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className={`transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              className={`animate-fade-in-up delay-${index * 100}`}
             >
               <div className="card-luxury h-full">
                 {/* Icon */}

@@ -1,38 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { getConfig } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Features() {
   const demoUrl = getConfig("demoUrl");
-  const [visibleCards, setVisibleCards] = useState<number[]>([]);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Stagger the card animations
-            features.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleCards((prev) => [...prev, index]);
-              }, index * 100);
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   const features = [
     {
@@ -166,7 +138,6 @@ export default function Features() {
   return (
     <section
       id="features"
-      ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50"
     >
       {/* Decorative background elements */}
@@ -199,11 +170,7 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`group relative transition-all duration-700 ${
-                visibleCards.includes(index)
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-10"
-              }`}
+              className={`group relative animate-fade-in-up delay-${index * 100}`}
             >
               {/* Feature Card */}
               <div className="card-luxury-border h-full group-hover:scale-105 transition-all duration-300">

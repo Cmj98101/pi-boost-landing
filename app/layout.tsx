@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -82,17 +83,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="8RGaHpym6HopAd3PLKhSqw"
-          async
-        ></script>
       </head>
       <body className={inter.className}>
-        <GoogleAnalytics />
-
         {children}
         <Analytics />
+        <GoogleAnalytics />
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="8RGaHpym6HopAd3PLKhSqw"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
