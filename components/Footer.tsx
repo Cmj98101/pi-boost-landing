@@ -32,7 +32,7 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h4 className="font-bold mb-4 text-white text-lg">Product</h4>
+            <h3 className="font-bold mb-4 text-white text-lg">Product</h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -84,7 +84,7 @@ export default function Footer() {
 
           {/* Downloads */}
           <div>
-            <h4 className="font-bold mb-4 text-white text-lg">Download</h4>
+            <h3 className="font-bold mb-4 text-white text-lg">Download</h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -125,7 +125,7 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="font-bold mb-4 text-white text-lg">Support</h4>
+            <h3 className="font-bold mb-4 text-white text-lg">Support</h3>
             <ul className="space-y-3">
               <li>
                 <a

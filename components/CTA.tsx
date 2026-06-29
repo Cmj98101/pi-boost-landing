@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import PaymentButton from "./PaymentButton";
 import { getConfig, getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
@@ -9,33 +8,9 @@ export default function CTA() {
   const ctaContent = getModeContent('cta');
   const demoUrl = getConfig('demoUrl');
 
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id="cta"
-      ref={sectionRef}
       className="relative py-24 md:py-32 overflow-hidden"
     >
       {/* Premium gradient background */}
@@ -52,9 +27,7 @@ export default function CTA() {
       }}></div>
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className={`text-center transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className="text-center animate-fade-in-up">
           {/* Main CTA Card */}
           <div>
             {ctaContent.badge && (

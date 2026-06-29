@@ -1,18 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { getConfig, getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
   const heroContent = getModeContent("hero");
   const demoUrl = getConfig("demoUrl");
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   return (
     <section
@@ -28,7 +21,7 @@ export default function Hero() {
 
       {/* Content Container */}
       <div className="relative w-full max-w-4xl mx-auto px-6 md:px-12 text-center">
-        <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="space-y-8">
 
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-purple-100 animate-fade-in">
@@ -41,8 +34,9 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] animate-fade-in-up delay-200">
+          {/* Main Headline — no entrance animation: this is the LCP element,
+              so it must paint fully opaque immediately */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
             <span className="gradient-text">{heroContent.headline}</span>
           </h1>
 
