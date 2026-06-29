@@ -34,8 +34,9 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] animate-fade-in-up delay-200">
+          {/* Main Headline — no entrance animation: this is the LCP element,
+              so it must paint fully opaque immediately */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
             <span className="gradient-text">{heroContent.headline}</span>
           </h1>
 
