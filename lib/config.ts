@@ -28,7 +28,7 @@ export const SITE_CONFIG = {
   hero: {
     "early-access": {
       badge: "Now in Early Access: Join the Founding Users",
-      headline: "Timestamp your surveillance videos in 5 minutes.",
+      headline: "Timestamp your surveillance videos in minutes.",
       subheadline:
         "Timestamp, stitch clips in order, toggle audio, and grab stills, without fighting a general video editor. Try it free in your browser, no download required.",
       cta: {

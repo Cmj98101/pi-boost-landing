@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="mb-4">
@@ -77,6 +77,49 @@ export default function Footer() {
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
                   FAQ
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Compare */}
+          <div>
+            <h3 className="font-bold mb-4 text-white text-lg">Compare</h3>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="/investigation-video-editor-alternative"
+                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                >
+                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  Investigation Flow vs. IVE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/v3-video-editor-alternative"
+                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                >
+                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  Investigation Flow vs. V3
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/imovie-alternative"
+                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                >
+                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  Investigation Flow vs. iMovie
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/wondershare-alternative"
+                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                >
+                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  Investigation Flow vs. Wondershare
                 </a>
               </li>
             </ul>
