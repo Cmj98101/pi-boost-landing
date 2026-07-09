@@ -4,6 +4,8 @@ import Script from "next/script";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import PostHogProvider from "@/components/PostHogProvider";
+import PostHogPageView from "@/components/PostHogPageView";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -91,7 +93,10 @@ export default function RootLayout({
         <script src="https://lmsqueezy.com/affiliate.js" defer />
       </head>
       <body className={inter.className}>
-        {children}
+        <PostHogProvider>
+          <PostHogPageView />
+          {children}
+        </PostHogProvider>
         <Analytics />
         <GoogleAnalytics />
         <Script

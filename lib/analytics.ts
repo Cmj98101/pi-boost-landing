@@ -1,4 +1,6 @@
-// Google Analytics event tracking helper
+import posthog from "posthog-js";
+
+// Fires every tracked event to both GA4 and PostHog
 export const trackEvent = (
   eventName: string,
   eventParams?: Record<string, any>
@@ -9,6 +11,10 @@ export const trackEvent = (
     console.log("📊 GA4 Event:", eventName, eventParams);
   } else {
     console.warn("⚠️ GA4 not loaded - Event not tracked:", eventName);
+  }
+
+  if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+    posthog.capture(eventName, eventParams);
   }
 };
 
