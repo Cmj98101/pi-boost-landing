@@ -182,7 +182,7 @@ export const SITE_CONFIG = {
         headline: "Need more than 50 computers?",
         body: "Tell us how many seats you need and we'll set you up with custom volume pricing for your agency or department.",
         buttonText: "Contact us",
-        email: "support@systumboost.com",
+        email: "support@investigationflow.com",
       },
       plans: {
         yearly: {

@@ -1,5 +1,21 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import BuyContent from "./BuyContent";
+
+export const metadata: Metadata = {
+  title: "Pricing | Investigation Flow",
+  description:
+    "Monthly, yearly, or a one-time lifetime license for Investigation Flow. Volume pricing for agencies running the app on multiple computers.",
+  alternates: {
+    canonical: "https://www.investigationflow.com/pricing",
+  },
+  openGraph: {
+    title: "Pricing | Investigation Flow",
+    description:
+      "Monthly, yearly, or a one-time lifetime license for Investigation Flow. Volume pricing for agencies running the app on multiple computers.",
+    type: "website",
+  },
+};
 
 function LoadingSpinner() {
   return (

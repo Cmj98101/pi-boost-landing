@@ -1,5 +1,15 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import BuyContent from "../pricing/BuyContent";
+
+export const metadata: Metadata = {
+  title: "Pricing | Investigation Flow",
+  description:
+    "Monthly, yearly, or a one-time lifetime license for Investigation Flow. Volume pricing for agencies running the app on multiple computers.",
+  alternates: {
+    canonical: "https://www.investigationflow.com/pricing",
+  },
+};
 
 function LoadingSpinner() {
   return (
