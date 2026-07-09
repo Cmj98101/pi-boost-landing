@@ -83,6 +83,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.lemonSqueezyAffiliateConfig = { store: "investigationflow" };`,
+          }}
+        />
+        <script src="https://lmsqueezy.com/affiliate.js" defer />
       </head>
       <body className={inter.className}>
         {children}
