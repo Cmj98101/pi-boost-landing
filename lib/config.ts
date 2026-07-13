@@ -124,6 +124,11 @@ export const SITE_CONFIG = {
   pricing: {
     productName: "Investigation Flow",
     productTagline: "Surveillance video, court-ready in minutes.",
+    trialBanner: {
+      text: "Not ready to buy? Download the app and start a 7-day free trial with every feature unlocked.",
+      linkText: "Download the free trial",
+      href: "/download",
+    },
     features: [
       "Court-ready timestamps",
       "Stitch clips in order",

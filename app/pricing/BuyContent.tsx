@@ -141,6 +141,32 @@ export default function BuyContent() {
               {pricingConfig.productTagline}
             </p>
 
+            {/* Free Trial Banner */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 px-5 py-3 bg-green-50 border border-green-200 rounded-xl mb-8 text-sm md:text-base">
+              <svg
+                className="w-5 h-5 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span className="text-slate-700">
+                {pricingConfig.trialBanner.text}
+              </span>
+              <a
+                href={pricingConfig.trialBanner.href}
+                className="font-semibold text-green-700 hover:text-green-800 underline underline-offset-2"
+              >
+                {pricingConfig.trialBanner.linkText}
+              </a>
+            </div>
+
             {/* Features List */}
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm md:text-base text-slate-600 mb-8">
               {pricingConfig.features.map((feature, index) => (
