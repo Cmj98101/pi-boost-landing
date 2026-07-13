@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  experimental: {
+    inlineCss: true,
+  },
   async redirects() {
     return [
       {

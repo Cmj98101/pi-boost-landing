@@ -21,7 +21,26 @@ export default function PostHogProvider({
       capture_pageview: false,
       capture_pageleave: true,
       cross_subdomain_cookie: true,
+      // Recorder (~52 KiB) loads on first interaction instead of page load
+      disable_session_recording: true,
+      disable_surveys: true,
+      capture_dead_clicks: false,
     });
+
+    const interactionEvents = ["pointerdown", "keydown", "scroll", "touchstart"];
+    const startRecording = () => {
+      posthog.startSessionRecording();
+      interactionEvents.forEach((e) =>
+        window.removeEventListener(e, startRecording)
+      );
+    };
+    interactionEvents.forEach((e) =>
+      window.addEventListener(e, startRecording, { passive: true })
+    );
+    return () =>
+      interactionEvents.forEach((e) =>
+        window.removeEventListener(e, startRecording)
+      );
   }, []);
 
   return <PHProvider client={posthog}>{children}</PHProvider>;
