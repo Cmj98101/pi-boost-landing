@@ -3,6 +3,15 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/buy',
+        destination: '/pricing',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
