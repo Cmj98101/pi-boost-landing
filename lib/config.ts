@@ -109,14 +109,14 @@ export const SITE_CONFIG = {
       title: "Get Early Access",
       subtitle: "Join the waitlist for exclusive launch pricing",
       features: [
-        "7-day free trial included",
+        "Free trial: 25 video conversions included",
         "Email support",
         "Access to all features",
         "Cancel anytime",
       ],
       buttonText: "Join Waitlist",
       successMessage: "Thank you! We'll notify you when we launch.",
-      footerText: "🔒 No spam. Unsubscribe anytime. 7-day free trial included.",
+      footerText: "🔒 No spam. Unsubscribe anytime. Free trial included.",
     },
   },
 
@@ -125,7 +125,7 @@ export const SITE_CONFIG = {
     productName: "Investigation Flow",
     productTagline: "Surveillance video, court-ready in minutes.",
     trialBanner: {
-      text: "Not ready to buy? Download the app and start a 7-day free trial with every feature unlocked.",
+      text: "Not ready to buy? Download the app and try it free. Your first 25 video conversions are on us, every feature unlocked.",
       linkText: "Download the free trial",
       href: "/download",
     },

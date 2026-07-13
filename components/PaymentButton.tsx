@@ -16,7 +16,7 @@ interface PaymentButtonProps {
 export default function PaymentButton({
   variant = "primary",
   size = "lg",
-  text = "Start 7-Day Free Trial",
+  text = "Start Free Trial",
   className = "",
   planType = "default",
   onSuccess,
