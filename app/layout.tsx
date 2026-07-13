@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PostHogProvider from "@/components/PostHogProvider";
 import PostHogPageView from "@/components/PostHogPageView";
@@ -98,6 +99,7 @@ export default function RootLayout({
           {children}
         </PostHogProvider>
         <Analytics />
+        <SpeedInsights />
         <GoogleAnalytics />
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
