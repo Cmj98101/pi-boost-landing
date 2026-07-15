@@ -20,7 +20,7 @@ export default function Features() {
           />
         </svg>
       ),
-      title: "Court-Ready Timestamps, Automatically",
+      title: "Verifiable Timestamps, Automatically",
       description:
         "Burn accurate, verifiable date and time onto footage that no longer carries it. Recover the original recording time and lock in timestamps that hold up in court.",
       gradient: "from-purple-500 to-blue-500",
@@ -83,7 +83,7 @@ export default function Features() {
           />
         </svg>
       ),
-      title: "Grab Court-Ready Stills in One Click",
+      title: "Grab Clean Stills in One Click",
       description:
         "Pull clean still shots straight from the footage you're editing, perfect for reports, exhibits, and client updates, without switching tools.",
       gradient: "from-teal-500 to-green-500",

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title:
     "Investigation Flow vs. V3 Video Editor: The Modern Alternative",
   description:
-    "Comparing Investigation Flow and V3 Video Editor for private investigators: court-ready timestamps, clip stitching, native Mac & Windows, a free in-browser demo, and flexible pricing.",
+    "Comparing Investigation Flow and V3 Video Editor for private investigators: verifiable timestamps, clip stitching, native Mac & Windows, a free in-browser demo, and flexible pricing.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 // (Learn More / pricing pages). Only claims that are verifiable or fairly
 // framed are included.
 const ROWS: { feature: string; flow: string; v3: string }[] = [
-  { feature: "Court-ready timestamps", flow: "yes", v3: "yes" },
+  { feature: "Verifiable timestamps", flow: "yes", v3: "yes" },
   { feature: "Stitch & order multiple clips into one sequence", flow: "yes", v3: "yes" },
   { feature: "Keep or remove audio per clip", flow: "yes", v3: "Removal only, not selective" },
   { feature: "One-click timestamped still shots", flow: "yes", v3: "Not advertised" },
@@ -43,7 +43,7 @@ const ROWS: { feature: string; flow: string; v3: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is the best alternative to V3 Video Editor?",
-    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and court-ready stills for surveillance footage. It adds a native macOS app, a free in-browser demo, and monthly, yearly, or one-time billing.",
+    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds a native macOS app, a free in-browser demo, and monthly, yearly, or one-time billing.",
   },
   {
     q: "How is Investigation Flow different from V3 Video Editor?",
@@ -232,7 +232,7 @@ export default function V3VideoEditorAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it become court-ready in seconds, right in your browser.
+            Upload a clip and watch it get timestamped in seconds, right in your browser.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <DemoLink

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title:
     "Investigation Flow vs. Investigation Video Editor (IVE): The Modern Alternative",
   description:
-    "Comparing Investigation Flow and IVE (Investigation Video Editor) for private investigators: court-ready timestamps, clip stitching, transferable licenses, native Mac & Windows, a free in-browser demo, and flexible pricing.",
+    "Comparing Investigation Flow and IVE (Investigation Video Editor) for private investigators: verifiable timestamps, clip stitching, transferable licenses, native Mac & Windows, a free in-browser demo, and flexible pricing.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // Honest, sourced comparison. IVE details from investigationve.com (features
 // + buy pages). Only claims that are verifiable or fairly framed are included.
 const ROWS: { feature: string; flow: string; ive: string }[] = [
-  { feature: "Court-ready timestamps", flow: "yes", ive: "yes" },
+  { feature: "Verifiable timestamps", flow: "yes", ive: "yes" },
   { feature: "Stitch & order multiple clips into one sequence", flow: "yes", ive: "yes" },
   { feature: "Keep or remove audio per clip", flow: "yes", ive: "yes" },
   { feature: "One-click timestamped still shots", flow: "yes", ive: "yes" },
@@ -42,7 +42,7 @@ const ROWS: { feature: string; flow: string; ive: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is the best alternative to Investigation Video Editor (IVE)?",
-    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and court-ready stills for surveillance footage. It adds native macOS and Windows apps, a free in-browser demo, and licenses you can move between computers.",
+    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds native macOS and Windows apps, a free in-browser demo, and licenses you can move between computers.",
   },
   {
     q: "How is Investigation Flow different from IVE?",
@@ -230,7 +230,7 @@ export default function InvestigationVideoEditorAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it become court-ready in seconds, right in your browser.
+            Upload a clip and watch it get timestamped in seconds, right in your browser.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <DemoLink

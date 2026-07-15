@@ -88,7 +88,7 @@ export default function Hero() {
           {/* Key Benefits - Quick Scan */}
           <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-400">
             {[
-              "✓ Court-Ready Timestamps",
+              "✓ Verifiable Timestamps",
               "✓ Stitch Clips in Order",
               "✓ Audio Toggle + Stills"
             ].map((benefit, idx) => (

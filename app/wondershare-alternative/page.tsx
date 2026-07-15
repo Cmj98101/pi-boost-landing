@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title:
     "Investigation Flow vs. Wondershare UniConverter: A Purpose-Built Alternative for Surveillance Video",
   description:
-    "Comparing Investigation Flow and Wondershare UniConverter for private investigators: automatic court-ready timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
+    "Comparing Investigation Flow and Wondershare UniConverter for private investigators: automatic verifiable timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 // comparison is framed around that gap rather than a feature-for-feature
 // rivalry.
 const ROWS: { feature: string; flow: string; wondershare: string }[] = [
-  { feature: "Automatic, court-ready timestamps from footage metadata", flow: "yes", wondershare: "Manual watermark/text overlay, no metadata recovery" },
+  { feature: "Automatic, verifiable timestamps from footage metadata", flow: "yes", wondershare: "Manual watermark/text overlay, no metadata recovery" },
   { feature: "Stitch a whole case into one sequence", flow: "yes", wondershare: "yes, general merge/editing tool" },
   { feature: "Keep or remove audio per clip", flow: "yes", wondershare: "yes" },
   { feature: "One-click timestamped still shots", flow: "yes", wondershare: "Not built for this" },
@@ -46,7 +46,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What is the best alternative to using Wondershare for surveillance video?",
-    a: "Investigation Flow is built specifically for the job: automatic court-ready timestamps, whole-case clip stitching, per-clip audio control, and one-click stills, on native Mac and Windows apps.",
+    a: "Investigation Flow is built specifically for the job: automatic verifiable timestamps, whole-case clip stitching, per-clip audio control, and one-click stills, on native Mac and Windows apps.",
   },
   {
     q: "Why not just use a general converter like Wondershare?",
@@ -108,7 +108,7 @@ export default function WondershareAlternative() {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
             Wondershare UniConverter is a capable general video converter and editor, but it
             wasn&apos;t built for surveillance case work. Investigation Flow automates the parts
-            that eat your time: <strong>court-ready timestamps</strong>,{" "}
+            that eat your time: <strong>verifiable timestamps</strong>,{" "}
             <strong>whole-case stitching</strong>, and <strong>batch processing</strong>, on
             native Mac and Windows.
           </p>
@@ -232,7 +232,7 @@ export default function WondershareAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it become court-ready in seconds, right in your browser.
+            Upload a clip and watch it get timestamped in seconds, right in your browser.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <DemoLink

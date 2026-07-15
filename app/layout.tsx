@@ -57,9 +57,9 @@ export default function RootLayout({
         applicationCategory: "MultimediaApplication",
         operatingSystem: "Windows, macOS",
         description:
-          "Court-ready video timestamping software for private investigators. Add timestamps, stitch clips in order, keep or remove audio, grab still shots, and batch process surveillance footage.",
+          "Video timestamping software for private investigators. Add timestamps, stitch clips in order, keep or remove audio, grab still shots, and batch process surveillance footage.",
         featureList: [
-          "Court-ready video timestamping",
+          "Video timestamping",
           "Clip stitching",
           "Audio keep or remove",
           "Still-shot capture",

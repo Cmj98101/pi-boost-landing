@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title:
     "Investigation Flow vs. iMovie: A Purpose-Built Alternative for Surveillance Video",
   description:
-    "Comparing Investigation Flow and iMovie for private investigators: automatic court-ready timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
+    "Comparing Investigation Flow and iMovie for private investigators: automatic verifiable timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 // built for surveillance case work, so this comparison is framed around
 // that gap rather than a feature-for-feature rivalry.
 const ROWS: { feature: string; flow: string; imovie: string }[] = [
-  { feature: "Automatic, court-ready timestamps from footage metadata", flow: "yes", imovie: "Manual title overlay per clip, no metadata recovery" },
+  { feature: "Automatic, verifiable timestamps from footage metadata", flow: "yes", imovie: "Manual title overlay per clip, no metadata recovery" },
   { feature: "Stitch a whole case into one sequence", flow: "yes", imovie: "yes, with manual timeline work" },
   { feature: "Keep or remove audio per clip", flow: "yes", imovie: "yes" },
   { feature: "One-click timestamped still shots", flow: "yes", imovie: "Not built for this" },
@@ -44,7 +44,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What is the best alternative to using iMovie for surveillance video?",
-    a: "Investigation Flow is built specifically for the job: automatic court-ready timestamps, whole-case clip stitching, per-clip audio control, and one-click stills, on native Mac and Windows apps.",
+    a: "Investigation Flow is built specifically for the job: automatic verifiable timestamps, whole-case clip stitching, per-clip audio control, and one-click stills, on native Mac and Windows apps.",
   },
   {
     q: "Why not just use iMovie since it's free?",
@@ -52,10 +52,10 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Does Investigation Flow cost more than iMovie?",
-    a: "iMovie is free. Investigation Flow is $19.99/month, $199/year, or $299 one-time for a lifetime license. The cost buys automation: metadata-based timestamping, batch folder processing, and one-click court-ready stills that iMovie doesn't offer.",
+    a: "iMovie is free. Investigation Flow is $19.99/month, $199/year, or $299 one-time for a lifetime license. The cost buys automation: metadata-based timestamping, batch folder processing, and one-click clean stills that iMovie doesn't offer.",
   },
   {
-    q: "Is iMovie good enough for court-ready surveillance video?",
+    q: "Is iMovie good enough for surveillance video work?",
     a: "It can produce a video with a timestamp overlay, but the timestamp is manually entered per clip rather than recovered from the original recording metadata, which matters if authenticity is questioned. For a handful of short clips it may be workable; for a full case of surveillance footage, purpose-built software like Investigation Flow is far faster and more defensible.",
   },
 ];
@@ -106,7 +106,7 @@ export default function IMovieAlternative() {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
             iMovie is free and comes on every Mac, but it wasn&apos;t built for surveillance
             case work. Investigation Flow automates the parts that eat your time:{" "}
-            <strong>court-ready timestamps</strong>, <strong>whole-case stitching</strong>, and{" "}
+            <strong>verifiable timestamps</strong>, <strong>whole-case stitching</strong>, and{" "}
             <strong>batch processing</strong>, on native Mac and Windows.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -228,7 +228,7 @@ export default function IMovieAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it become court-ready in seconds, right in your browser.
+            Upload a clip and watch it get timestamped in seconds, right in your browser.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <DemoLink

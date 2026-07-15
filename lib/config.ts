@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
     launch: {
       badge: "Built for Private Investigators: Windows & Mac",
       headline:
-        "Timestamp, Stitch & Deliver Court-Ready Surveillance Videos in Minutes, Not Hours",
+        "Timestamp, Stitch & Deliver Surveillance Videos in Minutes, Not Hours",
       subheadline:
         "Timestamp, strip the audio, and pull the stills, then hand over an action report that logs every action from upload to export, so your clients keep sending you cases.",
       cta: {
@@ -57,7 +57,7 @@ export const SITE_CONFIG = {
     "early-access": {
       headline: "See It For Yourself",
       subheadline:
-        "Download the app and run your own clips through it. Timestamp, stitch, and export court-ready video in minutes.",
+        "Download the app and run your own clips through it. Timestamp, stitch, and export finished video in minutes.",
       benefits: [
         "Free trial: first 25 conversions on us",
         "Timestamp · Stitch · Audio · Stills",
@@ -69,7 +69,7 @@ export const SITE_CONFIG = {
       stats: [
         { value: "Win/Mac", label: "Native Windows & Mac App" },
         { value: "4 Tools", label: "Timestamp · Stitch · Audio · Stills" },
-        { value: "Minutes", label: "From Footage to Court-Ready" },
+        { value: "Minutes", label: "From Footage to Evidence" },
       ],
     },
     launch: {
@@ -126,14 +126,14 @@ export const SITE_CONFIG = {
   // Pricing options (single product, multiple billing options)
   pricing: {
     productName: "Investigation Flow",
-    productTagline: "Surveillance video, court-ready in minutes.",
+    productTagline: "Surveillance video, ready to deliver in minutes.",
     trialBanner: {
       text: "Not ready to buy? Download the app and try it free. Your first 25 video conversions are on us, every feature unlocked.",
       linkText: "Download the free trial",
       href: "/download",
     },
     features: [
-      "Court-ready timestamps",
+      "Verifiable timestamps",
       "Stitch clips in order",
       "Keep or remove audio",
       "One-click still shots",
