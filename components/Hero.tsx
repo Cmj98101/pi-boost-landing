@@ -51,7 +51,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20"
+      className="relative overflow-hidden pt-36 pb-20 md:pt-48 md:pb-28"
     >
       {/* Luxury Gradient Mesh Background */}
       <div className="absolute inset-0 gradient-mesh opacity-60"></div>
@@ -61,85 +61,62 @@ export default function Hero() {
       <div className="absolute bottom-20 -right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float delay-1000"></div>
 
       {/* Content Container */}
-      <div className="relative w-full max-w-4xl mx-auto px-6 md:px-12 text-center">
-        <div className="space-y-8">
+      <div className="relative w-full max-w-5xl mx-auto px-6 md:px-12 text-center">
+        <div className="space-y-10">
 
-          {/* Trust Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-purple-100 animate-fade-in">
-            <span className="flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-purple-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
-            </span>
-            <span className="text-sm font-semibold text-slate-700">
-              {heroContent.badge}
-            </span>
-          </div>
-
-          {/* Main Headline — no entrance animation: this is the LCP element,
+          {/* Main Headline: no entrance animation. This is the LCP element,
               so it must paint fully opaque immediately. The audience word
               rotates; the rest of the line stays put. */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-slate-900">
-            Give{" "}
-            <span
-              className="relative inline-block whitespace-nowrap align-baseline transition-[width] duration-500 ease-out"
-              style={
-                widths[audienceIndex]
-                  ? { width: widths[audienceIndex] }
-                  : undefined
-              }
-            >
-              {/* Invisible word establishes the line box (height + baseline)
-                  and seeds the width until real widths are measured. */}
-              <span className="invisible" aria-hidden="true">
-                {longestAudience}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900">
+            {/* Line 1 holds the rotating word; keeping "evidence they can use"
+                on its own line below means the word's changing width can never
+                reflow the rest of the headline. */}
+            <span className="block">
+              Give{" "}
+              <span
+                className="relative inline-block whitespace-nowrap align-baseline transition-[width] duration-500 ease-out"
+                style={
+                  widths[audienceIndex]
+                    ? { width: widths[audienceIndex] }
+                    : undefined
+                }
+              >
+                {/* Invisible word establishes the line box (height + baseline)
+                    and seeds the width until real widths are measured. */}
+                <span className="invisible" aria-hidden="true">
+                  {longestAudience}
+                </span>
+                {audiences.map((word, i) => {
+                  const isActive = i === audienceIndex;
+                  const isLeaving =
+                    i === prevIndex && prevIndex !== audienceIndex;
+                  const motion = isActive
+                    ? "opacity-100 translate-y-0"
+                    : isLeaving
+                      ? "opacity-0 -translate-y-[0.4em]"
+                      : "opacity-0 translate-y-[0.4em]";
+                  return (
+                    <span
+                      key={word}
+                      ref={(el) => {
+                        wordRefs.current[i] = el;
+                      }}
+                      aria-hidden={!isActive}
+                      className={`gradient-text absolute left-0 top-0 whitespace-nowrap transition-all duration-500 ease-out ${motion}`}
+                    >
+                      {word}
+                    </span>
+                  );
+                })}
               </span>
-              {audiences.map((word, i) => {
-                const isActive = i === audienceIndex;
-                const isLeaving = i === prevIndex && prevIndex !== audienceIndex;
-                const motion = isActive
-                  ? "opacity-100 translate-y-0"
-                  : isLeaving
-                    ? "opacity-0 -translate-y-[0.4em]"
-                    : "opacity-0 translate-y-[0.4em]";
-                return (
-                  <span
-                    key={word}
-                    ref={(el) => {
-                      wordRefs.current[i] = el;
-                    }}
-                    aria-hidden={!isActive}
-                    className={`gradient-text absolute left-0 top-0 whitespace-nowrap transition-all duration-500 ease-out ${motion}`}
-                  >
-                    {word}
-                  </span>
-                );
-              })}
-            </span>{" "}
-            evidence they can use
+            </span>
+            <span className="block">evidence they can use</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up delay-300 max-w-2xl mx-auto">
             {heroContent.subheadline}
           </p>
-
-          {/* Key Benefits - Quick Scan */}
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-400">
-            {[
-              "✓ Verifiable Timestamps",
-              "✓ Stitch Clips in Order",
-              "✓ Audio Toggle + Stills"
-            ].map((benefit, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200"
-              >
-                <span className="text-sm font-medium text-slate-700">
-                  {benefit}
-                </span>
-              </div>
-            ))}
-          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-500">

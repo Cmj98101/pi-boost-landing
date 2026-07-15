@@ -24,7 +24,7 @@ export default function HowItWorks() {
     },
     {
       title: "Export and Deliver",
-      description: "Render universally-accepted MP4 or MOV files in minutes, ready for clients, case files, and review.",
+      description: "Make final edits and redactions, then export universally-accepted MP4 or MOV files in minutes, each with an action report that logs every action, ready for clients and case files.",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
