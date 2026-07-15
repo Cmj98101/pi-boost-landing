@@ -1,18 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getConfig, getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
   const heroContent = getModeContent("hero");
   const audiences = getConfig("heroAudiences");
-  // Widest word reserves the space so the rotating word never shifts the line.
+  // Seeds the initial width before real pixel widths are measured.
   const longestAudience = audiences.reduce(
     (a, b) => (b.length > a.length ? b : a),
     ""
   );
+  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [widths, setWidths] = useState<number[]>([]);
   const [audienceIndex, setAudienceIndex] = useState(0);
+  // The prior index survives one render after a change, so the outgoing word
+  // can slide up and out while the incoming word rises into place.
+  const prevIndexRef = useRef(0);
+  const prevIndex = prevIndexRef.current;
+  useEffect(() => {
+    prevIndexRef.current = audienceIndex;
+  }, [audienceIndex]);
+
+  // Measure each word so the container can hug the active word instead of
+  // reserving the widest word's width. Re-measure on resize, since the font
+  // size changes across breakpoints.
+  useEffect(() => {
+    const measure = () =>
+      setWidths(audiences.map((_, i) => wordRefs.current[i]?.offsetWidth ?? 0));
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [audiences]);
 
   useEffect(() => {
     // Respect users who prefer less motion: hold on the first audience.
@@ -24,7 +44,7 @@ export default function Hero() {
     }
     const id = setInterval(() => {
       setAudienceIndex((i) => (i + 1) % audiences.length);
-    }, 2200);
+    }, 2600);
     return () => clearInterval(id);
   }, [audiences.length]);
 
@@ -60,22 +80,40 @@ export default function Hero() {
               rotates; the rest of the line stays put. */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-slate-900">
             Give{" "}
-            <span className="relative inline-block">
-              {/* Invisible spacer holds the width of the widest audience word */}
+            <span
+              className="relative inline-block whitespace-nowrap align-baseline transition-[width] duration-500 ease-out"
+              style={
+                widths[audienceIndex]
+                  ? { width: widths[audienceIndex] }
+                  : undefined
+              }
+            >
+              {/* Invisible word establishes the line box (height + baseline)
+                  and seeds the width until real widths are measured. */}
               <span className="invisible" aria-hidden="true">
                 {longestAudience}
               </span>
-              {audiences.map((word, i) => (
-                <span
-                  key={word}
-                  aria-hidden={i !== audienceIndex}
-                  className={`gradient-text absolute inset-x-0 top-0 text-center transition-opacity duration-500 ${
-                    i === audienceIndex ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  {word}
-                </span>
-              ))}
+              {audiences.map((word, i) => {
+                const isActive = i === audienceIndex;
+                const isLeaving = i === prevIndex && prevIndex !== audienceIndex;
+                const motion = isActive
+                  ? "opacity-100 translate-y-0"
+                  : isLeaving
+                    ? "opacity-0 -translate-y-[0.4em]"
+                    : "opacity-0 translate-y-[0.4em]";
+                return (
+                  <span
+                    key={word}
+                    ref={(el) => {
+                      wordRefs.current[i] = el;
+                    }}
+                    aria-hidden={!isActive}
+                    className={`gradient-text absolute left-0 top-0 whitespace-nowrap transition-all duration-500 ease-out ${motion}`}
+                  >
+                    {word}
+                  </span>
+                );
+              })}
             </span>{" "}
             evidence they can use
           </h1>

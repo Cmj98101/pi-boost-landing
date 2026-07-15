@@ -12,9 +12,9 @@ export default function Testimonials() {
       ),
     },
     {
-      title: "Holds up in court",
+      title: "Holds up under scrutiny",
       description:
-        "Accurate, verifiable timestamps and clean MP4/MOV exports built to meet court and agency standards, not Hollywood effects.",
+        "Accurate, verifiable timestamps and clean MP4/MOV exports built to meet agency standards, not Hollywood effects.",
       gradient: "from-blue-500 to-cyan-500",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

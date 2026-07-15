@@ -22,7 +22,7 @@ export default function Features() {
       ),
       title: "Verifiable Timestamps, Automatically",
       description:
-        "Burn accurate, verifiable date and time onto footage that no longer carries it. Recover the original recording time and lock in timestamps that hold up in court.",
+        "Burn accurate, verifiable date and time onto footage that no longer carries it. Recover the original recording time and lock in timestamps that hold up under scrutiny.",
       gradient: "from-purple-500 to-blue-500",
     },
     {
