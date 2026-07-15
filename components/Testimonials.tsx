@@ -93,13 +93,13 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Honest trust badges (pre-launch, no fabricated reviews) */}
+        {/* Honest trust badges (no fabricated reviews) */}
         <div className="mt-16 md:mt-20 text-center">
           <div className="inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-8 py-6 bg-white rounded-2xl shadow-lg border border-slate-200">
             {[
               "Native Windows & Mac app",
-              "Free trial at launch",
-              "Founding-user pricing",
+              "Free trial included",
+              "One-time license option",
               "Cancel anytime",
             ].map((badge, index) => (
               <div key={index} className="flex items-center gap-2">

@@ -102,7 +102,7 @@ export default function Hero() {
             Free trial, first 25 conversions on us. Windows &amp; Mac.
           </p>
 
-          {/* Honest pre-launch trust line */}
+          {/* Honest trust line */}
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 pt-4 text-sm text-slate-600 animate-fade-in-up delay-600">
             {[
               "Built with working private investigators",

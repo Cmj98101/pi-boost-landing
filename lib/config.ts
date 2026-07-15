@@ -6,7 +6,7 @@
 export type SiteMode = "early-access" | "launch";
 
 export const SITE_CONFIG = {
-  mode: "early-access" as SiteMode,
+  mode: "launch" as SiteMode,
 
   // Live, in-browser demo of the timestamping tool
   demoUrl: "https://timestamp.investigationflow.com",

@@ -56,7 +56,7 @@ export default function DownloadContent() {
           ) : (
             <div className="card-luxury p-10">
               <p className="text-slate-600">
-                Desktop apps are coming soon. Join the waitlist and we&apos;ll email you the moment they&apos;re ready.
+                Desktop apps for this platform are coming soon. Check back shortly.
               </p>
             </div>
           )}
