@@ -175,7 +175,7 @@ export default function Features() {
       ),
       title: "Built for Investigators, Not Filmmakers",
       description:
-        "Export universally-accepted MP4 or MOV, install on Windows or Mac in minutes, and start working immediately. No editing degree, no learning curve.",
+        "Export universally-accepted MP4, install on Windows or Mac in minutes, and start working immediately. No editing degree, no learning curve.",
       gradient: "from-emerald-500 to-purple-500",
     },
   ];

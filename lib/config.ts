@@ -85,8 +85,8 @@ export const SITE_CONFIG = {
       buttonText: "Download Free Trial",
       badge: null,
       stats: [
-        { value: "$19.99", label: "Starting Per Month" },
-        { value: "$299", label: "One-Time License Option" },
+        { value: "Minutes", label: "From Footage to Delivery" },
+        { value: "4 Tools", label: "Timestamp · Stitch · Audio · Stills" },
         { value: "Win/Mac", label: "Native Desktop App" },
       ],
     },

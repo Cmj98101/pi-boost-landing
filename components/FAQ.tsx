@@ -17,7 +17,7 @@ export default function FAQ() {
     },
     {
       question: "What video formats are supported?",
-      answer: "Investigation Flow supports all common video formats including MP4, MOV, AVI, WMV, and more. You can export your timestamped videos in MP4 or MOV format, which are universally compatible with clients and case files.",
+      answer: "Investigation Flow supports all common video formats including MP4, MOV, AVI, WMV, and more. You can export your timestamped videos in MP4 format, which is universally compatible with clients and case files.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -52,17 +52,8 @@ export default function FAQ() {
       )
     },
     {
-      question: "Do you offer a subscription or a one-time purchase?",
-      answer: "Both. You can subscribe monthly or yearly (the yearly plan saves about 34%), or buy a one-time Version 1 lifetime license for a single device that includes all Version 1 updates. Future major versions are sold separately. Subscriptions include priority email support; all plans include email support.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      )
-    },
-    {
       question: "Can I use my license on more than one computer?",
-      answer: "Each license runs on one computer at a time. This is true for Monthly, Yearly, and Lifetime plans alike. You can move a license to a different computer whenever you need to: just deactivate the license key on the old machine, then activate it on the new one. To run Investigation Flow on multiple computers at the same time, you'll need a license for each. If you're outfitting a team, check out our Team plans for volume pricing. The more seats you buy, the lower the per-seat price.",
+      answer: "Each license runs on one computer at a time. You can move a license to a different computer whenever you need to: just deactivate the license key on the old machine, then activate it on the new one. To run Investigation Flow on multiple computers at the same time, you'll need a license for each.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
