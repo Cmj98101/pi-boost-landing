@@ -1,12 +1,11 @@
 "use client";
 
 import PaymentButton from "./PaymentButton";
-import { getConfig, getModeContent } from "@/lib/config";
+import { getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function CTA() {
   const ctaContent = getModeContent('cta');
-  const demoUrl = getConfig('demoUrl');
 
   return (
     <section
@@ -51,10 +50,8 @@ export default function CTA() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <a
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => analytics.demoClicked("cta-section")}
+                href="/download"
+                onClick={() => analytics.downloadNowClicked("cta-section")}
                 className="inline-flex items-center justify-center gap-2 bg-white text-purple-600 hover:bg-slate-50 hover:shadow-2xl transition-all duration-300 font-bold px-8 py-4 rounded-xl shadow-xl text-lg"
               >
                 {ctaContent.buttonText}

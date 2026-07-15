@@ -30,9 +30,9 @@ export const SITE_CONFIG = {
       badge: "Now in Early Access: Join the Founding Users",
       headline: "Timestamp your surveillance videos in minutes.",
       subheadline:
-        "Timestamp, stitch clips in order, toggle audio, and grab stills, without fighting a general video editor. Try it free in your browser, no download required.",
+        "Timestamp, stitch clips in order, toggle audio, and grab stills, without fighting a general video editor. Download the app and try it free on your own footage.",
       cta: {
-        primary: "Try the Live Demo",
+        primary: "Download Free Trial",
         secondary: "See How It Works",
       },
     },
@@ -43,7 +43,7 @@ export const SITE_CONFIG = {
       subheadline:
         "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills, all in one tool built for surveillance work, not Hollywood.",
       cta: {
-        primary: "Try the Live Demo",
+        primary: "Download Free Trial",
         secondary: "See How It Works",
       },
     },
@@ -54,15 +54,15 @@ export const SITE_CONFIG = {
     "early-access": {
       headline: "See It For Yourself",
       subheadline:
-        "Try the live demo right in your browser. Upload a clip and watch it become court-ready in seconds. No download, no signup.",
+        "Download the app and run your own clips through it. Timestamp, stitch, and export court-ready video in minutes.",
       benefits: [
-        "Runs in your browser, nothing to install",
+        "Free trial: first 25 conversions on us",
         "Timestamp · Stitch · Audio · Stills",
         "Founding-user pricing at launch",
         "Built with working investigators",
       ],
-      buttonText: "Try the Live Demo",
-      badge: "Live Demo: Try It Free",
+      buttonText: "Download Free Trial",
+      badge: "Free Trial: 25 Conversions Free",
       stats: [
         { value: "Win/Mac", label: "Native Windows & Mac App" },
         { value: "4 Tools", label: "Timestamp · Stitch · Audio · Stills" },
@@ -79,7 +79,7 @@ export const SITE_CONFIG = {
         "Cancel anytime, no questions asked",
         "Free trial included",
       ],
-      buttonText: "Try the Live Demo",
+      buttonText: "Download Free Trial",
       badge: null,
       stats: [
         { value: "$19.99", label: "Starting Per Month" },

@@ -1,6 +1,5 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import LiveDemo from "@/components/LiveDemo";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
@@ -15,7 +14,6 @@ export default function Home() {
       <HashRedirect />
       <Navigation />
       <Hero />
-      <LiveDemo />
       <Features />
       <HowItWorks />
       <Testimonials />

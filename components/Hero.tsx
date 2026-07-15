@@ -1,11 +1,10 @@
 "use client";
 
-import { getConfig, getModeContent } from "@/lib/config";
+import { getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
   const heroContent = getModeContent("hero");
-  const demoUrl = getConfig("demoUrl");
 
   return (
     <section
@@ -66,10 +65,8 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-500">
             <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => analytics.demoClicked("hero")}
+              href="/download"
+              onClick={() => analytics.downloadNowClicked("hero")}
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg group"
             >
               {heroContent.cta.primary}
@@ -89,10 +86,10 @@ export default function Hero() {
             </a>
 
             <a
-              href="#demo"
+              href="#how-it-works"
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector("#demo")?.scrollIntoView({ behavior: "smooth" });
+                document.querySelector("#how-it-works")?.scrollIntoView({ behavior: "smooth" });
               }}
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
@@ -100,12 +97,17 @@ export default function Hero() {
             </a>
           </div>
 
+          {/* Free-trial reassurance line under the download CTA */}
+          <p className="text-sm text-slate-500 animate-fade-in-up delay-500">
+            Free trial, first 25 conversions on us. Windows &amp; Mac.
+          </p>
+
           {/* Honest pre-launch trust line */}
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 pt-4 text-sm text-slate-600 animate-fade-in-up delay-600">
             {[
               "Built with working private investigators",
               "Native Windows & Mac app",
-              "Try free in your browser",
+              "Free trial, no credit card",
             ].map((item, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <svg

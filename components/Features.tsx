@@ -1,11 +1,8 @@
 "use client";
 
-import { getConfig } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Features() {
-  const demoUrl = getConfig("demoUrl");
-
   const features = [
     {
       icon: (
@@ -224,13 +221,11 @@ export default function Features() {
             Ready to turn footage into evidence?
           </p>
           <a
-            href={demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => analytics.demoClicked("features")}
+            href="/download"
+            onClick={() => analytics.downloadNowClicked("features")}
             className="btn-primary-luxury inline-flex items-center gap-2 text-lg group"
           >
-            Try the Live Demo
+            Download Free Trial
             <svg
               className="w-5 h-5 group-hover:translate-x-1 transition-transform"
               fill="none"
