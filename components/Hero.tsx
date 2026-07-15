@@ -1,10 +1,32 @@
 "use client";
 
-import { getModeContent } from "@/lib/config";
+import { useState, useEffect } from "react";
+import { getConfig, getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
 export default function Hero() {
   const heroContent = getModeContent("hero");
+  const audiences = getConfig("heroAudiences");
+  // Widest word reserves the space so the rotating word never shifts the line.
+  const longestAudience = audiences.reduce(
+    (a, b) => (b.length > a.length ? b : a),
+    ""
+  );
+  const [audienceIndex, setAudienceIndex] = useState(0);
+
+  useEffect(() => {
+    // Respect users who prefer less motion: hold on the first audience.
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const id = setInterval(() => {
+      setAudienceIndex((i) => (i + 1) % audiences.length);
+    }, 2200);
+    return () => clearInterval(id);
+  }, [audiences.length]);
 
   return (
     <section
@@ -34,9 +56,28 @@ export default function Hero() {
           </div>
 
           {/* Main Headline — no entrance animation: this is the LCP element,
-              so it must paint fully opaque immediately */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
-            <span className="gradient-text">{heroContent.headline}</span>
+              so it must paint fully opaque immediately. The audience word
+              rotates; the rest of the line stays put. */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-slate-900">
+            Give{" "}
+            <span className="relative inline-block">
+              {/* Invisible spacer holds the width of the widest audience word */}
+              <span className="invisible" aria-hidden="true">
+                {longestAudience}
+              </span>
+              {audiences.map((word, i) => (
+                <span
+                  key={word}
+                  aria-hidden={i !== audienceIndex}
+                  className={`gradient-text absolute inset-x-0 top-0 text-center transition-opacity duration-500 ${
+                    i === audienceIndex ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {word}
+                </span>
+              ))}
+            </span>{" "}
+            evidence they can use
           </h1>
 
           {/* Subheadline */}

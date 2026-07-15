@@ -8,6 +8,9 @@ export type SiteMode = "early-access" | "launch";
 export const SITE_CONFIG = {
   mode: "launch" as SiteMode,
 
+  // Audiences that rotate through the hero H1: "Give <audience> evidence they can use"
+  heroAudiences: ["adjusters", "attorneys", "clients"],
+
   // Live, in-browser demo of the timestamping tool
   demoUrl: "https://timestamp.investigationflow.com",
 
@@ -41,7 +44,7 @@ export const SITE_CONFIG = {
       headline:
         "Timestamp, Stitch & Deliver Court-Ready Surveillance Videos in Minutes, Not Hours",
       subheadline:
-        "Add accurate timestamps, stitch clips into one logical sequence, keep or remove audio, and pull court-ready stills, all in one tool built for surveillance work, not Hollywood.",
+        "Timestamp, strip the audio, and pull the stills, then hand over an action report that logs every action from upload to export, so your clients keep sending you cases.",
       cta: {
         primary: "Download Free Trial",
         secondary: "See How It Works",
@@ -226,7 +229,7 @@ export function getConfig<T extends keyof typeof SITE_CONFIG>(key: T) {
 export function getModeContent<
   T extends keyof Omit<
     typeof SITE_CONFIG,
-    "mode" | "demoUrl" | "showFullTestimonials" | "pricing" | "download"
+    "mode" | "heroAudiences" | "demoUrl" | "showFullTestimonials" | "pricing" | "download"
   >,
 >(section: T): (typeof SITE_CONFIG)[T][SiteMode] {
   const mode = SITE_CONFIG.mode;
