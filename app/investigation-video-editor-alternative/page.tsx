@@ -99,9 +99,6 @@ export default function InvestigationVideoEditorAlternative() {
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
         <div className="relative max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-6">
-            <span className="text-sm font-semibold text-purple-700">Comparison</span>
-          </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
             Investigation Flow vs. <span className="gradient-text">Investigation Video Editor (IVE)</span>
           </h1>

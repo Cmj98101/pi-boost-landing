@@ -47,12 +47,6 @@ export default function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 rounded-full mb-6">
-            <span className="text-sm font-semibold text-purple-700">
-              WHY INVESTIGATION FLOW
-            </span>
-          </div>
-
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
             Built Around the{" "}
             <span className="gradient-text">Real Surveillance Workflow</span>

@@ -29,9 +29,6 @@ export default function LearnPage() {
       <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-200/20 blur-3xl"></div>
         <div className="relative mx-auto max-w-4xl px-6 text-center md:px-12">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2">
-            <span className="text-sm font-semibold text-purple-700">LEARN</span>
-          </div>
           <h1 className="text-4xl font-bold leading-[1.1] text-slate-900 md:text-5xl lg:text-6xl">
             Learn <span className="gradient-text">Investigation Flow</span>
           </h1>
