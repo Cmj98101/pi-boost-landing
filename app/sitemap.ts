@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
 import { TUTORIALS } from '@/lib/tutorials'
+import { SITE } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.investigationflow.com'
+  const baseUrl = SITE.url
 
   const tutorialEntries: MetadataRoute.Sitemap = TUTORIALS.map((tutorial) => ({
     url: `${baseUrl}/learn/${tutorial.slug}`,
