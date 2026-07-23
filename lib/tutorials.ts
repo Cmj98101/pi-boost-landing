@@ -38,6 +38,7 @@ export const TUTORIALS: Tutorial[] = [
       "A step-by-step guide to adding accurate, verifiable timestamps to surveillance footage with Investigation Flow, including recovering the original recording time when a clip has lost its metadata.",
     youtubeId: "FiKMTe-SOac",
     publishDate: "2026-07-22",
+    duration: "PT1M21S",
     intro:
       "Timestamps are what turn raw surveillance footage into usable evidence, but adding them by hand in a general video editor is slow and easy to get wrong. This short walkthrough shows how to add accurate, verifiable timestamps to your footage in Investigation Flow in just a few clicks, even when the original recording time is missing from the file.",
     steps: [
