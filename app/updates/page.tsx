@@ -62,12 +62,46 @@ export default function UpdatesPage() {
                     >
                       {entry.tag}
                     </span>
+                    {entry.version && (
+                      <span className="text-sm font-semibold text-slate-700">
+                        Version {entry.version}
+                      </span>
+                    )}
                     <time dateTime={entry.date} className="text-sm text-slate-500">
                       {formatDate(entry.date)}
                     </time>
                   </div>
                   <h2 className="text-xl font-bold text-slate-900 mb-2">{entry.title}</h2>
-                  <p className="text-slate-600 leading-relaxed">{entry.body}</p>
+                  {entry.body && (
+                    <p className="text-slate-600 leading-relaxed">{entry.body}</p>
+                  )}
+                  {entry.sections && entry.sections.length > 0 && (
+                    <div className="mt-4 space-y-5">
+                      {entry.sections.map((section, i) => (
+                        <div key={i}>
+                          {section.heading && (
+                            <h3 className="font-semibold text-slate-900 mb-2">
+                              {section.heading}
+                            </h3>
+                          )}
+                          <ul className="space-y-2">
+                            {section.items.map((item, j) => (
+                              <li
+                                key={j}
+                                className="flex gap-3 text-slate-600 leading-relaxed"
+                              >
+                                <span
+                                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-purple-400"
+                                  aria-hidden="true"
+                                ></span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
