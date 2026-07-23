@@ -1,7 +1,15 @@
 import { MetadataRoute } from 'next'
+import { TUTORIALS } from '@/lib/tutorials'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.investigationflow.com'
+
+  const tutorialEntries: MetadataRoute.Sitemap = TUTORIALS.map((tutorial) => ({
+    url: `${baseUrl}/learn/${tutorial.slug}`,
+    lastModified: new Date(tutorial.publishDate),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
 
   return [
     {
@@ -16,6 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/learn`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    ...tutorialEntries,
     {
       url: `${baseUrl}/updates`,
       lastModified: new Date(),

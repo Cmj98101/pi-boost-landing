@@ -81,6 +81,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="/learn"
+                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  Learn
+                </a>
+              </li>
+              <li>
+                <a
                   href="/updates"
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
