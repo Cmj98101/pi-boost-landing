@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Monthly, yearly, or a one-time lifetime license for Investigation Flow. Volume pricing for agencies running the app on multiple computers.",
   alternates: {
-    canonical: "https://www.investigationflow.com/pricing",
+    canonical: "/pricing",
   },
   openGraph: {
     title: "Pricing | Investigation Flow",

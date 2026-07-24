@@ -4,8 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import DemoLink from "@/components/DemoLink";
 
-const PAGE_URL =
-  "https://www.investigationflow.com/v3-video-editor-alternative";
+const PAGE_URL = "/v3-video-editor-alternative";
 
 export const metadata: Metadata = {
   title:

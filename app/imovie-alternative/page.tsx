@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import DemoLink from "@/components/DemoLink";
 
-const PAGE_URL = "https://www.investigationflow.com/imovie-alternative";
+const PAGE_URL = "/imovie-alternative";
 
 export const metadata: Metadata = {
   title:

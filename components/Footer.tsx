@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { SITE } from "@/lib/site";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -190,7 +191,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:support@investigationflow.com"
+                  href={`mailto:${SITE.supportEmail}`}
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -199,7 +200,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:support@investigationflow.com?subject=Cancel%20Subscription"
+                  href={`mailto:${SITE.supportEmail}?subject=Cancel%20Subscription`}
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -208,7 +209,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:support@investigationflow.com?subject=Billing%20Question"
+                  href={`mailto:${SITE.supportEmail}?subject=Billing%20Question`}
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>

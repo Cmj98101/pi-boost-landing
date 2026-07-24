@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "See what's new in Investigation Flow: the latest features, improvements, and fixes.",
   alternates: {
-    canonical: "https://www.investigationflow.com/updates",
+    canonical: "/updates",
   },
   openGraph: {
     title: "Updates | Investigation Flow",

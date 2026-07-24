@@ -3,6 +3,8 @@
  * Toggle between waitlist and full launch by changing the mode
  */
 
+import { SITE } from "@/lib/site";
+
 export type SiteMode = "early-access" | "launch";
 
 export const SITE_CONFIG = {
@@ -190,7 +192,7 @@ export const SITE_CONFIG = {
         headline: "Need more than 50 computers?",
         body: "Tell us how many seats you need and we'll set you up with custom volume pricing for your agency or department.",
         buttonText: "Contact us",
-        email: "support@investigationflow.com",
+        email: SITE.supportEmail,
       },
       plans: {
         yearly: {

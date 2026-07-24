@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Download Investigation Flow for macOS or Windows. Timestamp, stitch, and export timestamped surveillance video, no browser required.",
   alternates: {
-    canonical: "https://www.investigationflow.com/download",
+    canonical: "/download",
   },
   openGraph: {
     title: "Download for Mac & Windows | Investigation Flow",

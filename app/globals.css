@@ -317,6 +317,15 @@ body {
 .delay-900 { animation-delay: 0.9s; }
 .delay-1000 { animation-delay: 1s; }
 
+/* ========== BRAND THEME TOKENS ========== */
+/* The brand gradient. Change these three to re-skin the site's primary
+   gradient (headings, buttons, borders) without touching components. */
+:root {
+  --brand-from: #4338ca;
+  --brand-to: #9333ea;
+  --brand-accent: #f59e0b;
+}
+
 /* ========== PREMIUM GRADIENTS ========== */
 
 .gradient-luxury {
@@ -324,11 +333,11 @@ body {
 }
 
 .gradient-navy-purple {
-  background: linear-gradient(135deg, #4338ca 0%, #7e22ce 100%);
+  background: linear-gradient(135deg, var(--brand-from) 0%, #7e22ce 100%);
 }
 
 .gradient-purple-gold {
-  background: linear-gradient(135deg, #9333ea 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, var(--brand-to) 0%, var(--brand-accent) 100%);
 }
 
 .gradient-mesh {
@@ -340,7 +349,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #4338ca 0%, #9333ea 100%);
+  background: linear-gradient(135deg, var(--brand-from) 0%, var(--brand-to) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -357,7 +366,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 2px;
-  background: linear-gradient(135deg, #4338ca, #9333ea);
+  background: linear-gradient(135deg, var(--brand-from), var(--brand-to));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -390,7 +399,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #4338ca 0%, #9333ea 100%);
+  background: linear-gradient(135deg, var(--brand-from) 0%, var(--brand-to) 100%);
   border-radius: 6px;
 }
 
@@ -408,7 +417,7 @@ body {
 /* ========== FOCUS STATES ========== */
 
 *:focus-visible {
-  outline: 2px solid #9333ea;
+  outline: 2px solid var(--brand-to);
   outline-offset: 2px;
 }
 
@@ -433,7 +442,7 @@ body {
 /* ========== CONVERSION-OPTIMIZED COMPONENTS ========== */
 
 .btn-primary-luxury {
-  background: linear-gradient(to right, #4f46e5, #9333ea);
+  background: linear-gradient(to right, #4f46e5, var(--brand-to));
   color: white;
   font-weight: 600;
   padding: 1rem 2rem;
@@ -453,7 +462,7 @@ body {
 
 .btn-secondary-luxury {
   background: white;
-  color: #4338ca;
+  color: var(--brand-from);
   font-weight: 600;
   padding: 1rem 2rem;
   border-radius: 0.75rem;
