@@ -14,7 +14,7 @@ export const SITE = {
     "Professional video timestamping software for private investigators and surveillance professionals.",
   supportEmail: "support@investigationflow.com",
   // Contact for privacy/legal requests (GDPR, CCPA, deletion).
-  legalEmail: "chris@investigationflow.com",
+  legalEmail: "support@investigationflow.com",
   // Wordmark logo in /public, used in the nav and Organization schema.
   logo: "/logo-full.png",
   // daisyUI theme name applied on <html data-theme>.
