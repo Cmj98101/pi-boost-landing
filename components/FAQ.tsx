@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { SITE } from "@/lib/site";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -163,7 +162,7 @@ export default function FAQ() {
               Can't find the answer you're looking for? Our support team is here to help.
             </p>
             <a
-              href={`mailto:${SITE.supportEmail}`}
+              href="/contact"
               className="btn-primary-luxury inline-flex items-center gap-2"
             >
               Contact Support

@@ -413,9 +413,7 @@ export default function BuyContent() {
                           {teamConfig.contact.body}
                         </p>
                         <a
-                          href={`mailto:${teamConfig.contact.email}?subject=${encodeURIComponent(
-                            "Team pricing for 50+ computers"
-                          )}`}
+                          href="/contact"
                           className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
                         >
                           {teamConfig.contact.buttonText}
