@@ -51,6 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
       url: `${baseUrl}/investigation-video-editor-alternative`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

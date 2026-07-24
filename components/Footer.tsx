@@ -191,7 +191,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href={`mailto:${SITE.supportEmail}`}
+                  href="/contact"
                   className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
@@ -243,7 +243,7 @@ export default function Footer() {
                 Terms of Service
               </a>
               <a
-                href="mailto:support@investigationflow.com"
+                href="/contact"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 Contact
