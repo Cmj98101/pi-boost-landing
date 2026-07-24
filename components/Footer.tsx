@@ -231,7 +231,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <a
-                href="#"
+                href="/privacy"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 Privacy Policy
