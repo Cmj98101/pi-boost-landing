@@ -1,40 +1,7 @@
-export default function HowItWorks() {
-  const steps = [
-    {
-      title: "Add Your Footage",
-      description: "Drag and drop a day's worth of surveillance clips from any camera or device. Supports all major video formats.",
-      icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-        </svg>
-      ),
-      gradient: "from-purple-500 to-blue-500",
-      number: "01"
-    },
-    {
-      title: "Timestamp, Stitch & Edit",
-      description: "Add accurate timestamps, stitch clips into order, toggle audio on or off, and grab still shots, all in one place.",
-      icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-        </svg>
-      ),
-      gradient: "from-blue-500 to-cyan-500",
-      number: "02"
-    },
-    {
-      title: "Export and Deliver",
-      description: "Make final edits and redactions, then export universally-accepted MP4 files in minutes, each with an action report that logs every action, ready for clients and case files.",
-      icon: (
-        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-      ),
-      gradient: "from-cyan-500 to-purple-500",
-      number: "03"
-    }
-  ];
+import { HOW_IT_WORKS_STEPS } from "@/lib/content";
+import { Icon } from "@/components/icons";
 
+export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
@@ -62,7 +29,7 @@ export default function HowItWorks() {
           <div className="hidden md:block absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 opacity-20" style={{ width: '85%', margin: '0 auto' }}></div>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            {steps.map((step, index) => (
+            {HOW_IT_WORKS_STEPS.map((step, index) => (
               <div
                 key={index}
                 className={`relative animate-fade-in-up delay-${index * 200}`}
@@ -80,7 +47,7 @@ export default function HowItWorks() {
                   <div className="flex justify-center mb-6">
                     <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}>
                       <div className="text-white">
-                        {step.icon}
+                        <Icon name={step.icon} className="w-10 h-10" />
                       </div>
                       {/* Glow effect on hover */}
                       <div className={`absolute inset-0 w-20 h-20 bg-gradient-to-br ${step.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity`}></div>

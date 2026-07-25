@@ -1,185 +1,10 @@
 "use client";
 
 import { analytics } from "@/lib/analytics";
+import { FEATURES } from "@/lib/content";
+import { Icon } from "@/components/icons";
 
 export default function Features() {
-  const features = [
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
-      title: "Verifiable Timestamps, Automatically",
-      description:
-        "Burn accurate, verifiable date and time onto footage that no longer carries it. Recover the original recording time and lock in timestamps that hold up under scrutiny.",
-      gradient: "from-purple-500 to-blue-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-          />
-        </svg>
-      ),
-      title: "Stitch a Whole Case Into One Sequence",
-      description:
-        "Drop in clips from a day of surveillance and stitch them into a single, logical, chronological video. No timeline wrestling, no general-purpose editor required.",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-          />
-        </svg>
-      ),
-      title: "Audio On or Off, Your Call",
-      description:
-        "Keep the audio when it matters, strip it when it doesn't, for privacy or admissibility. One toggle per clip, no re-encoding headaches.",
-      gradient: "from-cyan-500 to-teal-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-          />
-        </svg>
-      ),
-      title: "Grab Clean Stills in One Click",
-      description:
-        "Pull clean still shots straight from the footage you're editing, perfect for reports, exhibits, and client updates, without switching tools.",
-      gradient: "from-teal-500 to-green-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"
-          />
-        </svg>
-      ),
-      title: "A Full Action Report on Every Case",
-      description:
-        "Every action is logged in order, from the moment footage is uploaded through each edit to the final export. Hand over a clear, defensible record of exactly what was done to the video.",
-      gradient: "from-teal-500 to-blue-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-      ),
-      title: "Redact, Highlight, Annotate, and Brand",
-      description:
-        "Blur bystanders and plates, spotlight your subject, and drop in text, notes, or your logo, right on the video. Steer the viewer's eye to what matters while nothing private slips through.",
-      gradient: "from-blue-500 to-purple-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          />
-        </svg>
-      ),
-      title: "Process Entire Cases at Once",
-      description:
-        "Stop processing one file at a time. Batch whole folders of surveillance video in a single pass and reclaim the hours you spend on manual prep.",
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: (
-        <svg
-          className="w-12 h-12"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 10V3L4 14h7v7l9-11h-7z"
-          />
-        </svg>
-      ),
-      title: "Built for Investigators, Not Filmmakers",
-      description:
-        "Export universally-accepted MP4, install on Windows or Mac in minutes, and start working immediately. No editing degree, no learning curve.",
-      gradient: "from-emerald-500 to-purple-500",
-    },
-  ];
-
   return (
     <section
       id="features"
@@ -200,13 +25,13 @@ export default function Features() {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
             Stop fighting Premiere. Investigation Flow does the four jobs
             surveillance video actually needs: timestamp, stitch, audio, and
-            stills, and nothing you don't.
+            stills, and nothing you don&apos;t.
           </p>
         </div>
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {features.map((feature, index) => (
+          {FEATURES.map((feature, index) => (
             <div
               key={index}
               className={`group relative animate-fade-in-up delay-${index * 100}`}
@@ -218,7 +43,9 @@ export default function Features() {
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow`}
                   >
-                    <div className="text-white">{feature.icon}</div>
+                    <div className="text-white">
+                      <Icon name={feature.icon} className="w-12 h-12" />
+                    </div>
                   </div>
                   {/* Glow effect on hover */}
                   <div
