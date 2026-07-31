@@ -141,6 +141,50 @@ export const PILLARS: Pillar[] = [
   },
 ];
 
+// ========== Showcase (product screenshots) section ==========
+export type ShowcaseItem = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export const SHOWCASE_ITEMS: ShowcaseItem[] = [
+  {
+    eyebrow: "Redaction",
+    title: "Blur what shouldn't be seen",
+    description:
+      "Drop a blur box on a plate, a face, or a house number and it tracks the clip. Nothing private leaves your office, and the rest of the frame stays untouched.",
+    src: "/screenshots/blur.webp",
+    alt: "Investigation Flow blurring a license plate on surveillance footage, with a zoomed view of the redacted plate",
+    width: 2000,
+    height: 1119,
+  },
+  {
+    eyebrow: "Stitching",
+    title: "A whole day on one timeline",
+    description:
+      "Every clip from a shift lands in chronological order on a single timeline. Trim, mark, and layer effects where they matter, then export one continuous file.",
+    src: "/screenshots/timeline.webp",
+    alt: "Investigation Flow timeline showing five surveillance clips stitched in order with effect markers",
+    width: 2000,
+    height: 1573,
+  },
+  {
+    eyebrow: "Location",
+    title: "Prove where it was shot",
+    description:
+      "Investigation Flow reads the GPS data your camera already recorded and pins the clip on a satellite map, with coordinates, accuracy, and altitude. Export it as a location sheet and attach it straight to the file.",
+    src: "/screenshots/location.webp",
+    alt: "Investigation Flow inspecting a clip's GPS location on a satellite map, with coordinates, accuracy, and altitude, and an export location sheet button",
+    width: 2000,
+    height: 1134,
+  },
+];
+
 export const TRUST_BADGES: string[] = [
   "Native Windows & Mac app",
   "Free trial included",
