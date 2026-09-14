@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import DemoLink from "@/components/DemoLink";
+import RelatedComparisons from "@/components/RelatedComparisons";
+import { comparisonFor } from "@/lib/comparisons";
+import { SITE } from "@/lib/site";
 
 const PAGE_URL = "/investigation-video-editor-alternative";
 
 export const metadata: Metadata = {
   title:
-    "Investigation Flow vs. Investigation Video Editor (IVE): The Modern Alternative",
+    "IVE Alternative for Investigators | Investigation Flow",
   description:
-    "Comparing Investigation Flow and IVE (Investigation Video Editor) for private investigators: verifiable timestamps, clip stitching, transferable licenses, native Mac & Windows, a free in-browser demo, and flexible pricing.",
+    "Investigation Video Editor (IVE) vs. Investigation Flow: timestamps, clip stitching, transferable licenses, and pricing compared.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -32,7 +34,7 @@ const ROWS: { feature: string; flow: string; ive: string }[] = [
   { feature: "Batch-process whole folders", flow: "yes", ive: "Not advertised" },
   { feature: "Native macOS app", flow: "yes", ive: "Not advertised" },
   { feature: "Native Windows app", flow: "yes", ive: "yes" },
-  { feature: "Try free in your browser (no download)", flow: "yes", ive: "Download trial only" },
+  { feature: "Free trial before you buy", flow: "First 25 conversions free, no credit card", ive: "Download trial" },
   { feature: "Move a license between computers (deactivate & reactivate)", flow: "yes", ive: "No, keys are non-transferable" },
   { feature: "Monthly, yearly, or one-time billing", flow: "yes", ive: "One-time only" },
   { feature: "Team volume pricing", flow: "yes", ive: "Per-key, up to 3" },
@@ -41,7 +43,7 @@ const ROWS: { feature: string; flow: string; ive: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is the best alternative to Investigation Video Editor (IVE)?",
-    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds native macOS and Windows apps, a free in-browser demo, and licenses you can move between computers.",
+    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds native macOS and Windows apps, a free trial, and licenses you can move between computers.",
   },
   {
     q: "How is Investigation Flow different from IVE?",
@@ -76,6 +78,23 @@ function Cell({ value }: { value: string }) {
 }
 
 export default function InvestigationVideoEditorAlternative() {
+  // Breadcrumbs give search engines the Home > comparison hierarchy, which is
+  // what renders a readable path instead of a bare URL in results.
+  const comparison = comparisonFor(PAGE_URL.slice(1));
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Investigation Flow vs. ${comparison?.competitor ?? ""}`,
+        item: `${SITE.url}${PAGE_URL}`,
+      },
+    ],
+  };
+
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -92,6 +111,10 @@ export default function InvestigationVideoEditorAlternative() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navigation />
 
       {/* Hero */}
@@ -104,16 +127,16 @@ export default function InvestigationVideoEditorAlternative() {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
             Both tools timestamp and edit surveillance video for private investigators.
             Investigation Flow is the modern alternative: native <strong>Mac and Windows</strong>{" "}
-            apps, a <strong>free in-browser demo</strong>, licenses you can <strong>move between
+            apps, a <strong>free trial</strong>, licenses you can <strong>move between
             computers</strong>, and flexible monthly, yearly, or one-time pricing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-hero"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
@@ -170,7 +193,7 @@ export default function InvestigationVideoEditorAlternative() {
               },
               {
                 title: "Native Mac and Windows",
-                body: "A real desktop app on both platforms, plus a free in-browser demo so you can try the workflow in seconds. No download, no signup. IVE doesn't advertise a Mac version.",
+                body: "A real desktop app on both platforms, with a free trial so you can run the workflow on your own footage before you buy. IVE doesn't advertise a Mac version.",
               },
               {
                 title: "Pricing that fits how you work",
@@ -219,6 +242,8 @@ export default function InvestigationVideoEditorAlternative() {
         </div>
       </section>
 
+      <RelatedComparisons currentSlug={PAGE_URL.slice(1)} />
+
       {/* Final CTA */}
       <section className="py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
@@ -226,15 +251,16 @@ export default function InvestigationVideoEditorAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it get timestamped in seconds, right in your browser.
+            Download Investigation Flow and run it on your own footage. Your first
+            25 conversions are free, with every feature unlocked.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-cta"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"

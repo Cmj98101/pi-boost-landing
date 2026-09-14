@@ -88,7 +88,12 @@ export default async function TutorialPage({
 
         <div className="relative mx-auto max-w-3xl px-6 md:px-12">
           {/* Breadcrumb */}
+          {/* Mirrors the BreadcrumbList schema above, which starts at Home. */}
           <nav className="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-purple-600">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
             <Link href="/learn" className="hover:text-purple-600">
               Learn
             </Link>

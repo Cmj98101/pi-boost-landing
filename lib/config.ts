@@ -13,9 +13,6 @@ export const SITE_CONFIG = {
   // Audiences that rotate through the hero H1: "Give <audience> evidence they can use"
   heroAudiences: ["adjusters", "attorneys", "clients"],
 
-  // Live, in-browser demo of the timestamping tool
-  demoUrl: "https://timestamp.investigationflow.com",
-
   // Desktop app downloads. Flip a platform to `true` once its PUBLIC download
   // URL is set (NEXT_PUBLIC_MACOS_DOWNLOAD_URL / NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL).
   // Buttons link to /download/mac and /download/windows, which redirect to those URLs.
@@ -231,7 +228,7 @@ export function getConfig<T extends keyof typeof SITE_CONFIG>(key: T) {
 export function getModeContent<
   T extends keyof Omit<
     typeof SITE_CONFIG,
-    "mode" | "heroAudiences" | "demoUrl" | "showFullTestimonials" | "pricing" | "download"
+    "mode" | "heroAudiences" | "showFullTestimonials" | "pricing" | "download"
   >,
 >(section: T): (typeof SITE_CONFIG)[T][SiteMode] {
   const mode = SITE_CONFIG.mode;

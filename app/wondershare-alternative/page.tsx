@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import DemoLink from "@/components/DemoLink";
+import RelatedComparisons from "@/components/RelatedComparisons";
+import { comparisonFor } from "@/lib/comparisons";
+import { SITE } from "@/lib/site";
 
 const PAGE_URL = "/wondershare-alternative";
 
 export const metadata: Metadata = {
   title:
-    "Investigation Flow vs. Wondershare UniConverter: A Purpose-Built Alternative for Surveillance Video",
+    "Wondershare Alternative for Surveillance Video | Investigation Flow",
   description:
-    "Comparing Investigation Flow and Wondershare UniConverter for private investigators: automatic verifiable timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
+    "Wondershare UniConverter vs. Investigation Flow for investigators: verifiable timestamps, whole-case stitching, and batch processing compared.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -36,7 +38,7 @@ const ROWS: { feature: string; flow: string; wondershare: string }[] = [
   { feature: "Native macOS app", flow: "yes", wondershare: "yes" },
   { feature: "Native Windows app", flow: "yes", wondershare: "yes" },
   { feature: "Built for investigators, not a general toolbox", flow: "yes", wondershare: "General-purpose converter and editor" },
-  { feature: "Try free in your browser (no download)", flow: "yes", wondershare: "Download trial only, watermarked output" },
+  { feature: "Free trial before you buy", flow: "First 25 conversions free, no watermark", wondershare: "Trial watermarks your output" },
 ];
 
 const FAQS: { q: string; a: string }[] = [
@@ -77,6 +79,23 @@ function Cell({ value }: { value: string }) {
 }
 
 export default function WondershareAlternative() {
+  // Breadcrumbs give search engines the Home > comparison hierarchy, which is
+  // what renders a readable path instead of a bare URL in results.
+  const comparison = comparisonFor(PAGE_URL.slice(1));
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Investigation Flow vs. ${comparison?.competitor ?? ""}`,
+        item: `${SITE.url}${PAGE_URL}`,
+      },
+    ],
+  };
+
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -92,6 +111,10 @@ export default function WondershareAlternative() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <Navigation />
 
@@ -110,12 +133,12 @@ export default function WondershareAlternative() {
             native Mac and Windows.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-hero"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
@@ -176,7 +199,7 @@ export default function WondershareAlternative() {
               },
               {
                 title: "No watermarked trial exports",
-                body: "Try the full workflow free in your browser, no download, no signup, and no watermark on your test clip.",
+                body: "Try the full workflow free: your first 25 conversions are on us, with every feature unlocked and no watermark on your exports.",
               },
             ].map((card, i) => (
               <div key={i} className="card-luxury p-8">
@@ -222,6 +245,8 @@ export default function WondershareAlternative() {
         </div>
       </section>
 
+      <RelatedComparisons currentSlug={PAGE_URL.slice(1)} />
+
       {/* Final CTA */}
       <section className="py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
@@ -229,15 +254,16 @@ export default function WondershareAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it get timestamped in seconds, right in your browser.
+            Download Investigation Flow and run it on your own footage. Your first
+            25 conversions are free, with every feature unlocked.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-cta"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"

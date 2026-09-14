@@ -50,6 +50,10 @@ export default function LearnPage() {
                 className="card-luxury group flex flex-col overflow-hidden"
               >
                 <div className="relative mb-5 aspect-video overflow-hidden rounded-xl bg-slate-900">
+                  {/* Intentionally empty alt: this card's <Link> already
+                      renders the tutorial title as visible text, so a
+                      describing alt here would be announced twice. The
+                      thumbnail is decorative in this context. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={tutorialThumbnail(tutorial.youtubeId)}

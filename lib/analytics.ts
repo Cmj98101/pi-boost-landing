@@ -86,14 +86,6 @@ export const analytics = {
     });
   },
 
-  // "Try the Live Demo" button clicks (the browser demo)
-  demoClicked: (location: string) => {
-    trackEvent("demo_clicked", {
-      event_category: "engagement",
-      event_label: location,
-    });
-  },
-
   // Desktop app download clicks
   downloadStarted: (platform: string) => {
     trackEvent("download_started", {

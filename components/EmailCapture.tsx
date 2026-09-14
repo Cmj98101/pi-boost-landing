@@ -135,7 +135,7 @@ export default function EmailCapture({
   if (variant === "footer") {
     return (
       <div className={`${className}`}>
-        <h4 className="font-bold mb-4">Stay Updated</h4>
+        <h2 className="font-bold mb-4">Stay Updated</h2>
         <p className="text-gray-400 text-sm mb-4">
           Get notified when we launch and receive early access.
         </p>

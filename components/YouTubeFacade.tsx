@@ -32,10 +32,13 @@ export default function YouTubeFacade({
           className="group absolute inset-0 h-full w-full"
           aria-label={`Play video: ${title}`}
         >
+          {/* The thumbnail is the content here, so it gets a real alt. The
+              button's aria-label is what screen readers announce, so this
+              doesn't produce a duplicate reading. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={tutorialThumbnail(id)}
-            alt=""
+            alt={title}
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />

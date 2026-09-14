@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import DemoLink from "@/components/DemoLink";
+import RelatedComparisons from "@/components/RelatedComparisons";
+import { comparisonFor } from "@/lib/comparisons";
+import { SITE } from "@/lib/site";
 
 const PAGE_URL = "/imovie-alternative";
 
 export const metadata: Metadata = {
   title:
-    "Investigation Flow vs. iMovie: A Purpose-Built Alternative for Surveillance Video",
+    "iMovie Alternative for Surveillance Video | Investigation Flow",
   description:
-    "Comparing Investigation Flow and iMovie for private investigators: automatic verifiable timestamps, whole-case stitching, batch processing, and native Mac & Windows support.",
+    "Why iMovie falls short for surveillance case work: verifiable timestamps, whole-case stitching, and batch processing compared side by side.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -34,7 +36,7 @@ const ROWS: { feature: string; flow: string; imovie: string }[] = [
   { feature: "Batch-process whole folders at once", flow: "yes", imovie: "No, one clip at a time" },
   { feature: "Native Windows app", flow: "yes", imovie: "No, Mac and iOS only" },
   { feature: "Built for case work, not general filmmaking", flow: "yes", imovie: "General-purpose consumer editor" },
-  { feature: "Try free in your browser (no download)", flow: "yes", imovie: "N/A, but iMovie itself is free" },
+  { feature: "Free trial before you buy", flow: "First 25 conversions free, every feature unlocked", imovie: "N/A, iMovie is free but Mac-only" },
 ];
 
 const FAQS: { q: string; a: string }[] = [
@@ -75,6 +77,23 @@ function Cell({ value }: { value: string }) {
 }
 
 export default function IMovieAlternative() {
+  // Breadcrumbs give search engines the Home > comparison hierarchy, which is
+  // what renders a readable path instead of a bare URL in results.
+  const comparison = comparisonFor(PAGE_URL.slice(1));
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Investigation Flow vs. ${comparison?.competitor ?? ""}`,
+        item: `${SITE.url}${PAGE_URL}`,
+      },
+    ],
+  };
+
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -90,6 +109,10 @@ export default function IMovieAlternative() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <Navigation />
 
@@ -107,12 +130,12 @@ export default function IMovieAlternative() {
             <strong>batch processing</strong>, on native Mac and Windows.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-hero"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
@@ -173,7 +196,7 @@ export default function IMovieAlternative() {
               },
               {
                 title: "Runs where you work",
-                body: "Native apps for both Mac and Windows, plus a free in-browser demo. iMovie is Mac and iOS only.",
+                body: "Native apps for both Mac and Windows, plus a free trial on your own footage. iMovie is Mac and iOS only.",
               },
             ].map((card, i) => (
               <div key={i} className="card-luxury p-8">
@@ -218,6 +241,8 @@ export default function IMovieAlternative() {
         </div>
       </section>
 
+      <RelatedComparisons currentSlug={PAGE_URL.slice(1)} />
+
       {/* Final CTA */}
       <section className="py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
@@ -225,15 +250,16 @@ export default function IMovieAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it get timestamped in seconds, right in your browser.
+            Download Investigation Flow and run it on your own footage. Your first
+            25 conversions are free, with every feature unlocked.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-cta"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"

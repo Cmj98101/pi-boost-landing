@@ -53,9 +53,10 @@ export default function Navigation() {
             <Image
               src="/logo-full.png"
               alt="Investigation Flow"
-              width={1682}
-              height={357}
+              width={600}
+              height={127}
               priority
+              sizes="200px"
               className="h-9 md:h-10 w-auto group-hover:scale-105 transition-transform"
             />
           </a>

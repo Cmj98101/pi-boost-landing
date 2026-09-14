@@ -1,75 +1,54 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { FAQS } from "@/lib/faq";
+import { COMPARISONS } from "@/lib/comparisons";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = [
-    {
-      question: "Can I timestamp videos in batch?",
-      answer: "Yes! Investigation Flow supports both individual video timestamping and batch processing. You can process entire folders of surveillance footage with just a few clicks, saving you hours of work.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  // Icons live here rather than in lib/faq.ts so the content module
+  // stays JSX-free and usable from server components.
+  const icons = [
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
-      )
-    },
-    {
-      question: "What video formats are supported?",
-      answer: "Investigation Flow supports all common video formats including MP4, MOV, AVI, WMV, and more. You can export your timestamped videos in MP4 format, which is universally compatible with clients and case files.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
-      )
-    },
-    {
-      question: "Is Investigation Flow available for both Mac and Windows?",
-      answer: "Yes! Investigation Flow is available as a native application for both macOS and Windows. You'll get the same features and performance on both platforms.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
-      )
-    },
-    {
-      question: "Can I customize the timestamp format?",
-      answer: "Absolutely. Investigation Flow offers extensive customization options including timestamp format (date/time styles), position on screen, font size, color, and more. You can also edit timestamps after they've been added.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
         </svg>
-      )
-    },
-    {
-      question: "Can I stitch clips together and pull still shots?",
-      answer: "Yes. You can stitch multiple surveillance clips into one logical, chronological sequence, keep or remove the audio on each clip, and grab clean still shots straight from the footage you're editing, all without a separate editor.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-      )
-    },
-    {
-      question: "Can I use my license on more than one computer?",
-      answer: "Each license runs on one computer at a time. You can move a license to a different computer whenever you need to: just deactivate the license key on the old machine, then activate it on the new one. To run Investigation Flow on multiple computers at the same time, you'll need a license for each.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
-      )
-    },
-    {
-      question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time. No questions asked, no cancellation fees. If you cancel, you'll retain access until the end of your billing period.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    ),
+    (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-      )
-    }
+    ),
   ];
+
+  const faqs = FAQS.map((faq, i) => ({ ...faq, icon: icons[i] }));
 
   return (
     <section id="faq" className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
@@ -150,6 +129,27 @@ export default function FAQ() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Comparison links. "How does this compare to X?" is the question
+            visitors ask right after the FAQ, and these pages previously had a
+            single inbound link each (the footer), so this serves the reader
+            and spreads internal link equity at the same time. */}
+        <div className="mt-12 text-center">
+          <p className="text-slate-600 mb-4">
+            Already using another editor? See how Investigation Flow compares:
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {COMPARISONS.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/${c.slug}`}
+                className="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 transition-colors hover:border-purple-300 hover:text-purple-700"
+              >
+                vs. {c.competitor}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Still have questions CTA */}

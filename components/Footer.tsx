@@ -20,8 +20,9 @@ export default function Footer() {
               <Image
                 src="/logo-full-white.png"
                 alt="Investigation Flow"
-                width={1682}
-                height={357}
+                width={600}
+                height={127}
+                sizes="200px"
                 className="h-10 w-auto"
               />
             </div>
@@ -33,7 +34,7 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h3 className="font-bold mb-4 text-white text-lg">Product</h3>
+            <h2 className="font-bold mb-4 text-white text-lg">Product</h2>
             <ul className="space-y-3">
               <li>
                 <a
@@ -103,7 +104,7 @@ export default function Footer() {
 
           {/* Compare */}
           <div>
-            <h3 className="font-bold mb-4 text-white text-lg">Compare</h3>
+            <h2 className="font-bold mb-4 text-white text-lg">Compare</h2>
             <ul className="space-y-3">
               <li>
                 <a
@@ -146,7 +147,7 @@ export default function Footer() {
 
           {/* Downloads */}
           <div>
-            <h3 className="font-bold mb-4 text-white text-lg">Download</h3>
+            <h2 className="font-bold mb-4 text-white text-lg">Download</h2>
             <ul className="space-y-3">
               <li>
                 <a
@@ -187,7 +188,7 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="font-bold mb-4 text-white text-lg">Support</h3>
+            <h2 className="font-bold mb-4 text-white text-lg">Support</h2>
             <ul className="space-y-3">
               <li>
                 <a
@@ -237,7 +238,7 @@ export default function Footer() {
                 Privacy Policy
               </a>
               <a
-                href="#"
+                href="/terms"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 Terms of Service

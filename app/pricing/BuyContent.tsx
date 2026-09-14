@@ -165,6 +165,10 @@ export default function BuyContent() {
           </div>
 
           {/* Pricing Options */}
+          {/* The plan cards below are H3s. This H2 gives them a parent so the
+              outline runs H1 -> H2 -> H3 instead of skipping a level. The
+              design has no visible heading here, so it's screen-reader only. */}
+          <h2 className="sr-only">Plans and pricing</h2>
           <div className="grid gap-8 md:grid-cols-3 mb-12">
             {pricingConfig.options.map((option, index) => {
               const [whole, cents] = String(option.price).split(".");
@@ -283,9 +287,9 @@ export default function BuyContent() {
                       Team
                     </span>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
                     {teamConfig.headline}
-                  </h3>
+                  </h2>
                   <p className="text-slate-600 mt-2 max-w-2xl">
                     {teamConfig.subheadline}
                   </p>
@@ -406,9 +410,9 @@ export default function BuyContent() {
                   <div className="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50 p-6 md:p-8 flex flex-col">
                     {teamBilling === "contact" ? (
                       <>
-                        <h4 className="text-xl md:text-2xl font-bold text-slate-900">
+                        <h3 className="text-xl md:text-2xl font-bold text-slate-900">
                           {teamConfig.contact.headline}
-                        </h4>
+                        </h3>
                         <p className="text-slate-600 mt-2">
                           {teamConfig.contact.body}
                         </p>
@@ -516,12 +520,12 @@ export default function BuyContent() {
 
           {/* Single Use Disclaimer */}
           <div className="mb-12 p-6 bg-slate-50 rounded-xl border border-slate-200">
-            <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
               <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               About the Lifetime (V1) License
-            </h4>
+            </h2>
             <p className="text-slate-600 text-sm leading-relaxed">
               The Lifetime (V1) License is a one-time purchase that runs Investigation Flow <strong>Version 1</strong> on
               {" "}<strong>one computer at a time</strong>, with all Version 1 updates included. No recurring fees. Future

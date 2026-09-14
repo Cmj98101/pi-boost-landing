@@ -195,8 +195,8 @@ export default function Hero() {
         <Image
           src="/screenshots/hero.webp"
           alt="Investigation Flow with a day of surveillance clips loaded, a burned-in timestamp on the footage, and the timestamp settings panel open"
-          width={2400}
-          height={1335}
+          width={1920}
+          height={1068}
           priority
           sizes="(min-width: 1280px) 1152px, 100vw"
           className="w-full h-auto"

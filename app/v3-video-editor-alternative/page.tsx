@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import DemoLink from "@/components/DemoLink";
+import RelatedComparisons from "@/components/RelatedComparisons";
+import { comparisonFor } from "@/lib/comparisons";
+import { SITE } from "@/lib/site";
 
 const PAGE_URL = "/v3-video-editor-alternative";
 
 export const metadata: Metadata = {
   title:
-    "Investigation Flow vs. V3 Video Editor: The Modern Alternative",
+    "V3 Video Editor Alternative | Investigation Flow",
   description:
-    "Comparing Investigation Flow and V3 Video Editor for private investigators: verifiable timestamps, clip stitching, native Mac & Windows, a free in-browser demo, and flexible pricing.",
+    "V3 Video Editor vs. Investigation Flow: verifiable timestamps, clip stitching, Mac & Windows support, and pricing compared side by side.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title:
@@ -33,7 +35,7 @@ const ROWS: { feature: string; flow: string; v3: string }[] = [
   { feature: "Batch-process whole folders", flow: "yes", v3: "Not advertised" },
   { feature: "Native macOS app", flow: "yes", v3: "Not advertised, PC only" },
   { feature: "Native Windows app", flow: "yes", v3: "yes" },
-  { feature: "Try free in your browser (no download)", flow: "yes", v3: "Download trial only" },
+  { feature: "Free trial before you buy", flow: "First 25 conversions free, no credit card", v3: "Free trial, no credit card required" },
   { feature: "Move a license between computers", flow: "yes", v3: "yes" },
   { feature: "Monthly, yearly, or one-time billing", flow: "yes", v3: "Monthly only" },
   { feature: "Team volume pricing", flow: "yes", v3: "Not advertised" },
@@ -42,11 +44,11 @@ const ROWS: { feature: string; flow: string; v3: string }[] = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is the best alternative to V3 Video Editor?",
-    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds a native macOS app, a free in-browser demo, and monthly, yearly, or one-time billing.",
+    a: "Investigation Flow is a modern alternative built for the same job: timestamping, stitching, audio control, and clean stills for surveillance footage. It adds a native macOS app, a free trial, and monthly, yearly, or one-time billing.",
   },
   {
     q: "How is Investigation Flow different from V3 Video Editor?",
-    a: "Both timestamp and edit surveillance video for private investigators. The main differences: Investigation Flow runs natively on Mac and Windows, lets you try it free in the browser, and offers monthly, yearly, or one-time billing with team volume discounts. V3 Video Editor is Windows-only and billed monthly at $9.99.",
+    a: "Both timestamp and edit surveillance video for private investigators. The main differences: Investigation Flow runs natively on Mac and Windows, lets you try it free before you buy, and offers monthly, yearly, or one-time billing with team volume discounts. V3 Video Editor is Windows-only and billed monthly at $9.99.",
   },
   {
     q: "Does Investigation Flow work on Mac?",
@@ -54,7 +56,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Can I try Investigation Flow before I buy?",
-    a: "Yes. Investigation Flow offers a free, in-browser demo with no download or signup required. V3 Video Editor offers a downloadable free trial with no credit card required.",
+    a: "Yes. Investigation Flow includes a free trial: your first 25 video conversions are free with every feature unlocked, and no credit card is required. V3 Video Editor also offers a free trial with no credit card required.",
   },
   {
     q: "How much does Investigation Flow cost compared to V3 Video Editor?",
@@ -77,6 +79,23 @@ function Cell({ value }: { value: string }) {
 }
 
 export default function V3VideoEditorAlternative() {
+  // Breadcrumbs give search engines the Home > comparison hierarchy, which is
+  // what renders a readable path instead of a bare URL in results.
+  const comparison = comparisonFor(PAGE_URL.slice(1));
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Investigation Flow vs. ${comparison?.competitor ?? ""}`,
+        item: `${SITE.url}${PAGE_URL}`,
+      },
+    ],
+  };
+
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -93,6 +112,10 @@ export default function V3VideoEditorAlternative() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navigation />
 
       {/* Hero */}
@@ -105,16 +128,16 @@ export default function V3VideoEditorAlternative() {
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
             Both tools timestamp and edit surveillance video for private investigators.
             Investigation Flow is the modern alternative: native <strong>Mac and Windows</strong>{" "}
-            apps, a <strong>free in-browser demo</strong>, and flexible monthly, yearly, or
+            apps, a <strong>free trial</strong>, and flexible monthly, yearly, or
             one-time pricing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-hero"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
@@ -167,7 +190,7 @@ export default function V3VideoEditorAlternative() {
             {[
               {
                 title: "Native Mac and Windows",
-                body: "A real desktop app on both platforms, plus a free in-browser demo so you can try the workflow in seconds. No download, no signup. V3's site only advertises PC compatibility.",
+                body: "A real desktop app on both platforms, with a free trial so you can run the workflow on your own footage before you buy. V3's site only advertises PC compatibility.",
               },
               {
                 title: "Pricing that fits how you work",
@@ -221,6 +244,8 @@ export default function V3VideoEditorAlternative() {
         </div>
       </section>
 
+      <RelatedComparisons currentSlug={PAGE_URL.slice(1)} />
+
       {/* Final CTA */}
       <section className="py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
@@ -228,15 +253,16 @@ export default function V3VideoEditorAlternative() {
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
-            Upload a clip and watch it get timestamped in seconds, right in your browser.
+            Download Investigation Flow and run it on your own footage. Your first
+            25 conversions are free, with every feature unlocked.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <DemoLink
-              location="comparison-cta"
+            <Link
+              href="/download"
               className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
             >
-              Try the Live Demo
-            </DemoLink>
+              Download Free Trial
+            </Link>
             <Link
               href="/pricing"
               className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
