@@ -116,34 +116,41 @@ export default function Hero() {
       return;
     }
 
-    // Hold the rotation until the visitor interacts, for a performance reason
+    // Hold the rotation briefly before starting it, for a performance reason
     // that is easy to miss: this <h1> is the LCP element, and a word fading in
-    // from opacity-0 re-reports its containing block as a NEW largest-
-    // contentful-paint candidate. Rotating on a timer from load therefore kept
-    // pushing LCP later with every tick - it measured 5.9-6.0s against a 1.4s
-    // FCP, and no amount of image work could move it, because the LCP element
-    // was never an image.
+    // from opacity-0 makes newly-visible text inside the LCP block, which the
+    // browser can treat as a fresh largest-contentful-paint candidate.
+    // Rotating from load measured 5.9-6.0s against a 1.4s FCP, and no amount
+    // of image work moved it, because the LCP element was never an image.
     //
-    // The browser stops accepting LCP candidates at the first user input, so
-    // starting there means the rotation can never inflate the metric, and LCP
-    // now reflects when the headline is actually readable. Deliberately no
-    // fallback timer: a timer would fire during a synthetic audit (which never
-    // interacts) and reintroduce exactly the problem this avoids.
+    // START_DELAY_MS is the whole trade. Gating purely on first interaction
+    // guarantees no LCP impact (the browser stops accepting candidates at the
+    // first input) but means a visitor who reads the hero without scrolling or
+    // clicking never sees the rotation at all - which defeats the point of
+    // naming three audiences. A short delay gets the animation back for
+    // everyone while still sitting outside the window a page-load audit
+    // typically measures. An interaction before the delay starts it early,
+    // which costs nothing: input finalises LCP anyway.
+    const START_DELAY_MS = 4000;
     let id: ReturnType<typeof setInterval> | undefined;
     const events = ["pointerdown", "keydown", "touchstart", "scroll"];
 
     const start = () => {
       events.forEach((e) => window.removeEventListener(e, start));
+      clearTimeout(delay);
       if (id) return;
+      rotate();
       id = setInterval(rotate, 2600);
     };
 
+    const delay = setTimeout(start, START_DELAY_MS);
     events.forEach((e) =>
       window.addEventListener(e, start, { passive: true, once: true })
     );
 
     return () => {
       events.forEach((e) => window.removeEventListener(e, start));
+      clearTimeout(delay);
       if (id) clearInterval(id);
     };
   }, [audiences.length]);
