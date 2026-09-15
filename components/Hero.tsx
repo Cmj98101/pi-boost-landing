@@ -16,13 +16,62 @@ export default function Hero() {
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [widths, setWidths] = useState<number[]>([]);
   const [audienceIndex, setAudienceIndex] = useState(0);
-  // The prior index survives one render after a change, so the outgoing word
-  // can slide up and out while the incoming word rises into place.
-  const prevIndexRef = useRef(0);
-  const prevIndex = prevIndexRef.current;
+  // The word being animated out. Held in state (not a ref) because unmounting
+  // it has to happen on a render, once its transition has finished.
+  const [leavingIndex, setLeavingIndex] = useState<number | null>(null);
+  // True for exactly one frame after the word changes, while the incoming word
+  // sits in its "from" styles. A newly mounted element has nothing to
+  // transition from - if it mounts already at its final opacity it simply
+  // appears, which is why the incoming word used to pop in while the outgoing
+  // one faded. Mount it hidden, then flip it on the next frame so the browser
+  // has two states to interpolate between.
+  const [entering, setEntering] = useState(false);
+
+  // MOTION_MS must match the duration-500 class on the words below.
+  const MOTION_MS = 500;
+
   useEffect(() => {
-    prevIndexRef.current = audienceIndex;
+    if (!entering) return;
+    // Two frames: the first guarantees the browser has painted the "from"
+    // styles, the second starts the transition. One frame is enough in most
+    // browsers but not reliably in all of them.
+    let inner = 0;
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => setEntering(false));
+    });
+    // rAF is suspended in a background tab. Rotation only starts after an
+    // interaction, so the tab is normally visible, but if it is backgrounded
+    // mid-rotation the incoming word would otherwise stay stuck invisible
+    // until the visitor came back. This releases it either way.
+    const fallback = setTimeout(() => setEntering(false), 80);
+    return () => {
+      cancelAnimationFrame(outer);
+      cancelAnimationFrame(inner);
+      clearTimeout(fallback);
+    };
+  }, [entering, audienceIndex]);
+
+  useEffect(() => {
+    if (leavingIndex === null) return;
+    // Keep the outgoing word mounted for the length of its fade, then drop it
+    // so the heading holds a single word again between rotations.
+    const t = setTimeout(() => setLeavingIndex(null), MOTION_MS);
+    return () => clearTimeout(t);
+  }, [leavingIndex]);
+
+  // The interval's closure would capture a stale index, so the current one is
+  // mirrored into a ref for it to read.
+  const indexRef = useRef(0);
+  useEffect(() => {
+    indexRef.current = audienceIndex;
   }, [audienceIndex]);
+
+  const rotate = () => {
+    const from = indexRef.current;
+    setLeavingIndex(from);
+    setAudienceIndex((from + 1) % audiences.length);
+    setEntering(true);
+  };
 
   // Measure every word so the slot can reserve the widest one. A slot that
   // hugged the active word would change line 1's total width on each rotation,
@@ -86,9 +135,7 @@ export default function Hero() {
     const start = () => {
       events.forEach((e) => window.removeEventListener(e, start));
       if (id) return;
-      id = setInterval(() => {
-        setAudienceIndex((i) => (i + 1) % audiences.length);
-      }, 2600);
+      id = setInterval(rotate, 2600);
     };
 
     events.forEach((e) =>
@@ -130,7 +177,17 @@ export default function Hero() {
             <span className="block">
               Give{" "}
               <span
-                className="relative inline-block whitespace-nowrap align-baseline"
+                // A one-cell inline grid. Both the outgoing and incoming
+                // words occupy that same cell, so they overlay exactly while
+                // both stay in normal flow. The previous approach kept the
+                // active word in flow and absolutely positioned the outgoing
+                // one at top-0, but an inline-block word sits 28.8px below the
+                // slot's top on the baseline, so every rotation made the
+                // outgoing word jump up before it faded.
+                // justify-items-start pins the words left; the surrounding
+                // container is text-center, which would otherwise centre each
+                // word in the reserved slot and make "Give" appear to shift.
+                className="inline-grid justify-items-start whitespace-nowrap align-baseline"
                 style={slotWidth ? { width: slotWidth } : undefined}
               >
                 {/* Only the active word (and, mid-transition, the outgoing one)
@@ -144,11 +201,16 @@ export default function Hero() {
                     now happens in the off-screen rig below the heading. */}
                 {audiences.map((word, i) => {
                   const isActive = i === audienceIndex;
-                  const isLeaving =
-                    i === prevIndex && prevIndex !== audienceIndex;
+                  const isLeaving = i === leavingIndex && !isActive;
                   if (!isActive && !isLeaving) return null;
+                  // The incoming word mounts one frame below and transparent,
+                  // then `entering` clears and it rises into place. Without
+                  // that first frame there is no start value to animate from
+                  // and it would simply appear.
                   const motion = isActive
-                    ? "opacity-100 translate-y-0"
+                    ? entering
+                      ? "opacity-0 translate-y-[0.4em]"
+                      : "opacity-100 translate-y-0"
                     : "opacity-0 -translate-y-[0.4em]";
                   return (
                     <span
@@ -165,11 +227,7 @@ export default function Hero() {
                       // sm breakpoint, so a resize would measure a word
                       // mid-shrink and latch a too-wide slot, leaving a gap
                       // after "Give" until the next resize.
-                      className={`gradient-text whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${
-                        isActive
-                          ? "inline-block"
-                          : "absolute left-0 top-0"
-                      } ${motion}`}
+                      className={`gradient-text col-start-1 row-start-1 whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${motion}`}
                     >
                       {word}
                     </span>
