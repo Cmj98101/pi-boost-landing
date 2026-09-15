@@ -1,18 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { getConfig, getModeContent } from "@/lib/config";
 import { analytics } from "@/lib/analytics";
 
+// useLayoutEffect warns when React renders this on the server, so fall back to
+// useEffect there. The layout pass only matters in the browser anyway.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export default function Hero() {
   const heroContent = getModeContent("hero");
   const audiences = getConfig("heroAudiences");
-  // Seeds the initial width before real pixel widths are measured.
-  const longestAudience = audiences.reduce(
-    (a, b) => (b.length > a.length ? b : a),
-    ""
-  );
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [widths, setWidths] = useState<number[]>([]);
   const [audienceIndex, setAudienceIndex] = useState(0);
@@ -28,20 +28,29 @@ export default function Hero() {
   // hugged the active word would change line 1's total width on each rotation,
   // and centering would then shove "Give" left and right. Re-measure on resize,
   // since the font size changes across breakpoints.
-  useEffect(() => {
+  //
+  // The first measurement runs in a layout effect, synchronously and before
+  // paint, rather than inside requestAnimationFrame. The slot used to contain
+  // an in-flow invisible copy of the longest word, so it was naturally wide
+  // enough even before JS measured anything; that copy is gone now (it was
+  // polluting the heading's text), which makes the reserved width entirely
+  // dependent on this measurement. rAF is the wrong tool for that: it does not
+  // fire at all in a background tab, and it lands after first paint, which
+  // would let the slot resize under a painted headline.
+  useIsomorphicLayoutEffect(() => {
     let frame = 0;
     const measure = () =>
       setWidths(audiences.map((_, i) => wordRefs.current[i]?.offsetWidth ?? 0));
+    measure();
     // Resize fires faster than layout settles, so coalesce to one measurement
     // per frame rather than measuring mid-reflow.
     const schedule = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(measure);
     };
-    schedule();
     window.addEventListener("resize", schedule);
     // Inter arrives after first paint and changes every width.
-    document.fonts?.ready.then(schedule).catch(() => {});
+    document.fonts?.ready.then(measure).catch(() => {});
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", schedule);
@@ -57,10 +66,39 @@ export default function Hero() {
     ) {
       return;
     }
-    const id = setInterval(() => {
-      setAudienceIndex((i) => (i + 1) % audiences.length);
-    }, 2600);
-    return () => clearInterval(id);
+
+    // Hold the rotation until the visitor interacts, for a performance reason
+    // that is easy to miss: this <h1> is the LCP element, and a word fading in
+    // from opacity-0 re-reports its containing block as a NEW largest-
+    // contentful-paint candidate. Rotating on a timer from load therefore kept
+    // pushing LCP later with every tick - it measured 5.9-6.0s against a 1.4s
+    // FCP, and no amount of image work could move it, because the LCP element
+    // was never an image.
+    //
+    // The browser stops accepting LCP candidates at the first user input, so
+    // starting there means the rotation can never inflate the metric, and LCP
+    // now reflects when the headline is actually readable. Deliberately no
+    // fallback timer: a timer would fire during a synthetic audit (which never
+    // interacts) and reintroduce exactly the problem this avoids.
+    let id: ReturnType<typeof setInterval> | undefined;
+    const events = ["pointerdown", "keydown", "touchstart", "scroll"];
+
+    const start = () => {
+      events.forEach((e) => window.removeEventListener(e, start));
+      if (id) return;
+      id = setInterval(() => {
+        setAudienceIndex((i) => (i + 1) % audiences.length);
+      }, 2600);
+    };
+
+    events.forEach((e) =>
+      window.addEventListener(e, start, { passive: true, once: true })
+    );
+
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, start));
+      if (id) clearInterval(id);
+    };
   }, [audiences.length]);
 
   return (
@@ -95,37 +133,43 @@ export default function Hero() {
                 className="relative inline-block whitespace-nowrap align-baseline"
                 style={slotWidth ? { width: slotWidth } : undefined}
               >
-                {/* Invisible word establishes the line box (height + baseline)
-                    and seeds the slot width until real widths are measured. */}
-                <span className="invisible" aria-hidden="true">
-                  {longestAudience}
-                </span>
-                {/* Words are pinned to the slot's left edge, not centered in it:
-                    centering would split the slack in two and open a gap after
-                    "Give" on the shorter words. Left-aligned, the slack all
-                    falls at the end of the line where it reads as nothing. */}
+                {/* Only the active word (and, mid-transition, the outgoing one)
+                    is rendered here. Every audience used to be in the markup at
+                    once, alongside an invisible sizing copy, so the heading's
+                    text content read
+                    "Give adjustersadjustersattorneysclientsevidence they can use"
+                    to anything parsing the DOM - crawlers included. The active
+                    word sits in normal flow so it still establishes the line
+                    box's height and baseline without a duplicate. Measurement
+                    now happens in the off-screen rig below the heading. */}
                 {audiences.map((word, i) => {
                   const isActive = i === audienceIndex;
                   const isLeaving =
                     i === prevIndex && prevIndex !== audienceIndex;
+                  if (!isActive && !isLeaving) return null;
                   const motion = isActive
                     ? "opacity-100 translate-y-0"
-                    : isLeaving
-                      ? "opacity-0 -translate-y-[0.4em]"
-                      : "opacity-0 translate-y-[0.4em]";
+                    : "opacity-0 -translate-y-[0.4em]";
                   return (
                     <span
                       key={word}
-                      ref={(el) => {
-                        wordRefs.current[i] = el;
-                      }}
                       aria-hidden={!isActive}
+                      // Words are pinned to the slot's left edge, not centered
+                      // in it: centering would split the slack in two and open
+                      // a gap after "Give" on the shorter words. Left-aligned,
+                      // the slack all falls at the end of the line where it
+                      // reads as nothing.
+                      //
                       // Transition opacity and translate only. transition-all
                       // would also animate the inherited font-size across the
                       // sm breakpoint, so a resize would measure a word
                       // mid-shrink and latch a too-wide slot, leaving a gap
                       // after "Give" until the next resize.
-                      className={`gradient-text absolute left-0 top-0 whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${motion}`}
+                      className={`gradient-text whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${
+                        isActive
+                          ? "inline-block"
+                          : "absolute left-0 top-0"
+                      } ${motion}`}
                     >
                       {word}
                     </span>
@@ -133,10 +177,39 @@ export default function Hero() {
                 })}
               </span>
             </span>
+            {/* Separates the two block lines in the heading's text content, so
+                it reads "Give adjusters evidence they can use" rather than
+                "adjustersevidence" when the tags are stripped. Whitespace-only
+                content between two block boxes generates no box, so this is
+                invisible on the page. */}
+            {" "}
             {/* text-balance keeps the wrap even on phones ("evidence they" /
                 "can use") instead of leaving "use" alone on a line. */}
             <span className="block text-balance">evidence they can use</span>
           </h1>
+
+          {/* Width-measuring rig. Deliberately a sibling of the <h1> rather
+              than a child, so these copies stay out of the heading's text.
+              Font classes mirror the <h1> exactly or the measurements would be
+              wrong at every breakpoint. `invisible` (visibility: hidden) is
+              required over `hidden` or sr-only's clip: the element must still
+              be laid out for offsetWidth to return a real number. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none invisible absolute whitespace-nowrap text-4xl font-bold leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl"
+          >
+            {audiences.map((word, i) => (
+              <span
+                key={word}
+                className="inline-block"
+                ref={(el) => {
+                  wordRefs.current[i] = el;
+                }}
+              >
+                {word}
+              </span>
+            ))}
+          </div>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up delay-300 max-w-2xl mx-auto">
