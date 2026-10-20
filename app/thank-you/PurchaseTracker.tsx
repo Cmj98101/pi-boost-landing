@@ -8,15 +8,25 @@ import { getConfig } from "@/lib/config";
 // Reports a completed purchase to GA4, Google Ads and PostHog.
 //
 // Buyers land here from the "Continue" button on Lemon Squeezy's confirmation
-// modal (Product → Confirmation modal → Button link). Recommended link:
-//   https://www.investigationflow.com/thank-you?order_id=[order_id]&plan=yearly
-// `order_id` de-duplicates reloads; `plan` (monthly | yearly | lifetime) sets
-// the conversion value. Both are optional.
+// modal (Product → Confirmation modal → Button link). The same link works for
+// every product:
+//   https://www.investigationflow.com/thank-you?order_id=[order_id]&total=[total]
+// Lemon Squeezy fills in the bracketed link variables. `order_id` de-duplicates
+// reloads; `total` (e.g. "$199.00") is the amount actually paid. An optional
+// `plan` (monthly | yearly | lifetime) is used as a fallback value. All are
+// optional.
 //
 // Google Ads needs NEXT_PUBLIC_GOOGLE_ADS_ID (AW-…) and
 // NEXT_PUBLIC_GOOGLE_ADS_PURCHASE_LABEL (the label from the conversion action).
 
 const STORAGE_PREFIX = "if_purchase_tracked_";
+
+// Lemon Squeezy formats totals like "$1,234.00"; keep only the number.
+function parseTotal(total: string | null): number | undefined {
+  if (!total || total.startsWith("[")) return undefined;
+  const amount = Number.parseFloat(total.replace(/[^0-9.]/g, ""));
+  return Number.isFinite(amount) && amount > 0 ? amount : undefined;
+}
 
 function planValue(plan: string | null): number | undefined {
   if (!plan) return undefined;
@@ -30,7 +40,7 @@ function Tracker() {
   useEffect(() => {
     const orderId = params.get("order_id") || undefined;
     const plan = params.get("plan");
-    const value = planValue(plan);
+    const value = parseTotal(params.get("total")) ?? planValue(plan);
 
     // Ignore unsubstituted placeholders such as "[order_id]".
     const transactionId =
