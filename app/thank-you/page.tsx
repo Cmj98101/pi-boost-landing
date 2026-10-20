@@ -62,10 +62,10 @@ export default function ThankYouPage() {
           </ol>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/download" className="btn btn-primary btn-lg">
+            <Link href="/download" className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg">
               Download the app
             </Link>
-            <Link href="/learn" className="btn btn-outline btn-lg">
+            <Link href="/learn" className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg">
               Watch the tutorials
             </Link>
           </div>
