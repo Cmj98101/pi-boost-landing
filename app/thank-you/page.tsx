@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     title: "Find your license key",
-    body: "Right after purchasing, we emailed you a receipt and your license key. Check your spam folder if it isn't in your inbox within a few minutes.",
+    body: "Please check your email, as we sent you your license key and your receipt. Check your spam folder if it isn't in your inbox within a few minutes.",
   },
   {
     title: "Download the app",
