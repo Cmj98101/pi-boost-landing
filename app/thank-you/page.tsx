@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const STEPS = [
   {
     title: "Find your license key",
-    body: "Lemon Squeezy has emailed your receipt and license key. Check your spam folder if it isn't in your inbox within a few minutes.",
+    body: "Right after purchasing, we emailed you a receipt and your license key. Check your spam folder if it isn't in your inbox within a few minutes.",
   },
   {
     title: "Download the app",
