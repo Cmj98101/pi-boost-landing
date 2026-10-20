@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/site";
@@ -26,7 +27,25 @@ const STEPS = [
   },
 ];
 
-export default function ThankYouPage() {
+// Lemon Squeezy fills [order_id] with the numeric order ID when it sends a
+// buyer here from the confirmation modal. Anyone arriving without one (typed
+// the URL, an old bookmark, a bot) is sent home on the server, before the page
+// or the Google tag loads, so no purchase is recorded.
+function hasOrderId(value: string | string[] | undefined): boolean {
+  const id = Array.isArray(value) ? value[0] : value;
+  return typeof id === "string" && /^\d+$/.test(id);
+}
+
+export default async function ThankYouPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { order_id } = await searchParams;
+  if (!hasOrderId(order_id)) {
+    redirect("/");
+  }
+
   return (
     <main className="min-h-screen">
       <PurchaseTracker />
@@ -62,10 +81,10 @@ export default function ThankYouPage() {
           </ol>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/download" className="btn btn-primary btn-lg">
+            <Link href="/download" className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg">
               Download the app
             </Link>
-            <Link href="/learn" className="btn btn-outline btn-lg">
+            <Link href="/learn" className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg">
               Watch the tutorials
             </Link>
           </div>
