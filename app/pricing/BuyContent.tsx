@@ -124,17 +124,14 @@ export default function BuyContent() {
 
       <section
         ref={sectionRef}
-        className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white"
+        className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-white"
       >
         {/* Decorative background */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gold-200/10 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-slate-900">
+            <h1 className="display-xl mb-4">
               {pricingConfig.productName}
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 mb-8">
@@ -146,7 +143,7 @@ export default function BuyContent() {
               {pricingConfig.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <svg
-                    className="w-5 h-5 text-purple-600"
+                    className="w-5 h-5 text-ink"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -185,62 +182,51 @@ export default function BuyContent() {
                 {/* Badge */}
                 {"badge" in option && option.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <div className="px-4 py-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold rounded-full shadow-lg">
+                    <div className="badge">
                       {option.badge}
                     </div>
                   </div>
                 )}
 
-                {/* Card */}
+                {/* Card: the featured tier flips to the dark card (DESIGN-webflow.md) */}
                 <div
-                  className={`relative h-full text-center ${
-                    option.highlighted
-                      ? "card-luxury-border ring-2 ring-purple-300 transform md:scale-105"
-                      : "card-luxury"
+                  className={`relative h-full text-center !p-0 ${
+                    option.highlighted ? "card-dark shadow-layered-strong" : "card"
                   }`}
                 >
-                  {/* Gradient overlay for highlighted option */}
-                  {option.highlighted && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl -z-10"></div>
-                  )}
-
                   <div className="p-8 md:p-10 h-full flex flex-col">
                     {/* Option Name */}
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 min-h-[3.5rem] flex items-center justify-center text-center">
+                    <h3 className={`display-xs mb-2 min-h-[3.5rem] flex items-center justify-center text-center ${option.highlighted ? "!text-white" : ""}`}>
                       {option.name}
                     </h3>
 
                     {/* Price */}
-                    <div className="mb-1 flex items-start justify-center leading-none">
-                      <span className="text-2xl md:text-3xl font-bold text-slate-900 mt-1.5">
+                    <div className={`mb-1 flex items-start justify-center leading-none font-semibold ${option.highlighted ? "text-white" : "text-ink"}`}>
+                      <span className="text-2xl md:text-3xl mt-1.5">
                         $
                       </span>
-                      <span className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+                      <span className="text-4xl md:text-5xl tracking-tight">
                         {whole}
                       </span>
                       {cents && (
-                        <span className="text-xl md:text-2xl font-bold text-slate-900 mt-1.5">
+                        <span className="text-xl md:text-2xl mt-1.5">
                           .{cents}
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-500 text-sm mb-4">{option.period}</p>
+                    <p className={`text-sm mb-4 ${option.highlighted ? "text-white/60" : "text-mute"}`}>{option.period}</p>
 
                     {/* Description */}
-                    <p className="text-slate-600 mb-4">{option.description}</p>
+                    <p className={`mb-4 ${option.highlighted ? "text-white/80" : "text-body"}`}>{option.description}</p>
 
                     {/* Support info */}
-                    <p className="text-xs text-slate-500 mb-6">{option.support}</p>
+                    <p className={`text-xs mb-6 ${option.highlighted ? "text-white/60" : "text-mute"}`}>{option.support}</p>
 
                     {/* CTA Button */}
                     <button
                       onClick={() => handleSelectOption(option.id)}
                       disabled={loadingOption !== null}
-                      className={`mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
-                        option.highlighted
-                          ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105"
-                          : "bg-slate-900 text-white hover:bg-slate-800"
-                      }`}
+                      className={`btn-primary mt-auto w-full ${option.highlighted ? "btn-on-dark" : ""}`}
                     >
                       {loadingOption === option.id ? (
                         <>
@@ -275,19 +261,14 @@ export default function BuyContent() {
 
           {/* Team / Volume Pricing */}
           <div className="mb-12">
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+            <div className="card relative overflow-hidden !p-0">
               {/* Accent bar */}
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-600 to-blue-600"></div>
 
               <div className="p-8 md:p-10">
                 {/* Heading */}
                 <div className="mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full mb-3">
-                    <span className="text-xs font-bold text-purple-700 uppercase tracking-wide">
-                      Team
-                    </span>
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                  <p className="eyebrow mb-3">Team</p>
+                  <h2 className="display-lg">
                     {teamConfig.headline}
                   </h2>
                   <p className="text-slate-600 mt-2 max-w-2xl">
@@ -299,14 +280,14 @@ export default function BuyContent() {
                   {/* Left: billing toggle + seat selector */}
                   <div className="flex flex-col">
                     {/* Billing tabs */}
-                    <div className="inline-flex p-1 bg-slate-100 rounded-xl mb-8 self-start">
+                    <div className="inline-flex p-1 bg-surface rounded-sm border border-hairline mb-8 self-start">
                       {(["yearly", "monthly", "contact"] as const).map((key) => (
                         <button
                           key={key}
                           onClick={() => setTeamBilling(key)}
-                          className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${
+                          className={`px-5 py-2 rounded-xs text-sm font-medium transition-all ${
                             teamBilling === key
-                              ? "bg-white text-slate-900 shadow-sm"
+                              ? "bg-white text-ink shadow-sm"
                               : "text-slate-500 hover:text-slate-700"
                           }`}
                         >
@@ -314,7 +295,7 @@ export default function BuyContent() {
                             ? teamConfig.contact.label
                             : teamConfig.plans[key].label}
                           {key === "yearly" && (
-                            <span className="ml-2 text-xs font-bold text-purple-600">
+                            <span className="ml-2 text-xs font-semibold text-ink">
                               Best value
                             </span>
                           )}
@@ -344,12 +325,12 @@ export default function BuyContent() {
                             setTeamSeats((n) => Math.max(teamConfig.minSeats, n - 1))
                           }
                           disabled={teamSeats <= teamConfig.minSeats}
-                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-bold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
+                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-semibold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
                           aria-label="Remove a computer"
                         >
                           −
                         </button>
-                        <span className="w-12 text-center text-xl font-bold text-slate-900 tabular-nums">
+                        <span className="w-12 text-center text-xl font-semibold text-slate-900 tabular-nums">
                           {teamSeats}
                         </span>
                         <button
@@ -358,7 +339,7 @@ export default function BuyContent() {
                             setTeamSeats((n) => Math.min(teamConfig.maxSeats, n + 1))
                           }
                           disabled={teamSeats >= teamConfig.maxSeats}
-                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-bold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
+                          className="w-9 h-9 rounded-lg border border-slate-300 text-slate-700 font-semibold text-lg leading-none hover:bg-slate-50 disabled:opacity-40"
                           aria-label="Add a computer"
                         >
                           +
@@ -371,7 +352,7 @@ export default function BuyContent() {
                       max={teamConfig.maxSeats}
                       value={teamSeats}
                       onChange={(e) => setTeamSeats(Number(e.target.value))}
-                      className="w-full accent-purple-600 cursor-pointer"
+                      className="w-full accent-black cursor-pointer"
                       aria-label="Number of computers"
                     />
                     <div className="flex justify-between text-xs text-slate-400 mt-1">
@@ -380,9 +361,9 @@ export default function BuyContent() {
                     </div>
 
                     {/* One-key explanation */}
-                    <div className="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-200 flex gap-3">
+                    <div className="mt-8 p-4 bg-slate-50 rounded-md border border-slate-200 flex gap-3">
                       <svg
-                        className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5"
+                        className="w-5 h-5 text-ink flex-shrink-0 mt-0.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -407,18 +388,18 @@ export default function BuyContent() {
                   </div>
 
                   {/* Right: live price summary + checkout (or contact CTA) */}
-                  <div className="rounded-xl border border-purple-200 bg-gradient-to-br from-purple-50 to-blue-50 p-6 md:p-8 flex flex-col">
+                  <div className="card-dark p-6 md:p-8 flex flex-col">
                     {teamBilling === "contact" ? (
                       <>
-                        <h3 className="text-xl md:text-2xl font-bold text-slate-900">
+                        <h3 className="display-xs !text-white">
                           {teamConfig.contact.headline}
                         </h3>
-                        <p className="text-slate-600 mt-2">
+                        <p className="text-white/80 mt-2">
                           {teamConfig.contact.body}
                         </p>
                         <a
                           href="/contact"
-                          className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                          className="btn-primary mt-auto w-full btn-on-dark"
                         >
                           {teamConfig.contact.buttonText}
                           <svg
@@ -439,23 +420,23 @@ export default function BuyContent() {
                     ) : (
                       <>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+                      <span className="text-4xl md:text-5xl font-semibold text-white tracking-tight">
                         {money(teamTotal)}
                       </span>
-                      <span className="text-slate-500 font-medium">
+                      <span className="text-white/60 font-medium">
                         {teamPlan?.totalSuffix}
                       </span>
                     </div>
-                    <p className="text-slate-600 mt-1">
+                    <p className="text-white/80 mt-1">
                       {teamSeats} {teamSeats === 1 ? "computer" : "computers"} ×{" "}
                       {money(perSeat)}
                       {teamPlan?.unitSuffix}
                     </p>
 
                     {savingsPct > 0 ? (
-                      <div className="mt-4 inline-flex items-center gap-2 self-start px-3 py-1.5 bg-green-100 rounded-full">
+                      <div className="mt-4 inline-flex items-center gap-2 self-start px-3 py-1.5 bg-accent-green rounded-sm">
                         <svg
-                          className="w-4 h-4 text-green-600"
+                          className="w-4 h-4 text-ink"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -467,13 +448,13 @@ export default function BuyContent() {
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                        <span className="text-sm font-semibold text-green-700">
+                        <span className="text-sm font-semibold text-ink">
                           Save {money(savingsTotal)}
                           {teamPlan?.totalSuffix} ({savingsPct}% off)
                         </span>
                       </div>
                     ) : (
-                      <p className="mt-4 text-sm text-slate-500">
+                      <p className="mt-4 text-sm text-white/60">
                         Add a 4th computer to unlock volume pricing.
                       </p>
                     )}
@@ -481,7 +462,7 @@ export default function BuyContent() {
                     <button
                       onClick={handleTeamCheckout}
                       disabled={loadingOption !== null}
-                      className="mt-auto w-full inline-flex items-center justify-center gap-2 font-semibold py-3.5 px-6 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                      className="btn-primary mt-auto w-full btn-on-dark"
                     >
                       {loadingOption === teamPlan?.id ? (
                         <>
@@ -519,7 +500,7 @@ export default function BuyContent() {
           </div>
 
           {/* Single Use Disclaimer */}
-          <div className="mb-12 p-6 bg-slate-50 rounded-xl border border-slate-200">
+          <div className="mb-12 p-6 bg-slate-50 rounded-md border border-slate-200">
             <h2 className="text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
               <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -543,7 +524,7 @@ export default function BuyContent() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-600 mb-12">
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-green-500"
+                className="w-5 h-5 text-ink"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -559,7 +540,7 @@ export default function BuyContent() {
             </div>
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-green-500"
+                className="w-5 h-5 text-ink"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -575,7 +556,7 @@ export default function BuyContent() {
             </div>
             <div className="flex items-center gap-2">
               <svg
-                className="w-5 h-5 text-green-500"
+                className="w-5 h-5 text-ink"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -593,8 +574,8 @@ export default function BuyContent() {
 
           {/* Money-Back Guarantee */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-3 px-6 py-4 bg-white rounded-2xl shadow-lg border border-slate-200">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="card inline-flex items-center gap-3 px-6 py-4">
+              <div className="w-12 h-12 bg-accent-green rounded-full flex items-center justify-center flex-shrink-0">
                 <svg
                   className="w-6 h-6 text-white"
                   fill="none"
@@ -610,7 +591,7 @@ export default function BuyContent() {
                 </svg>
               </div>
               <div className="text-left">
-                <p className="font-bold text-slate-900">
+                <p className="font-semibold text-slate-900">
                   30-Day Money-Back Guarantee
                 </p>
                 <p className="text-sm text-slate-600">
@@ -622,9 +603,9 @@ export default function BuyContent() {
 
           {/* Free Trial Banner */}
           <div className="text-center">
-            <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 px-5 py-3 bg-green-50 border border-green-200 rounded-xl text-sm md:text-base">
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 px-5 py-3 bg-surface border border-hairline rounded-md text-sm md:text-base">
               <svg
-                className="w-5 h-5 text-green-600 flex-shrink-0"
+                className="w-5 h-5 text-ink flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -641,7 +622,7 @@ export default function BuyContent() {
               </span>
               <a
                 href={pricingConfig.trialBanner.href}
-                className="font-semibold text-green-700 hover:text-green-800 underline underline-offset-2"
+                className="font-medium text-ink underline underline-offset-2"
               >
                 {pricingConfig.trialBanner.linkText}
               </a>

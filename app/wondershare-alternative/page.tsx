@@ -67,7 +67,7 @@ const FAQS: { q: string; a: string }[] = [
 function Cell({ value }: { value: string }) {
   if (value === "yes") {
     return (
-      <span className="inline-flex items-center gap-2 text-green-600 font-semibold">
+      <span className="inline-flex items-center gap-2 text-ink font-semibold">
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
@@ -119,13 +119,12 @@ export default function WondershareAlternative() {
       <Navigation />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-white">
         <div className="relative max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
-            Investigation Flow vs. <span className="gradient-text">Wondershare UniConverter</span>
+          <h1 className="display-xl mb-6">
+            Investigation Flow vs. Wondershare UniConverter
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl mx-auto">
+          <p className="body-lg mb-8 max-w-3xl mx-auto">
             Wondershare UniConverter is a capable general video converter and editor, but it
             wasn&apos;t built for surveillance case work. Investigation Flow automates the parts
             that eat your time: <strong>verifiable timestamps</strong>,{" "}
@@ -135,13 +134,13 @@ export default function WondershareAlternative() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/download"
-              className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              className="btn-primary inline-flex items-center justify-center gap-2"
             >
               Download Free Trial
             </Link>
             <Link
               href="/pricing"
-              className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              className="btn-secondary inline-flex items-center justify-center gap-2"
             >
               See Pricing
             </Link>
@@ -152,7 +151,7 @@ export default function WondershareAlternative() {
       {/* Comparison table */}
       <section className="py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="display-lg text-center mb-12">
             Side-by-side comparison
           </h2>
           <div className="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
@@ -160,7 +159,7 @@ export default function WondershareAlternative() {
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200">
                   <th className="p-4 md:p-5 font-semibold text-slate-700">Feature</th>
-                  <th className="p-4 md:p-5 font-bold text-purple-700">Investigation Flow</th>
+                  <th className="p-4 md:p-5 font-semibold text-ink">Investigation Flow</th>
                   <th className="p-4 md:p-5 font-semibold text-slate-700">Wondershare UniConverter</th>
                 </tr>
               </thead>
@@ -182,9 +181,9 @@ export default function WondershareAlternative() {
       </section>
 
       {/* Why switch */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="display-lg text-center mb-12">
             Why investigators choose Investigation Flow over Wondershare
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -202,8 +201,8 @@ export default function WondershareAlternative() {
                 body: "Try the full workflow free: your first 25 conversions are on us, with every feature unlocked and no watermark on your exports.",
               },
             ].map((card, i) => (
-              <div key={i} className="card-luxury p-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{card.title}</h3>
+              <div key={i} className="card p-8">
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">{card.title}</h3>
                 <p className="text-slate-600 leading-relaxed">{card.body}</p>
               </div>
             ))}
@@ -229,15 +228,15 @@ export default function WondershareAlternative() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="display-lg text-center mb-12">
             Frequently asked questions
           </h2>
           <div className="space-y-6">
             {FAQS.map((f, i) => (
-              <div key={i} className="card-luxury p-6">
-                <h3 className="font-bold text-lg text-slate-900 mb-2">{f.q}</h3>
+              <div key={i} className="card p-6">
+                <h3 className="font-semibold text-lg text-slate-900 mb-2">{f.q}</h3>
                 <p className="text-slate-600 leading-relaxed">{f.a}</p>
               </div>
             ))}
@@ -250,7 +249,7 @@ export default function WondershareAlternative() {
       {/* Final CTA */}
       <section className="py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="display-lg mb-4">
             See it for yourself
           </h2>
           <p className="text-lg text-slate-600 mb-8">
@@ -260,13 +259,13 @@ export default function WondershareAlternative() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/download"
-              className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              className="btn-primary inline-flex items-center justify-center gap-2"
             >
               Download Free Trial
             </Link>
             <Link
               href="/pricing"
-              className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              className="btn-secondary inline-flex items-center justify-center gap-2"
             >
               See Pricing
             </Link>

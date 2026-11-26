@@ -45,7 +45,7 @@ export default function YouTubeFacade({
           <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/35"></span>
           <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform group-hover:scale-110">
             <svg
-              className="h-8 w-8 translate-x-0.5 text-purple-600"
+              className="h-8 w-8 translate-x-0.5 text-ink"
               fill="currentColor"
               viewBox="0 0 24 24"
             >

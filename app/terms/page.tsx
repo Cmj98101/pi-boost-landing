@@ -321,18 +321,17 @@ export default function TermsPage() {
     <main className="min-h-screen">
       <Navigation />
 
-      <article className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-200/20 blur-3xl"></div>
+      <article className="relative overflow-hidden bg-white pt-32 pb-24 md:pt-40 md:pb-32">
 
         <div className="relative mx-auto max-w-3xl px-6 md:px-12">
-          <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
-            Terms of <span className="gradient-text">Service</span>
+          <h1 className="display-xl">
+            Terms of Service
           </h1>
           <p className="mt-4 text-slate-500">Effective Date: {EFFECTIVE_DATE}</p>
 
           {SECTIONS.map((section, i) => (
             <section key={i} className="mt-10">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-semibold text-slate-900">
                 {section.heading}
               </h2>
               <div className="mt-4 space-y-4">
@@ -372,7 +371,7 @@ export default function TermsPage() {
           ))}
 
           <section className="mt-10">
-            <h2 className="text-2xl font-bold text-slate-900">19. Contact Us</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">19. Contact Us</h2>
             <div className="mt-4 space-y-4">
               <p className="leading-relaxed text-slate-600">
                 If you have questions about these Terms, please contact us at:
@@ -385,7 +384,7 @@ export default function TermsPage() {
                 Email:{" "}
                 <a
                   href={`mailto:${SITE.legalEmail}`}
-                  className="font-semibold text-purple-600 hover:text-purple-700"
+                  className="font-semibold text-accent-blue-deep hover:underline"
                 >
                   {SITE.legalEmail}
                 </a>
@@ -394,7 +393,7 @@ export default function TermsPage() {
                 See also our{" "}
                 <a
                   href="/privacy"
-                  className="font-semibold text-purple-600 hover:text-purple-700"
+                  className="font-semibold text-accent-blue-deep hover:underline"
                 >
                   Privacy Policy
                 </a>

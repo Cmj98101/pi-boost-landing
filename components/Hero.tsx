@@ -160,13 +160,6 @@ export default function Hero() {
       id="hero"
       className="relative overflow-hidden pt-36 pb-20 md:pt-48 md:pb-28"
     >
-      {/* Luxury Gradient Mesh Background */}
-      <div className="absolute inset-0 gradient-mesh opacity-60"></div>
-
-      {/* Animated gradient orbs */}
-      <div className="absolute top-20 -left-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float delay-1000"></div>
-
       {/* Content Container */}
       <div className="relative w-full max-w-5xl mx-auto px-6 md:px-12 text-center">
         <div className="space-y-10">
@@ -177,7 +170,7 @@ export default function Hero() {
           {/* Steps down to text-4xl on the narrowest phones: at 48px, "Give" plus
               the longest audience word overflows a 375px viewport and orphans
               "Give" on its own line. */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-slate-900">
+          <h1 className="hero-headline">
             {/* Line 1 holds the rotating word; keeping "evidence they can use"
                 on its own line below means the word's changing width can never
                 reflow the rest of the headline. */}
@@ -234,7 +227,7 @@ export default function Hero() {
                       // sm breakpoint, so a resize would measure a word
                       // mid-shrink and latch a too-wide slot, leaving a gap
                       // after "Give" until the next resize.
-                      className={`gradient-text col-start-1 row-start-1 whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${motion}`}
+                      className={`col-start-1 row-start-1 whitespace-nowrap transition-[opacity,translate] duration-500 ease-out ${motion}`}
                     >
                       {word}
                     </span>
@@ -255,13 +248,13 @@ export default function Hero() {
 
           {/* Width-measuring rig. Deliberately a sibling of the <h1> rather
               than a child, so these copies stay out of the heading's text.
-              Font classes mirror the <h1> exactly or the measurements would be
+              Both share the hero-headline class (globals.css) or the measurements would be
               wrong at every breakpoint. `invisible` (visibility: hidden) is
               required over `hidden` or sr-only's clip: the element must still
               be laid out for offsetWidth to return a real number. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none invisible absolute whitespace-nowrap text-4xl font-bold leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl"
+            className="hero-headline pointer-events-none invisible absolute whitespace-nowrap"
           >
             {audiences.map((word, i) => (
               <span
@@ -277,7 +270,7 @@ export default function Hero() {
           </div>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed animate-fade-in-up delay-300 max-w-2xl mx-auto">
+          <p className="body-lg animate-fade-in-up delay-300 max-w-2xl mx-auto">
             {heroContent.subheadline}
           </p>
 
@@ -287,7 +280,7 @@ export default function Hero() {
             <a
               href="/download"
               onClick={() => analytics.downloadNowClicked("hero")}
-              className="btn-primary-luxury inline-flex flex-col items-center justify-center text-lg group"
+              className="btn-primary inline-flex flex-col items-center justify-center group"
             >
               <span className="inline-flex items-center gap-2">
                 {heroContent.cta.primary}
@@ -318,7 +311,7 @@ export default function Hero() {
                   .querySelector("#how-it-works")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg"
+              className="btn-secondary inline-flex items-center justify-center gap-2"
             >
               {heroContent.cta.secondary}
             </a>

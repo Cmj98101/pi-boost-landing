@@ -17,12 +17,11 @@ export default function DownloadContent() {
     <main className="min-h-screen">
       <Navigation />
 
-      <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
+      <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-white">
 
         <div className="relative max-w-3xl mx-auto px-6 md:px-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
-            Download <span className="gradient-text">Investigation Flow</span>
+          <h1 className="display-xl mb-4">
+            Download Investigation Flow
           </h1>
           <p className="text-lg md:text-xl text-slate-600 mb-12">
             Choose your platform to get started.
@@ -35,16 +34,16 @@ export default function DownloadContent() {
                   key={p.key}
                   href={p.href}
                   onClick={() => analytics.downloadStarted(p.key)}
-                  className="card-luxury group flex flex-col items-center text-center p-8 hover:-translate-y-1 transition-all"
+                  className="card group flex flex-col items-center text-center p-8 transition-shadow hover:shadow-layered"
                 >
-                  <div className="text-slate-800 group-hover:text-purple-700 transition-colors mb-4">
+                  <div className="text-slate-800 group-hover:text-body-mid transition-colors mb-4">
                     <PlatformIcon platform={p.key} className="w-12 h-12" />
                   </div>
-                  <h2 className="text-xl font-bold text-slate-900 mb-1">
+                  <h2 className="display-xs mb-1">
                     Download for {p.name}
                   </h2>
                   <p className="text-sm text-slate-500 mb-6">{p.req}</p>
-                  <span className="mt-auto inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg group-hover:shadow-xl transition-all">
+                  <span className="btn-primary mt-auto w-full">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
@@ -54,7 +53,7 @@ export default function DownloadContent() {
               ))}
             </div>
           ) : (
-            <div className="card-luxury p-10">
+            <div className="card p-10">
               <p className="text-slate-600">
                 Desktop apps for this platform are coming soon. Check back shortly.
               </p>

@@ -51,14 +51,13 @@ export default async function ThankYouPage({
       <PurchaseTracker />
       <Navigation />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-200/20 blur-3xl"></div>
+      <section className="relative overflow-hidden bg-white pt-32 pb-24 md:pt-40 md:pb-32">
 
         <div className="relative mx-auto max-w-2xl px-6 text-center md:px-12">
-          <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
-            You&apos;re <span className="gradient-text">all set</span>
+          <h1 className="display-xl">
+            You&apos;re all set
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+          <p className="mx-auto mt-5 max-w-xl body-lg">
             Thanks for buying Investigation Flow. Here&apos;s how to get going
             in under two minutes.
           </p>
@@ -69,7 +68,7 @@ export default async function ThankYouPage({
                 key={step.title}
                 className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
               >
-                <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-purple-600 text-sm font-bold text-white">
+                <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
                   {i + 1}
                 </span>
                 <div>
@@ -81,10 +80,10 @@ export default async function ThankYouPage({
           </ol>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/download" className="btn-primary-luxury inline-flex items-center justify-center gap-2 text-lg">
+            <Link href="/download" className="btn-primary inline-flex items-center justify-center gap-2">
               Download the app
             </Link>
-            <Link href="/learn" className="btn-secondary-luxury inline-flex items-center justify-center gap-2 text-lg">
+            <Link href="/learn" className="btn-secondary inline-flex items-center justify-center gap-2">
               Watch the tutorials
             </Link>
           </div>
@@ -93,7 +92,7 @@ export default async function ThankYouPage({
             Need a hand? Email{" "}
             <a
               href={`mailto:${SITE.supportEmail}`}
-              className="font-medium text-purple-600 hover:text-purple-700"
+              className="font-medium text-accent-blue-deep hover:underline"
             >
               {SITE.supportEmail}
             </a>{" "}

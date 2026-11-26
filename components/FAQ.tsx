@@ -51,18 +51,17 @@ export default function FAQ() {
   const faqs = FAQS.map((faq, i) => ({ ...faq, icon: icons[i] }));
 
   return (
-    <section id="faq" className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <section id="faq" className="relative py-24 md:py-32 overflow-hidden bg-white">
       {/* Decorative background */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
-            <span className="gradient-text">Frequently Asked</span> Questions
+          <h2 className="display-lg mb-6">
+            Frequently Asked Questions
           </h2>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+          <p className="body-lg">
             Everything you need to know about Investigation Flow
           </p>
         </div>
@@ -72,7 +71,7 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="card-luxury overflow-hidden transition-all duration-300"
+              className="card overflow-hidden transition-all duration-300"
             >
               {/* Question Button */}
               <button
@@ -80,17 +79,17 @@ export default function FAQ() {
                 className="w-full flex items-start gap-4 p-6 text-left transition-colors hover:bg-slate-50"
               >
                 {/* Icon */}
-                <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                <div className={`flex-shrink-0 w-10 h-10 rounded-md flex items-center justify-center transition-all duration-300 ${
                   openIndex === index
-                    ? 'bg-gradient-to-br from-purple-500 to-blue-500 text-white'
-                    : 'bg-slate-100 text-slate-600'
+                    ? 'bg-primary text-white'
+                    : 'bg-surface text-body-mid'
                 }`}>
                   {faq.icon}
                 </div>
 
                 {/* Question */}
                 <div className="flex-grow">
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900 pr-8">
+                  <h3 className="display-xs pr-8">
                     {faq.question}
                   </h3>
                 </div>
@@ -144,7 +143,7 @@ export default function FAQ() {
               <Link
                 key={c.slug}
                 href={`/${c.slug}`}
-                className="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 transition-colors hover:border-purple-300 hover:text-purple-700"
+                className="px-4 py-2 rounded-full border border-slate-200 bg-white text-sm font-medium text-slate-700 transition-colors hover:border-ink hover:text-body-mid"
               >
                 vs. {c.competitor}
               </Link>
@@ -163,7 +162,7 @@ export default function FAQ() {
             </p>
             <a
               href="/contact"
-              className="btn-primary-luxury inline-flex items-center gap-2"
+              className="btn-primary inline-flex items-center gap-2"
             >
               Contact Support
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

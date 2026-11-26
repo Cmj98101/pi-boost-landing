@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/site";
 
-const EFFECTIVE_DATE = "July 24, 2026";
+const EFFECTIVE_DATE = "November 25, 2026";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Investigation Flow",
@@ -89,7 +89,7 @@ const SECTIONS: Section[] = [
       { type: "h3", text: "4.1 Email Address" },
       {
         type: "p",
-        text: `When you make a purchase, whether a one-time payment or a subscription, your email address is collected as part of the payment process. This is the only personal information we collect from customers.`,
+        text: `When you make a purchase, whether a one-time payment or a subscription, your email address is collected as part of the payment process. This is the only personal information we collect from customers. If you sign up on our website for a free resource or a waitlist, we also collect the details you enter there, as described in Section 4.4.`,
       },
       { type: "h3", text: "4.2 Payment Processing" },
       {
@@ -122,6 +122,11 @@ const SECTIONS: Section[] = [
       {
         type: "p",
         text: `For more information on how these tools handle data, please review the Google Analytics Privacy Policy and the PostHog Privacy Policy.`,
+      },
+      { type: "h3", text: "4.4 Email Signups (Brevo)" },
+      {
+        type: "p",
+        text: `When you request a free resource (such as our Surveillance Report Kit), join a product waitlist, or request a discount code on our website, we collect your first name and email address. For a waitlist, we also ask which describes you best (for example, solo investigator or agency owner, or a short description if you choose Other). We use this to send you what you asked for, along with product updates and related tips. These details are stored with our email service provider, Brevo (Sendinblue SAS), which processes them on our behalf. Every email includes an unsubscribe link, and you can ask us to delete your details at any time.`,
       },
     ],
   },
@@ -328,18 +333,17 @@ export default function PrivacyPage() {
     <main className="min-h-screen">
       <Navigation />
 
-      <article className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-200/20 blur-3xl"></div>
+      <article className="relative overflow-hidden bg-white pt-32 pb-24 md:pt-40 md:pb-32">
 
         <div className="relative mx-auto max-w-3xl px-6 md:px-12">
-          <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
-            Privacy <span className="gradient-text">Policy</span>
+          <h1 className="display-xl">
+            Privacy Policy
           </h1>
           <p className="mt-4 text-slate-500">Effective Date: {EFFECTIVE_DATE}</p>
 
           {SECTIONS.map((section, i) => (
             <section key={i} className="mt-10">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-semibold text-slate-900">
                 {section.heading}
               </h2>
               <div className="mt-4 space-y-4">
@@ -380,7 +384,7 @@ export default function PrivacyPage() {
 
           {/* 15. Contact Us */}
           <section className="mt-10">
-            <h2 className="text-2xl font-bold text-slate-900">15. Contact Us</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">15. Contact Us</h2>
             <div className="mt-4 space-y-4">
               <p className="leading-relaxed text-slate-600">
                 If you have questions, concerns, or requests regarding this
@@ -394,7 +398,7 @@ export default function PrivacyPage() {
                 Email:{" "}
                 <a
                   href={`mailto:${SITE.legalEmail}`}
-                  className="font-semibold text-purple-600 hover:text-purple-700"
+                  className="font-semibold text-accent-blue-deep hover:underline"
                 >
                   {SITE.legalEmail}
                 </a>

@@ -8,17 +8,15 @@ export default function Showcase() {
       className="relative py-24 md:py-32 overflow-hidden bg-white"
     >
       {/* Decorative background */}
-      <div className="absolute top-1/3 -left-32 w-96 h-96 bg-purple-200/25 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-200/25 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
-            This Is <span className="gradient-text">The Actual App</span>
+          <h2 className="display-lg mb-6">
+            This Is The Actual App
           </h2>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="body-lg max-w-2xl mx-auto">
             No mockups. Real footage, real case, real screens from Investigation
             Flow running on a Mac.
           </p>
@@ -38,13 +36,13 @@ export default function Showcase() {
                   index % 2 === 1 ? "lg:order-2" : ""
                 }`}
               >
-                <p className="text-sm font-semibold uppercase tracking-wider gradient-text mb-3">
+                <p className="eyebrow mb-3">
                   {item.eyebrow}
                 </p>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+                <h3 className="display-md mb-4">
                   {item.title}
                 </h3>
-                <p className="text-slate-600 text-lg leading-relaxed">
+                <p className="text-body leading-relaxed">
                   {item.description}
                 </p>
               </div>

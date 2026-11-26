@@ -95,6 +95,17 @@ export const analytics = {
     });
   },
 
+  // Signed up for a Brevo list: the report kit or the new-app waitlist.
+  // generate_lead is GA4's recommended event, so it can be marked as a key event.
+  leadSignup: (list: string, location: string) => {
+    trackEvent("generate_lead", {
+      event_category: "conversion",
+      event_label: list,
+      lead_list: list,
+      location,
+    });
+  },
+
   // Page view tracking (automatically handled by GA, but you can customize)
   pageView: (url: string) => {
     trackEvent("page_view", {

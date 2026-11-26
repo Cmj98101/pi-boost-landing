@@ -31,7 +31,7 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/90 backdrop-blur-lg shadow-lg border-b border-slate-200"
+          ? "bg-white border-b border-hairline"
           : "bg-transparent"
       }`}
     >
@@ -57,7 +57,7 @@ export default function Navigation() {
               height={127}
               priority
               sizes="200px"
-              className="h-9 md:h-10 w-auto group-hover:scale-105 transition-transform"
+              className="h-9 md:h-10 w-auto"
             />
           </a>
 
@@ -81,9 +81,7 @@ export default function Navigation() {
                       ?.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className={`font-medium transition-colors hover:text-purple-600 ${
-                  isScrolled ? "text-slate-700" : "text-slate-700"
-                }`}
+                className="text-sm font-medium text-ink transition-colors hover:text-body-mid"
               >
                 {link.name}
               </a>
@@ -92,7 +90,7 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
-            <DownloadButton className="btn-primary-luxury inline-flex items-center gap-2" />
+            <DownloadButton className="btn-primary inline-flex items-center gap-2" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -131,7 +129,7 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-200 shadow-xl animate-fade-in">
+        <div className="lg:hidden bg-white border-t border-hairline shadow-layered animate-fade-in">
           <div className="max-w-7xl mx-auto px-6 py-6 space-y-4">
             {navLinks.map((link) => (
               <a
@@ -152,12 +150,12 @@ export default function Navigation() {
                   }
                   setIsMobileMenuOpen(false);
                 }}
-                className="block text-slate-700 font-medium hover:text-purple-600 transition-colors py-2"
+                className="block text-slate-700 font-medium hover:text-body-mid transition-colors py-2"
               >
                 {link.name}
               </a>
             ))}
-            <DownloadButton className="btn-primary-luxury inline-flex items-center justify-center gap-2 w-full" />
+            <DownloadButton className="btn-primary inline-flex items-center justify-center gap-2 w-full" />
           </div>
         </div>
       )}

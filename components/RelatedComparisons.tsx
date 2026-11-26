@@ -16,7 +16,7 @@ export default function RelatedComparisons({
   return (
     <section className="py-16 md:py-24 bg-slate-50">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-4">
+        <h2 className="display-lg text-center mb-4">
           Comparing other editors?
         </h2>
         <p className="text-lg text-slate-600 text-center mb-12">
@@ -28,15 +28,15 @@ export default function RelatedComparisons({
             <Link
               key={c.slug}
               href={`/${c.slug}`}
-              className="card-luxury p-6 flex flex-col transition-transform hover:-translate-y-1"
+              className="card p-6 flex flex-col transition-transform hover:-translate-y-1"
             >
-              <h3 className="font-bold text-lg text-slate-900 mb-2">
+              <h3 className="font-semibold text-lg text-slate-900 mb-2">
                 Investigation Flow vs. {c.competitor}
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed flex-grow">
                 {c.blurb}
               </p>
-              <span className="mt-4 text-sm font-semibold text-purple-600">
+              <span className="mt-4 text-sm font-semibold text-ink">
                 Read the comparison &rarr;
               </span>
             </Link>

@@ -69,7 +69,7 @@ export default function EmailCapture({
       <div
         className={`bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-md mx-auto ${className}`}
       >
-        <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">
+        <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
           {emailContent.title}
         </h3>
         {isSuccess ? (
@@ -135,7 +135,7 @@ export default function EmailCapture({
   if (variant === "footer") {
     return (
       <div className={`${className}`}>
-        <h2 className="font-bold mb-4">Stay Updated</h2>
+        <h2 className="font-semibold mb-4">Stay Updated</h2>
         <p className="text-gray-400 text-sm mb-4">
           Get notified when we launch and receive early access.
         </p>

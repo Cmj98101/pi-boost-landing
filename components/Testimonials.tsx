@@ -5,21 +5,19 @@ export default function Testimonials() {
   return (
     <section
       id="why"
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-white to-slate-50"
+      className="relative py-24 md:py-32 overflow-hidden bg-white"
     >
       {/* Decorative background */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-slate-900">
+          <h2 className="display-lg mb-6">
             Built Around the{" "}
-            <span className="gradient-text">Real Surveillance Workflow</span>
+            Real Surveillance Workflow
           </h2>
 
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="body-lg max-w-3xl mx-auto">
             Adding a date and time stamp to modern surveillance footage is a
             known headache. General editors like Premiere have no easy way to do
             it. Investigation Flow was built specifically to fix that.
@@ -33,17 +31,17 @@ export default function Testimonials() {
               key={index}
               className={`animate-fade-in-up delay-${index * 100}`}
             >
-              <div className="card-luxury h-full">
+              <div className="card h-full">
                 {/* Icon */}
                 <div className="mb-6">
                   <div
-                    className={`w-14 h-14 bg-gradient-to-br ${pillar.gradient} rounded-2xl flex items-center justify-center shadow-lg text-white`}
+                    className={`flex h-12 w-12 items-center justify-center rounded-md ${pillar.accent}`}
                   >
-                    <Icon name={pillar.icon} className="w-8 h-8" />
+                    <Icon name={pillar.icon} className="h-7 w-7" />
                   </div>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
+                <h3 className="display-xs mb-3">
                   {pillar.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
@@ -56,11 +54,11 @@ export default function Testimonials() {
 
         {/* Honest trust badges (no fabricated reviews) */}
         <div className="mt-16 md:mt-20 text-center">
-          <div className="inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-8 py-6 bg-white rounded-2xl shadow-lg border border-slate-200">
+          <div className="card inline-flex flex-wrap items-center justify-center gap-x-8 gap-y-4 px-8 py-6">
             {TRUST_BADGES.map((badge, index) => (
               <div key={index} className="flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 text-green-500"
+                  className="w-5 h-5 text-ink"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -72,7 +70,7 @@ export default function Testimonials() {
                     d="M5 13l4 4L19 7"
                   />
                 </svg>
-                <span className="font-semibold text-slate-900">{badge}</span>
+                <span className="font-medium text-ink">{badge}</span>
               </div>
             ))}
           </div>

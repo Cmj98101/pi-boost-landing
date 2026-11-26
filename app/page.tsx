@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
+import DiscountOffer from "@/components/DiscountOffer";
 import Footer from "@/components/Footer";
 import HashRedirect from "@/components/HashRedirect";
 import { FAQS } from "@/lib/faq";
@@ -42,6 +43,9 @@ export default function Home() {
       <FAQ />
       <CTA />
       <Footer />
+      {/* Hidden until the Brevo list exists, so visitors never get a popup whose
+          signup fails. Set BREVO_DISCOUNT_LIST_ID in Vercel and redeploy to turn it on. */}
+      {process.env.BREVO_DISCOUNT_LIST_ID && <DiscountOffer />}
     </main>
   );
 }

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Surveillance Report Kit | Investigation Flow</title>
+<!--
+  Source for public/downloads/surveillance-report-kit.pdf.
+  Edit this file, then regenerate the PDF (see BREVO_SETUP.md, "Updating the kit").
+-->
+<style>
+  @page { size: Letter; margin: 0.6in 0.65in 0.7in; }
+  * { box-sizing: border-box; }
+  :root {
+    --ink: #0f172a; --muted: #475569; --faint: #94a3b8; --line: #cbd5e1;
+    --brand: #4f46e5; --brand2: #7c3aed; --soft: #eef2ff; --bad: #b91c1c; --good: #15803d;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.45; margin: 0; }
+  .page { page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  h1, h2, h3 { line-height: 1.2; margin: 0; }
+  h2 { font-size: 20pt; margin-bottom: 4pt; }
+  h3 { font-size: 11.5pt; margin: 14pt 0 4pt; }
+  .eyebrow { font-size: 8.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+  .lede { color: var(--muted); margin: 6pt 0 12pt; }
+  p { margin: 0 0 8pt; }
+
+  /* Cover */
+  .cover { height: 9.6in; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(150deg, #0f172a 0%, #1e1b4b 60%, #312e81 100%); color: white; border-radius: 14pt; padding: 0.7in 0.6in; }
+  .cover .eyebrow { color: #a5b4fc; }
+  .cover h1 { font-size: 40pt; margin-top: 14pt; letter-spacing: -0.01em; }
+  .cover .sub { font-size: 14pt; color: #c7d2fe; margin-top: 14pt; max-width: 5.2in; }
+  .cover ol { margin: 0; padding: 0; list-style: none; counter-reset: c; }
+  .cover li { counter-increment: c; padding: 9pt 0; border-top: 1px solid rgba(255,255,255,.15); font-size: 11.5pt; display: flex; gap: 12pt; }
+  .cover li::before { content: counter(c, decimal-leading-zero); color: #a5b4fc; font-weight: 700; }
+  .cover .brand { font-size: 10pt; color: #a5b4fc; }
+
+  /* Rules */
+  .rules { counter-reset: r; margin: 0; padding: 0; list-style: none; }
+  .rules li { counter-increment: r; position: relative; padding: 0 0 6pt 30pt; break-inside: avoid; }
+  .rules li::before { content: counter(r); position: absolute; left: 0; top: 0; width: 20pt; height: 20pt; border-radius: 50%; background: var(--brand); color: white; font-weight: 700; font-size: 9pt; display: flex; align-items: center; justify-content: center; }
+  .rules b { display: block; }
+  .rules span { color: var(--muted); }
+
+  /* Swaps */
+  table { width: 100%; border-collapse: collapse; }
+  .swaps td, .swaps th { padding: 5pt 8pt; vertical-align: top; border-bottom: 1px solid var(--line); text-align: left; }
+  .swaps th { font-size: 8.5pt; text-transform: uppercase; letter-spacing: .08em; }
+  .swaps th:first-child { color: var(--bad); width: 38%; }
+  .swaps th:last-child { color: var(--good); }
+  .swaps td:first-child { color: var(--muted); }
+  .swaps tr { break-inside: avoid; }
+  .tip { background: var(--soft); border-left: 3pt solid var(--brand); padding: 9pt 12pt; border-radius: 4pt; margin-top: 14pt; }
+
+  /* Template */
+  .form { border: 1px solid var(--ink); }
+  .form td, .form th { border: 1px solid var(--line); padding: 5pt 6pt; height: 22pt; vertical-align: top; font-size: 9pt; }
+  .form th { background: #f1f5f9; text-align: left; font-weight: 600; width: 24%; color: var(--muted); }
+  .section-bar { background: var(--ink); color: white; font-weight: 700; font-size: 9pt; letter-spacing: .08em; text-transform: uppercase; padding: 5pt 7pt; margin-top: 12pt; }
+  .log th { background: #f1f5f9; font-size: 8.5pt; color: var(--muted); text-align: left; padding: 5pt 6pt; border: 1px solid var(--line); }
+  .log td { border: 1px solid var(--line); height: 24pt; padding: 4pt 6pt; font-size: 9pt; }
+  .log .ex td { color: var(--brand); font-style: italic; height: auto; }
+  .lines div { border-bottom: 1px solid var(--line); height: 22pt; }
+  .hint { font-size: 8.5pt; color: var(--faint); font-style: italic; margin: 4pt 0 0; }
+  .sig { display: flex; gap: 24pt; margin-top: 26pt; }
+  .sig div { flex: 1; border-top: 1px solid var(--ink); padding-top: 3pt; font-size: 8.5pt; color: var(--muted); }
+
+  /* Checklist */
+  .check { list-style: none; margin: 0; padding: 0; columns: 1; }
+  .check li { display: flex; gap: 10pt; padding: 7pt 0; border-bottom: 1px solid var(--line); break-inside: avoid; }
+  .check li::before { content: ""; flex: none; width: 11pt; height: 11pt; border: 1.5px solid var(--ink); border-radius: 2pt; margin-top: 2pt; }
+  .check small { display: block; color: var(--muted); font-size: 9pt; }
+
+  .cta { margin-top: 22pt; border-radius: 12pt; padding: 22pt 24pt; background: linear-gradient(135deg, var(--brand), var(--brand2)); color: white; }
+  .cta h3 { font-size: 15pt; margin: 0 0 6pt; }
+  .cta p { color: #e0e7ff; }
+  .cta .url { display: inline-block; margin-top: 6pt; background: white; color: var(--brand); font-weight: 700; padding: 6pt 12pt; border-radius: 999px; text-decoration: none; }
+  .fine { font-size: 8pt; color: var(--faint); margin-top: 16pt; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="page">
+  <div class="cover">
+    <div>
+      <div class="eyebrow">Free kit for private investigators</div>
+      <h1>The Surveillance<br>Report Kit</h1>
+      <p class="sub">A fill-in report template and the writing rules that keep adjusters and attorneys sending you cases.</p>
+    </div>
+    <ol>
+      <li>12 rules for a defensible surveillance report</li>
+      <li>Subjective-to-objective phrase swaps</li>
+      <li>Fill-in surveillance report template</li>
+      <li>The before-you-send checklist</li>
+    </ol>
+    <div class="brand">Investigation Flow · investigationflow.com</div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="page">
+  <div class="eyebrow">Part 1</div>
+  <h2>12 rules for a defensible surveillance report</h2>
+  <p class="lede">An adjuster reads your summary in under a minute. An attorney reads every line looking for a reason to doubt it. Write for both.</p>
+  <ol class="rules">
+    <li><b>Put the summary first.</b><span>Open with the answer: what activity was observed, how much video was obtained, and on which days. The adjuster decides whether to keep reading from this paragraph.</span></li>
+    <li><b>Write what you saw, not what you concluded.</b><span>Describe actions, distances, durations, and objects. Leave the conclusions to the adjuster, the doctor, and the court.</span></li>
+    <li><b>Never give a medical opinion.</b><span>"No sign of injury" is a diagnosis. Instead describe the movement: bending at the waist, lifting with one or both hands, gait, pace, use of a brace or cane.</span></li>
+    <li><b>Put a time on every entry.</b><span>Choose 12-hour or 24-hour time and stick with it for the whole report. Note the time zone if the case crosses one.</span></li>
+    <li><b>Account for every hour, including the quiet ones.</b><span>Log status checks and stretches with no activity, and why (no vantage point, subject inside, vehicle unmoved). Unexplained gaps look like missing work, or missing video.</span></li>
+    <li><b>Tie every clip to a log entry.</b><span>Mark each entry where video was obtained, with start and stop times that match the clip's on-screen timestamp and your media index.</span></li>
+    <li><b>Explain how you identified the subject.</b><span>Photo comparison, vehicle registration, a pretext contact. If you couldn't confirm identity, say so.</span></li>
+    <li><b>Describe once, then label consistently.</b><span>Give a full description of each person and vehicle the first time ("a white 2019 Ford F-150, TX plate ABC-1234"), then use one label for the rest of the report ("Vehicle 1").</span></li>
+    <li><b>Record the conditions.</b><span>Weather, lighting, distance, and obstructions explain why a clip is grainy, short, or shot through a windshield before anyone asks.</span></li>
+    <li><b>Report losses and possible burns honestly.</b><span>If you lost the subject or think you were noticed, write down when, where, and why. Hiding it costs far more credibility than it saves.</span></li>
+    <li><b>Use one voice.</b><span>Past tense, plain words, and one point of view ("the investigator" or "I") throughout. Follow the client's style guide if they have one.</span></li>
+    <li><b>Make the numbers match.</b><span>Hours, mileage, and video minutes in the report should match your invoice to the minute. Adjusters check.</span></li>
+  </ol>
+  <p class="fine">General guidance, not legal advice. Follow your state's licensing and recording laws and each client's reporting guidelines.</p>
+</section>
+
+<!-- SWAPS -->
+<section class="page">
+  <div class="eyebrow">Part 2</div>
+  <h2>Subjective-to-objective phrase swaps</h2>
+  <p class="lede">If you couldn't point to it on the video, it doesn't belong in the report. Rewrite opinions as observations a stranger could verify.</p>
+  <table class="swaps">
+    <tr><th>Instead of</th><th>Write</th></tr>
+    <tr><td>The subject showed no sign of pain.</td><td>The subject walked from the vehicle to the store entrance, about 150 feet, at a steady pace without an assistive device and did not stop.</td></tr>
+    <tr><td>Nothing happened all morning.</td><td>No activity observed from 07:30 to 11:45. Vehicle 1 remained in the driveway and the front blinds remained closed.</td></tr>
+    <tr><td>The subject lifted a heavy box.</td><td>The subject lifted a cardboard box, about 2 ft by 2 ft, from the trunk with both hands and carried it to the front door.</td></tr>
+    <tr><td>The subject bent over easily.</td><td>The subject bent at the waist to pick up a garden hose and returned to standing without holding onto anything.</td></tr>
+    <tr><td>The subject was working.</td><td>The subject loaded a ladder and two toolboxes into the bed of a pickup truck displaying "Smith Roofing" signage.</td></tr>
+    <tr><td>The subject left in a hurry.</td><td>The subject exited the residence at 08:42, entered Vehicle 1, and departed at 08:43.</td></tr>
+    <tr><td>The subject's wife came outside.</td><td>An unidentified adult female, approximately 40 to 50 years old, exited the residence. (Identify her only if you've confirmed who she is, and say how.)</td></tr>
+    <tr><td>The subject was acting suspicious and looking around.</td><td>Between 10:14 and 10:16 the subject looked toward the investigator's vehicle three times.</td></tr>
+    <tr><td>I lost him in traffic.</td><td>Contact with the subject was lost at 14:22 at Main St and 5th Ave when Vehicle 1 cleared a signal that turned red.</td></tr>
+    <tr><td>The subject went shopping for a while.</td><td>The subject entered Home Depot (1200 Main St) at 11:05 and exited at 11:47 pushing a cart holding four bags of mulch.</td></tr>
+    <tr><td>The subject was limping a little.</td><td>The subject walked with a shortened stride on the right leg for about 30 feet from the vehicle to the door.</td></tr>
+    <tr><td>Got good video of him.</td><td>Video obtained 09:12 to 09:19 (Clip 3), 7 min, subject unobstructed at about 80 ft.</td></tr>
+  </table>
+  <div class="tip"><b>Quick test:</b> read the sentence aloud and ask, "Could opposing counsel ask me how I know that?" If the honest answer is "I assumed," rewrite it.</div>
+</section>
+
+<!-- TEMPLATE: CASE + SUBJECT -->
+<section class="page">
+  <div class="eyebrow">Part 3</div>
+  <h2>Surveillance report template</h2>
+  <p class="lede">Fill it in, or copy the structure into your own letterhead. Rename sections to match each client's format.</p>
+
+  <div class="section-bar">Case information</div>
+  <table class="form">
+    <tr><th>Client / carrier</th><td></td><th>Claim / file #</th><td></td></tr>
+    <tr><th>Adjuster / attorney</th><td></td><th>Your case #</th><td></td></tr>
+    <tr><th>Subject name</th><td></td><th>Date of birth</th><td></td></tr>
+    <tr><th>Subject address</th><td colspan="3"></td></tr>
+    <tr><th>Claimed injury / restrictions</th><td colspan="3"></td></tr>
+    <tr><th>Assignment / objective</th><td colspan="3"></td></tr>
+    <tr><th>Investigator(s) / license #</th><td colspan="3"></td></tr>
+    <tr><th>Dates of surveillance</th><td></td><th>Report date</th><td></td></tr>
+  </table>
+
+  <div class="section-bar">Summary</div>
+  <p class="hint">Write this last, read it first. Activity observed, video obtained (total minutes), days worked, anything the adjuster should act on.</p>
+  <div class="lines"><div></div><div></div><div></div><div></div><div></div></div>
+
+  <div class="section-bar">Subject description &amp; identification</div>
+  <table class="form">
+    <tr><th>Sex / approx. age</th><td></td><th>Height / build</th><td></td></tr>
+    <tr><th>Hair / facial hair</th><td></td><th>Distinguishing marks</th><td></td></tr>
+    <tr><th>How identified</th><td colspan="3"></td></tr>
+  </table>
+
+  <div class="section-bar">Vehicles</div>
+  <table class="log">
+    <tr><th style="width:14%">Label</th><th>Year / make / model / color</th><th style="width:22%">Plate / state</th><th style="width:24%">Registered to</th></tr>
+    <tr><td>Vehicle 1</td><td></td><td></td><td></td></tr>
+    <tr><td>Vehicle 2</td><td></td><td></td><td></td></tr>
+  </table>
+</section>
+
+<!-- TEMPLATE: DAILY LOG -->
+<section class="page">
+  <div class="section-bar" style="margin-top:0">Daily surveillance log · Day ___ of ___</div>
+  <table class="form">
+    <tr><th>Date</th><td></td><th>Location</th><td></td></tr>
+    <tr><th>Weather / lighting</th><td></td><th>Vantage point</th><td></td></tr>
+    <tr><th>Arrived / departed</th><td></td><th>Hours / mileage</th><td></td></tr>
+  </table>
+
+  <table class="log" style="margin-top:8pt">
+    <tr><th style="width:13%">Time</th><th>Activity observed</th><th style="width:15%">Video</th></tr>
+    <tr class="ex"><td>06:00</td><td>Arrived at subject residence. Vehicle 1 in driveway. No activity observed.</td><td>No</td></tr>
+    <tr class="ex"><td>08:42</td><td>Subject exited residence carrying a black backpack, entered Vehicle 1, departed 08:43.</td><td>Yes, Clip 1</td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+  </table>
+  <p class="hint">Copy this page for each day. Log status checks during quiet stretches so there are no unexplained gaps.</p>
+</section>
+
+<!-- TEMPLATE: MEDIA + CERT -->
+<section class="page">
+  <div class="section-bar" style="margin-top:0">Video &amp; photo index</div>
+  <table class="log">
+    <tr><th style="width:9%">Clip</th><th style="width:13%">Date</th><th style="width:11%">Start</th><th style="width:11%">End</th><th style="width:11%">Length</th><th>Description</th></tr>
+    <tr class="ex"><td>1</td><td>03/14</td><td>08:42</td><td>08:43</td><td>0:48</td><td>Subject exits residence, enters Vehicle 1</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td colspan="4" style="text-align:right;font-weight:600">Total video</td><td></td><td></td></tr>
+  </table>
+
+  <div class="section-bar">Totals</div>
+  <table class="form">
+    <tr><th>Total surveillance hours</th><td></td><th>Total mileage</th><td></td></tr>
+    <tr><th>Total video obtained</th><td></td><th>Stills attached</th><td></td></tr>
+  </table>
+
+  <div class="section-bar">Investigator certification</div>
+  <p style="margin-top:8pt">I certify that the information in this report is true and accurate to the best of my knowledge and is based on my personal observations during the dates and times listed. The video and photographs referenced were obtained by me and have not been altered except for the addition of date and time stamps, audio removal, and redaction, as noted.</p>
+  <div class="sig"><div>Investigator signature</div><div>Printed name / license #</div><div>Date</div></div>
+</section>
+
+<!-- CHECKLIST + CTA -->
+<section class="page">
+  <div class="eyebrow">Part 4</div>
+  <h2>The before-you-send checklist</h2>
+  <p class="lede">Two minutes here saves a bounced report and a phone call from the adjuster.</p>
+  <ul class="check">
+    <li><div>Claim number, subject name, and dates are correct on every page<small>A wrong claim number is the fastest way to get a report returned.</small></div></li>
+    <li><div>The summary says whether activity was observed and how much video was obtained</div></li>
+    <li><div>Every log entry has a time, in one format throughout</div></li>
+    <li><div>Every gap in the log is explained</div></li>
+    <li><div>Every clip appears in both the log and the media index, and the times match the on-screen timestamp</div></li>
+    <li><div>No medical opinions, guesses about intent, or words like "easily," "obviously," or "suspicious"</div></li>
+    <li><div>Subject identification is explained</div></li>
+    <li><div>Losses, possible burns, and pretext contacts are documented</div></li>
+    <li><div>Hours, mileage, and video minutes match your invoice</div></li>
+    <li><div>Stills are labeled with date and time</div></li>
+    <li><div>Audio is kept or removed according to your state's recording laws and the client's instructions</div></li>
+    <li><div>Bystanders, minors, and unrelated plates are redacted where the client requires it</div></li>
+    <li><div>Files are named the way the client asks, and the report is proofread</div></li>
+  </ul>
+
+  <div class="cta">
+    <h3>Writing these at 11pm after a 10-hour stakeout?</h3>
+    <p>We're building a reporting app for web, iPhone, and Android: log what you see in the field, and it becomes a clean, objective report draft. Join the waitlist for early access and progress updates.</p>
+    <a class="url" href="https://www.investigationflow.com/waitlist">investigationflow.com/waitlist</a>
+  </div>
+</section>
+
+</body>
+</html>

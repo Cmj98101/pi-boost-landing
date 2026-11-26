@@ -68,12 +68,12 @@ export default function AuthCallback() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+    <div className="min-h-screen bg-surface flex items-center justify-center p-4">
+      <div className="card shadow-layered max-w-md w-full text-center">
         <div className="mb-6">
           {hasToken ? (
             <svg
-              className="w-16 h-16 text-green-500 mx-auto"
+              className="w-16 h-16 text-ink mx-auto"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -86,21 +86,21 @@ export default function AuthCallback() {
               />
             </svg>
           ) : (
-            <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <div className="w-16 h-16 border-4 border-ink border-t-transparent rounded-full animate-spin mx-auto"></div>
           )}
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+        <h1 className="display-sm mb-4">
           {hasToken ? "✓ Authentication Successful!" : "Processing..."}
         </h1>
 
-        <p className="text-gray-600 mb-6">{status}</p>
+        <p className="text-body mb-6">{status}</p>
 
         {hasToken && (
           <div className="space-y-3">
             <button
               onClick={openDesktopApp}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+              className="btn-primary w-full"
             >
               Open Investigation Flow
             </button>

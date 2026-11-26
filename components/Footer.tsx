@@ -7,10 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-slate-900 text-white py-16 md:py-20 overflow-hidden">
-      {/* Decorative gradient background */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <footer className="relative bg-white border-t border-hairline text-body-mid py-16 md:py-20 overflow-hidden">
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
@@ -18,7 +15,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-4">
               <Image
-                src="/logo-full-white.png"
+                src="/logo-full.png"
                 alt="Investigation Flow"
                 width={600}
                 height={127}
@@ -26,7 +23,7 @@ export default function Footer() {
                 className="h-10 w-auto"
               />
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-body-mid text-sm leading-relaxed mb-6">
               Professional video timestamping software for private
               investigators.
             </p>
@@ -34,69 +31,90 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h2 className="font-bold mb-4 text-white text-lg">Product</h2>
+            <h2 className="eyebrow-sm mb-5 text-ink">Product</h2>
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#features"
+                  href="/#features"
                   onClick={(e) => {
+                    // Smooth-scroll on the home page; elsewhere, follow the link.
+                    const target = document.querySelector("#features");
+                    if (!target) return;
                     e.preventDefault();
-                    document
-                      .querySelector("#features")
-                      ?.scrollIntoView({ behavior: "smooth" });
+                    target.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Features
                 </a>
               </li>
               <li>
                 <a
-                  href="#how-it-works"
+                  href="/#how-it-works"
                   onClick={(e) => {
+                    // Smooth-scroll on the home page; elsewhere, follow the link.
+                    const target = document.querySelector("#how-it-works");
+                    if (!target) return;
                     e.preventDefault();
-                    document
-                      .querySelector("#how-it-works")
-                      ?.scrollIntoView({ behavior: "smooth" });
+                    target.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   How It Works
                 </a>
               </li>
               <li>
                 <a
-                  href="#faq"
+                  href="/#faq"
                   onClick={(e) => {
+                    // Smooth-scroll on the home page; elsewhere, follow the link.
+                    const target = document.querySelector("#faq");
+                    if (!target) return;
                     e.preventDefault();
-                    document
-                      .querySelector("#faq")
-                      ?.scrollIntoView({ behavior: "smooth" });
+                    target.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   FAQ
                 </a>
               </li>
               <li>
                 <a
                   href="/learn"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Learn
                 </a>
               </li>
               <li>
                 <a
                   href="/updates"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Updates
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/surveillance-report-template"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
+                  Free Report Template
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/waitlist"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
+                  Mobile App Waitlist
                 </a>
               </li>
             </ul>
@@ -104,41 +122,41 @@ export default function Footer() {
 
           {/* Compare */}
           <div>
-            <h2 className="font-bold mb-4 text-white text-lg">Compare</h2>
+            <h2 className="eyebrow-sm mb-5 text-ink">Compare</h2>
             <ul className="space-y-3">
               <li>
                 <a
                   href="/investigation-video-editor-alternative"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-start gap-2 group text-sm"
                 >
-                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 mt-2 bg-hairline rounded-full shrink-0 group-hover:w-2 transition-all"></span>
                   Investigation Flow vs. IVE
                 </a>
               </li>
               <li>
                 <a
                   href="/v3-video-editor-alternative"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-start gap-2 group text-sm"
                 >
-                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 mt-2 bg-hairline rounded-full shrink-0 group-hover:w-2 transition-all"></span>
                   Investigation Flow vs. V3
                 </a>
               </li>
               <li>
                 <a
                   href="/imovie-alternative"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-start gap-2 group text-sm"
                 >
-                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 mt-2 bg-hairline rounded-full shrink-0 group-hover:w-2 transition-all"></span>
                   Investigation Flow vs. iMovie
                 </a>
               </li>
               <li>
                 <a
                   href="/wondershare-alternative"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-start gap-2 group text-sm"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-start gap-2 group text-sm"
                 >
-                  <span className="w-1 h-1 mt-2 bg-purple-500 rounded-full shrink-0 group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 mt-2 bg-hairline rounded-full shrink-0 group-hover:w-2 transition-all"></span>
                   Investigation Flow vs. Wondershare
                 </a>
               </li>
@@ -147,14 +165,14 @@ export default function Footer() {
 
           {/* Downloads */}
           <div>
-            <h2 className="font-bold mb-4 text-white text-lg">Download</h2>
+            <h2 className="eyebrow-sm mb-5 text-ink">Download</h2>
             <ul className="space-y-3">
               <li>
                 <a
                   href="/download"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-800 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-blue-600 flex items-center justify-center transition-all">
+                  <div className="w-8 h-8 rounded-lg bg-surface group-hover:bg-primary group-hover:text-ink flex items-center justify-center transition-all">
                     <svg
                       className="w-4 h-4"
                       fill="currentColor"
@@ -169,9 +187,9 @@ export default function Footer() {
               <li>
                 <a
                   href="/download"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-800 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-blue-600 flex items-center justify-center transition-all">
+                  <div className="w-8 h-8 rounded-lg bg-surface group-hover:bg-primary group-hover:text-ink flex items-center justify-center transition-all">
                     <svg
                       className="w-4 h-4"
                       fill="currentColor"
@@ -188,32 +206,32 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h2 className="font-bold mb-4 text-white text-lg">Support</h2>
+            <h2 className="eyebrow-sm mb-5 text-ink">Support</h2>
             <ul className="space-y-3">
               <li>
                 <a
                   href="/contact"
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Contact Us
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${SITE.supportEmail}?subject=Cancel%20Subscription`}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Cancel Subscription
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${SITE.supportEmail}?subject=Billing%20Question`}
-                  className="text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  className="text-body-mid hover:text-ink transition-colors inline-flex items-center gap-2 group"
                 >
-                  <span className="w-1 h-1 bg-purple-500 rounded-full group-hover:w-2 transition-all"></span>
+                  <span className="w-1 h-1 bg-hairline rounded-full group-hover:w-2 transition-all"></span>
                   Billing Questions
                 </a>
               </li>
@@ -225,27 +243,27 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-800 pt-8">
+        <div className="border-t border-hairline pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-slate-400 text-sm">
+            <p className="text-body-mid text-sm">
               © {currentYear} Investigation Flow. All rights reserved.
             </p>
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <a
                 href="/privacy"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-body-mid hover:text-ink transition-colors"
               >
                 Privacy Policy
               </a>
               <a
                 href="/terms"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-body-mid hover:text-ink transition-colors"
               >
                 Terms of Service
               </a>
               <a
                 href="/contact"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-body-mid hover:text-ink transition-colors"
               >
                 Contact
               </a>

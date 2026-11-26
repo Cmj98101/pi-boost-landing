@@ -35,3 +35,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent skills (sources are listed in skills-lock.json; reinstall with `npx skills add <source>`)
+/.agents/
+/.claude/skills/
+/.claude/settings.local.json
+
+# playwright-cli snapshots and logs
+/.playwright-cli/

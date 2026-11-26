@@ -83,28 +83,27 @@ export default async function TutorialPage({
       />
       <Navigation />
 
-      <article className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute top-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-purple-200/20 blur-3xl"></div>
+      <article className="relative overflow-hidden bg-white pt-32 pb-16 md:pt-40 md:pb-20">
 
         <div className="relative mx-auto max-w-3xl px-6 md:px-12">
           {/* Breadcrumb */}
           {/* Mirrors the BreadcrumbList schema above, which starts at Home. */}
           <nav className="mb-6 text-sm text-slate-500" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-purple-600">
+            <Link href="/" className="hover:text-body-mid">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <Link href="/learn" className="hover:text-purple-600">
+            <Link href="/learn" className="hover:text-body-mid">
               Learn
             </Link>
             <span className="mx-2">/</span>
             <span className="text-slate-700">{tutorial.title}</span>
           </nav>
 
-          <h1 className="text-3xl font-bold leading-[1.15] text-slate-900 md:text-4xl lg:text-5xl">
+          <h1 className="display-xl">
             {tutorial.title}
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
+          <p className="mt-5 body-lg">
             {tutorial.intro}
           </p>
 
@@ -115,17 +114,17 @@ export default async function TutorialPage({
 
           {/* Written walkthrough */}
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">
+            <h2 className="display-lg">
               Step by step
             </h2>
             <ol className="mt-8 space-y-8">
               {tutorial.steps.map((step, index) => (
                 <li key={index} className="flex gap-4">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-sm font-bold text-white">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white">
                     {index + 1}
                   </span>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900">
+                    <h3 className="text-lg font-semibold text-slate-900">
                       {step.heading}
                     </h3>
                     <p className="mt-1 leading-relaxed text-slate-600">
@@ -139,7 +138,7 @@ export default async function TutorialPage({
 
           {/* CTA */}
           <div className="mt-14 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-lg">
-            <h2 className="text-xl font-bold text-slate-900 md:text-2xl">
+            <h2 className="text-xl font-semibold text-slate-900 md:text-2xl">
               Try it on your own footage
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-slate-600">
@@ -147,7 +146,7 @@ export default async function TutorialPage({
               case. Your first conversions are free.
             </p>
             <div className="mt-6 flex justify-center">
-              <DownloadButton className="btn-primary-luxury inline-flex items-center gap-2" />
+              <DownloadButton className="btn-primary inline-flex items-center gap-2" />
             </div>
           </div>
 
@@ -155,7 +154,7 @@ export default async function TutorialPage({
           <div className="mt-10 text-center">
             <Link
               href="/learn"
-              className="inline-flex items-center gap-2 font-semibold text-purple-600 hover:text-purple-700"
+              className="inline-flex items-center gap-2 font-semibold text-accent-blue-deep hover:underline"
             >
               <svg
                 className="h-4 w-4"
